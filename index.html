@@ -265,6 +265,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
       <textarea id="tphMsg" placeholder="다음 10년에 전하고 싶은 한 마디를 자유롭게 써주세요..." style="min-height:72px;"></textarea>
     </div>
     <button class="mbtn" id="tphBtn" onclick="submitTeamPh()">등록하기</button>
+    <button id="tphDeleteAllBtn" onclick="deleteTeamEntry()" style="display:none;background:none;border:1px solid #c33;color:#c33;padding:7px 16px;border-radius:999px;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-left:8px;margin-top:4px;cursor:pointer;transition:all .15s;" onmouseover="this.style.background='#c33';this.style.color='#fff';" onmouseout="this.style.background='none';this.style.color='#c33';">🗑 전체 삭제</button>
   </div>
 </div>
 
@@ -480,6 +481,7 @@ function setLang(l){
   var tphMsgEl=document.getElementById('tphMsg');if(tphMsgEl)tphMsgEl.placeholder=ko?'다음 10년에 전하고 싶은 한 마디를 자유롭게 써주세요...':'Share what you want to say to the next 10 years...';
   var tphBtnEl=document.getElementById('tphBtn');if(tphBtnEl)tphBtnEl.textContent=ko?'등록하기':'Submit';
   var tphRm=document.getElementById('tphRemoveBtn');if(tphRm)tphRm.textContent=ko?'🗑 사진 삭제':'🗑 Remove photo';
+  var tphDel=document.getElementById('tphDeleteAllBtn');if(tphDel)tphDel.textContent=ko?'🗑 전체 삭제':'🗑 Delete all';
   // Photo gallery modal
   var phCapLbl=document.getElementById('phCapLabel');if(phCapLbl)phCapLbl.textContent=ko?'캡션 (선택)':'Caption (optional)';
   var phCapEl=document.getElementById('phCap');if(phCapEl)phCapEl.placeholder=ko?'이 사진에 대한 한 마디...':'A short caption for this photo...';
@@ -580,7 +582,36 @@ function openTeamPh(i){
   var existing=cache.team[TEAM[i].name];
   document.getElementById('tphMsg').value=existing?(existing.msg||''):'';
   setTphPhotoUI(existing&&existing.photo?existing.photo:null);
+  // Show "Delete all" only when there's something to delete
+  var delAll=document.getElementById('tphDeleteAllBtn');
+  if(delAll)delAll.style.display=(existing&&(existing.msg||existing.photo))?'inline-block':'none';
   document.getElementById('tphOv').classList.add('on');
+}
+async function deleteTeamEntry(){
+  if(curTeamIdx==null)return;
+  var member=TEAM[curTeamIdx];
+  var existing=cache.team[member.name]||{};
+  if(!confirm(lang==='en'?'Delete this team member\'s photo and message entirely?\n\nThis cannot be undone.':'이 팀원의 사진과 메시지를 완전히 삭제할까요?\n\n되돌릴 수 없습니다.'))return;
+  var btn=document.getElementById('tphDeleteAllBtn');
+  var orig=btn.textContent;
+  btn.textContent=lang==='en'?'Deleting...':'삭제 중...';btn.disabled=true;
+  try{
+    if(existing.photo){
+      var parts=existing.photo.split('/'+BUCKET+'/');
+      if(parts[1]){
+        var clean=parts[1].split('?')[0];
+        try{await sb.storage.from(BUCKET).remove([clean]);}catch(e){console.warn('storage remove:',e);}
+      }
+    }
+    var d=await sb.from('pbk20_team_photos').delete().eq('member_name',member.name);
+    if(d.error){toast('삭제 실패: '+d.error.message);return;}
+    if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
+    tphBlob=null;tphRemovePhoto=false;
+    await loadTeam();
+    closeOv('tphOv');
+    toast(lang==='en'?'Deleted ✓':'삭제됐어요 ✓');
+  }catch(e){console.error(e);toast('오류: '+e.message);}
+  finally{btn.textContent=orig;btn.disabled=false;}
 }
 function setTphPhotoUI(photoUrl){
   var prev=document.getElementById('tphPrev');
