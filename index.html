@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PBK 20th Anniversary</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--sol:#FDB813;--gx:#13294B;--wa:#455DA0;--sk:#199ac2;}
+body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x:hidden;}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:#F8F6F1;border-bottom:1px solid #E8E4DC;position:sticky;top:0;z-index:100;}
+.lbg{display:flex;gap:4px;}
+.lb{padding:5px 13px;border-radius:999px;border:1px solid #ccc;cursor:pointer;font-size:11px;font-weight:700;background:transparent;color:#666;transition:all .2s;}
+.lb.on{background:var(--sol);border-color:var(--sol);color:var(--gx);}
+.topbtns{display:flex;gap:8px;}
+.tbtn{padding:7px 16px;border-radius:999px;border:none;cursor:pointer;font-size:12px;font-weight:700;transition:all .2s;}
+.tbtn-admin{background:rgba(19,41,75,.1);color:var(--gx);}
+.tbtn-admin:hover{background:rgba(19,41,75,.2);}
+.tbtn-present{background:var(--gx);color:#fff;}
+.tbtn-present:hover{background:var(--wa);}
+.hero{background:var(--gx);padding:52px 28px 40px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;right:-8px;top:50%;transform:translateY(-50%);font-family:'Roboto Condensed',sans-serif;font-size:220px;font-weight:700;color:rgba(255,255,255,.04);line-height:1;user-select:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--sol);color:var(--gx);font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:4px 13px;border-radius:999px;margin-bottom:16px;}
+.hero-badge::before{content:'';width:4px;height:4px;background:var(--gx);border-radius:50%;}
+.htitle{font-family:'Roboto Condensed',sans-serif;font-size:clamp(30px,6vw,64px);font-weight:700;color:#fff;line-height:.95;letter-spacing:-.03em;margin-bottom:12px;}
+.htitle .ac{color:var(--sol);display:block;}
+.hsub{font-size:13px;color:rgba(255,255,255,.5);max-width:420px;line-height:1.65;}
+.hlogo{width:110px;margin-bottom:22px;display:block;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--sol);}
+.stat{padding:18px 14px;border-right:1px solid rgba(19,41,75,.15);}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'Roboto Condensed',sans-serif;font-size:clamp(22px,3.5vw,36px);font-weight:700;color:var(--gx);line-height:1;letter-spacing:-.02em;}
+.stat-l{font-size:10px;color:rgba(19,41,75,.6);margin-top:4px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+.eye{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--wa);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.eye::before{content:'';width:16px;height:2px;background:var(--sol);display:inline-block;}
+.stitle{font-family:'Roboto Condensed',sans-serif;font-size:clamp(20px,3.5vw,32px);font-weight:700;color:#1A1A1A;line-height:1.05;letter-spacing:-.02em;margin-bottom:6px;}
+.sbody{font-size:13px;line-height:1.7;color:#555;}
+.tl-wrap{background:var(--gx);padding:32px 24px;}
+.tl-wrap .eye{color:var(--sol);}
+.tl-wrap .eye::before{background:var(--sol);}
+.tl-wrap .stitle{color:#fff;}
+.tl{margin-top:20px;position:relative;}
+.tl::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:1px;background:rgba(255,255,255,.1);}
+.tli{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);position:relative;align-items:start;}
+.tli:last-child{border-bottom:none;}
+.tli::before{content:'';position:absolute;left:-4px;top:18px;width:8px;height:8px;border-radius:50%;background:var(--sol);border:2px solid var(--gx);}
+.tly{font-family:'Roboto Condensed',sans-serif;font-size:16px;font-weight:700;color:var(--sol);padding-left:14px;}
+.tlt{font-size:13px;font-weight:500;color:#fff;margin-bottom:2px;}
+.tlb{font-size:11px;color:rgba(255,255,255,.5);line-height:1.5;}
+.chart-sec{padding:32px 24px;background:#fff;}
+.chart-wrap{position:relative;width:100%;height:200px;margin-top:14px;}
+.team-sec{background:var(--gx);padding:32px 24px;}
+.team-sec .eye{color:var(--sol);}
+.team-sec .eye::before{background:var(--sol);}
+.team-sec .stitle{color:#fff;}
+.team-sec .sbody{color:rgba(255,255,255,.5);}
+.tgrid{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;}
+.tc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;position:relative;cursor:pointer;transition:transform .2s;}
+.tc:hover{transform:translateY(-2px);}
+.tc-photo{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.tc-ph{width:100%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.tc-ini{font-family:'Roboto Condensed',sans-serif;font-size:24px;font-weight:700;color:rgba(255,255,255,.28);}
+.tc-upl{font-size:9px;color:rgba(255,255,255,.28);text-align:center;line-height:1.3;}
+.tc-info{padding:8px;}
+.tc-name{font-size:11px;font-weight:500;color:#fff;line-height:1.2;}
+.tc-since{font-size:9px;color:var(--sol);margin-top:2px;}
+.tc-del{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:18px;height:18px;cursor:pointer;font-size:9px;display:none;align-items:center;justify-content:center;}
+.tc:hover .tc-del{display:flex;}
+.photo-sec{padding:32px 24px;background:#F0EDE6;}
+.photo-sec .eye{color:var(--wa);}
+.upzone{margin-top:14px;border:1.5px dashed #ccc;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s;}
+.upzone:hover{border-color:var(--sol);}
+.pgrid{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:4px;}
+.pt{aspect-ratio:1;overflow:hidden;position:relative;border-radius:6px;background:#ddd;}
+.pt img{width:100%;height:100%;object-fit:cover;display:block;}
+.pt-cap{position:absolute;bottom:0;left:0;right:0;background:rgba(19,41,75,.8);color:#fff;font-size:9px;padding:3px 6px;line-height:1.3;}
+.pt-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;font-size:9px;display:none;align-items:center;justify-content:center;}
+.pt:hover .pt-del{display:flex;}
+.msg-sec{padding:32px 24px;background:var(--sol);position:relative;overflow:hidden;}
+.msg-sec .eye{color:var(--gx);}
+.msg-sec .eye::before{background:var(--gx);}
+.msg-sec .stitle{color:var(--gx);}
+.msg-sec .sbody{color:rgba(19,41,75,.7);}
+.msg-bg{position:absolute;right:-8px;bottom:-10px;font-family:'Roboto Condensed',sans-serif;font-size:130px;font-weight:700;color:rgba(19,41,75,.07);line-height:1;user-select:none;}
+.mwall{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;position:relative;z-index:1;}
+.mc{background:#fff;padding:14px;min-height:86px;display:flex;flex-direction:column;justify-content:space-between;position:relative;border-radius:2px;transition:transform .2s;}
+.mc:hover{transform:translateY(-2px) rotate(.3deg);}
+.mc-text{font-size:11px;color:var(--gx);line-height:1.6;font-style:italic;}
+.mc-name{font-size:9px;font-weight:700;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
+.mc-del{position:absolute;top:4px;right:6px;background:none;border:none;color:#ccc;cursor:pointer;font-size:11px;display:none;}
+.mc:hover .mc-del{display:block;}
+.cg-sec{padding:32px 24px;background:#fff;}
+.cggrid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;}
+.cgc{background:#F8F6F1;border:1px solid #E8E4DC;border-radius:10px;padding:14px;position:relative;}
+.cgc-text{font-size:11px;color:#1A1A1A;line-height:1.6;font-style:italic;}
+.cgc-foot{display:flex;align-items:center;gap:6px;margin-top:8px;}
+.cgc-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;}
+.cgc-name{font-size:10px;font-weight:500;color:#1A1A1A;}
+.cgc-loc{font-size:9px;color:#999;}
+.cgc-del{position:absolute;top:6px;right:8px;background:none;border:none;color:#bbb;cursor:pointer;font-size:11px;display:none;}
+.cgc:hover .cgc-del{display:block;}
+.badd{display:inline-flex;align-items:center;gap:5px;background:var(--gx);color:#fff;border:none;padding:8px 18px;border-radius:999px;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;margin-top:14px;position:relative;z-index:1;transition:background .2s;}
+.badd:hover{background:var(--wa);}
+.footer{background:var(--gx);padding:28px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.footer-logo{width:90px;}
+.footer-txt{font-size:11px;color:rgba(255,255,255,.35);line-height:1.6;}
+.footer-yr{font-family:'Roboto Condensed',sans-serif;font-size:11px;font-weight:700;color:var(--sol);letter-spacing:.08em;}
+.empty{padding:20px;text-align:center;color:#aaa;font-size:12px;}
+.ov{position:fixed;inset:0;background:rgba(19,41,75,.72);z-index:500;display:none;align-items:center;justify-content:center;}
+.ov.on{display:flex;}
+.modal{background:#fff;padding:26px;width:min(420px,92vw);border-radius:14px;position:relative;max-height:88vh;overflow-y:auto;}
+.mh{font-size:15px;font-weight:700;color:#1A1A1A;margin-bottom:3px;}
+.ms{font-size:11px;color:#888;margin-bottom:16px;}
+.fld{margin-bottom:10px;}
+.fld label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#666;margin-bottom:4px;display:block;}
+.fld input,.fld textarea{width:100%;border:1px solid #ddd;padding:8px 10px;font-family:'Roboto',sans-serif;font-size:13px;color:#1A1A1A;background:#F8F6F1;border-radius:7px;outline:none;resize:vertical;transition:border-color .2s;}
+.fld input:focus,.fld textarea:focus{border-color:var(--gx);}
+.fld textarea{min-height:64px;}
+.phzone{border:1.5px dashed #ccc;border-radius:7px;padding:18px;text-align:center;cursor:pointer;position:relative;margin-top:4px;transition:border-color .2s;}
+.phzone:hover{border-color:var(--sol);}
+.phzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.phzone-lbl{font-size:12px;color:#888;}
+.ph-prev{width:100%;aspect-ratio:1;border-radius:7px;object-fit:cover;margin-top:6px;display:none;}
+.mbtn{background:var(--gx);color:#fff;border:none;padding:8px 20px;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border-radius:999px;margin-top:4px;transition:background .2s;}
+.mbtn:hover{background:var(--wa);}
+.mx{position:absolute;top:11px;right:13px;background:none;border:none;font-size:17px;cursor:pointer;color:#aaa;}
+.phcnt{font-size:11px;color:#888;margin-top:4px;display:none;}
+.tst{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--gx);color:#fff;padding:8px 16px;border-radius:999px;font-size:12px;font-weight:500;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
+.tst.on{opacity:1;}
+.pres{position:fixed;inset:0;background:#000;z-index:900;display:none;flex-direction:column;}
+.pres.on{display:flex;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity .7s ease;}
+.slide.act{opacity:1;}
+.sl-gx{background:var(--gx);}
+.sl-sol{background:var(--sol);}
+.sl-dk{background:#111;}
+.sl-blk{background:#000;}
+.s-lbl{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sol);margin-bottom:10px;}
+.s-main{font-family:'Roboto Condensed',sans-serif;font-size:clamp(28px,5vw,60px);font-weight:700;color:#fff;line-height:.95;letter-spacing:-.03em;}
+.s-main .ac{color:var(--sol);display:block;}
+.s-sub{font-size:clamp(12px,1.5vw,16px);color:rgba(255,255,255,.55);margin-top:12px;}
+.full-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.65;}
+.s-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.08) 65%);}
+.s-bot{position:absolute;bottom:56px;left:0;right:0;z-index:2;text-align:center;padding:0 40px;}
+.s-cap{font-size:clamp(13px,2vw,20px);color:#fff;line-height:1.5;font-style:italic;margin-bottom:6px;}
+.s-cap-meta{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.04em;}
+.s-badge{display:inline-block;background:var(--sol);color:var(--gx);font-size:10px;font-weight:700;padding:4px 13px;border-radius:999px;margin-top:12px;letter-spacing:.04em;}
+.ptl{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:640px;width:100%;padding:0 36px;}
+.ptl-item{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:start;}
+.ptl-yr{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--sol);}
+.ptl-t{font-size:12px;font-weight:500;color:#fff;margin-bottom:2px;}
+.ptl-b{font-size:10px;color:rgba(255,255,255,.5);}
+.pctrl{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:950;background:rgba(0,0,0,.55);padding:7px 14px;border-radius:999px;backdrop-filter:blur(6px);}
+.cbtn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.cbtn:hover{background:rgba(255,255,255,.15);}
+.cinfo{font-size:11px;color:rgba(255,255,255,.6);min-width:52px;text-align:center;}
+.cexit{background:none;border:none;color:rgba(255,255,255,.45);font-size:11px;cursor:pointer;margin-left:6px;padding:2px 7px;transition:color .2s;}
+.cexit:hover{color:#fff;}
+.pbar{position:fixed;top:0;left:0;height:3px;background:var(--sol);z-index:950;transition:width .15s linear;}
+@media(max-width:520px){.stats{grid-template-columns:repeat(2,1fr);}.hero,.tl-wrap,.chart-sec,.team-sec,.photo-sec,.msg-sec,.cg-sec{padding:24px 16px;}.topbar{padding:8px 14px;}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="lbg">
+    <button class="lb on" onclick="setLang('ko')">KO</button>
+    <button class="lb" onclick="setLang('en')">EN</button>
+  </div>
+  <div class="topbtns">
+    <button class="tbtn" id="musicBtn" style="background:rgba(19,41,75,.1);color:var(--gx);" onclick="toggleMusic()" title="배경음악">♪</button>
+    <button class="tbtn tbtn-admin" onclick="openAdmin()">⚙ Admin</button>
+    <button class="tbtn tbtn-present" onclick="startPresent()">▶ Present</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-bg">20</div>
+  <svg class="hlogo" viewBox="0 0 245.5 80.5" xmlns="http://www.w3.org/2000/svg"><g fill="#ffffff"><path d="m93.2 34.7c-.1-2.3-1.9-6.2-8.3-6.2h-11v.4c.3 5.3.3 16.7 0 22.2v.4s6.1 0 6.1 0v-.4c-.1-2.1-.2-4.7-.2-7.5h3.8c3.6 0 6.1-.9 7.6-2.7 1.8-2.1 1.9-4.3 1.8-6.3zm-10.3 4.7c-.5 0-1.6 0-3 0 0-2.7 0-4.1 0-6.8 1.4 0 2.2-.1 3.3 0 2.7.1 4 1.4 4 3.2s-.4 3.6-4.3 3.8z"/><path d="m108.1 33.9h-.3c-.6-.2-.8-.1-1.3-.1-2.7 0-4.9 1.1-6 2.7v-2-.3h-5.5v.4c.4 6.8.3 11.1.2 15.4v1.2s0 .4 0 .4h5.8v-.4s-.1-2.1-.1-2.1c-.2-3.5-.1-5.9 0-7.2.3-1.9 1.5-3.4 4.1-3.4s1.3 0 1.9.1l.5.2.8-4.7z"/><path d="m108 43c0 4 3.1 8.8 10.7 8.8s10.4-5 10.4-9.2-4-8.9-10.8-8.9-10.3 2.4-10.3 9.3zm5.9-.2c0-3.5 2-5.1 4.7-5.1s4.6.6 4.6 4.6-2.4 5.6-4.7 5.6c-3.3 0-4.6-2.5-4.6-5"/><path d="m160.1 38.8c-.1-3-2.4-5.1-6.3-5.1s-4.7.9-5.9 2.7c-1-1.7-2.8-2.7-5.4-2.7s-4.6 1.2-5.6 2.7v-1.9-.4h-5.5v.4c.2 6.3 0 14.7 0 16.5v.4s5.8 0 5.8 0v-.4c-.1-1.9-.3-7.2 0-9.4.2-1.6.8-3.5 3.2-3.5s2.5.8 2.5 2.6c.1 2.5 0 5 0 7.4v2.9.4s5.8 0 5.8 0v-.6c0-1.8-.2-7.4 0-9.3.2-1.2.7-3.3 3.2-3.3s2.5.8 2.6 2.5c0 1.1 0 7.7-.1 10.2v.6s5.8 0 5.8 0v-.8c-.2-4-.1-7.2 0-9.6 0-1.1 0-1.8 0-2.2"/><path d="m172.4 33.7c-4 0-6.1 1-7.8 2.7-2.2 2.4-2.4 5.6-2.3 6.9 0 1.4.4 3.4 1.8 5.1 1.8 2.2 5 3.3 9.1 3.3s3.9-.3 6-.8h.2s.7-4.1.7-4.1l-.5.2c-1.7.5-4 .9-6 .9-3.2 0-5.4-1-5.6-3.7v-.2s13.2 0 13.2 0 0-1.2 0-2.4c0-4.5-2.9-7.9-9.2-7.9m3.9 7.1h-7.8c0-2.1 1.6-3.6 3.9-3.6s3.9 1.1 3.9 3.6"/><path d="m197.2 49.6s.4 2.5-.9 3.9c-1.1 1.1-3.3 1.2-4.6 1.2s-2.4 0-5.2-.7l-.7-.2-.7 4h.2c1.6.4 4.5.8 7.5.8s6.7-1 8.1-2.5 2-4 1.9-6.2c-.2-5.8-.2-9.6 0-15.1v-.3s-.3 0-.3 0c-2.5-.4-5.1-.8-7.8-.8-4.3 0-7.1.8-9.1 2.9-2.4 2.5-2.4 5.4-2.4 6.7 0 4.9 3.1 8.1 8.1 8.1s5-1 5.9-1.8zm-4.3-2.2c-2.6 0-4.1-1.3-4.2-3.9 0-1 0-2.9 1.3-4.3 1-1.1 2.5-1.7 4.7-1.7s1.6 0 2.5.2v1.2c0 1.5 0 3.3-.2 4.7-.3 1.9-1.4 3.8-4.2 3.8"/><path d="m222.9 51c-.1-3 0-5.8 0-8.3 0-1.7 0-2.3 0-3.3 0-3.3-2.2-5.7-8.2-5.7s-4.5.2-7.4.9h-.2s-.5 4-.5 4l.5-.2c2.5-.9 4.8-1.3 6.9-1.3s3.3.6 3.3 1.6c0 1.7-2.4 1.6-5.4 2.3-3.5.7-7.1 1.8-6.9 6 .2 4.5 4.8 4.9 6.8 4.9s4.7-.7 5.7-2.3v1.5.4s.4 0 .4 0h5.1v-.4zm-5.5-5.5c-.2 2.4-3.3 2.7-4.3 2.7s-2.4-.3-2.6-1.7c-.1-1.3.9-2.3 3.4-2.7 1.1-.2 2.9-.6 3.6-1v2.6z"/><path d="m52.2 27c2.9 2.1 4 6.3 2.5 9.7-1.4-2.7-6.8-5-10.4-5.7 2.7-.9 5.9-2.1 8-4z"/><path d="m29.8 52.4c-2.9-2.1-4-6.3-2.5-9.7 1.4 2.7 6.8 5 10.4 5.7-2.7.9-5.9 2.1-8 4z"/><path d="m28.9 54.2c0-.1 0-.1 0-.2s-.1-.1-.2-.1c-2.4-2.2-4-4.9-3.8-8.1.9-15.8 22.4-14.3 27.2-21.1-3.3-1.9-7-3.1-10.5-4.2-2.5 1.4-5.2 2.2-7.8 3.3-15.7 6.6-20.1 20.2-5.1 30.3h.2z"/><path d="m53.3 25.3s-.1 0-.2-.1v.2s.1.1.2.1c2.3 2.1 4 4.9 3.7 8.1-1.1 15.8-22.4 14.3-27.2 21.1 3.3 1.9 7 3.1 10.5 4.2 2.5-1.4 5.2-2.2 7.8-3.3 15.7-6.6 20.1-20.2 5.2-30.3z"/></g></svg>
+  <div class="hero-badge">2006 — 2026</div>
+  <div class="htitle"><span id="h1">20년의</span><br><span class="ac" id="h2">과학과 사람.</span></div>
+  <p class="hsub" id="hsub">2006년 Promega BioSystems Korea 출범 후 20년. 10,084대의 Maxwell 장비를 세상에 내보내며 함께 성장했습니다.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">20</div><div class="stat-l" id="s0">함께한 해</div></div>
+  <div class="stat"><div class="stat-n">27</div><div class="stat-l" id="s1">현재 팀원</div></div>
+  <div class="stat"><div class="stat-n">10,084</div><div class="stat-l" id="s2">총 출하 대수</div></div>
+  <div class="stat"><div class="stat-n">100+</div><div class="stat-l" id="s3">제품 수출국</div></div>
+</div>
+
+<div class="tl-wrap">
+  <div class="eye" id="tl-eye">우리가 걸어온 길</div>
+  <div class="stitle" id="tl-title">20년의 발자취</div>
+  <div class="tl" id="tlMain"></div>
+</div>
+
+<div class="chart-sec">
+  <div class="eye" id="ch-eye">Maxwell 출하 기록</div>
+  <div class="stitle" id="ch-title">연도별 출하 현황</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:10px;color:#666;">
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:2px;background:#13294B;display:inline-block;"></span>AS1000/2000/3000</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:2px;background:#455DA0;display:inline-block;"></span>AS4500</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:2px;background:#FDB813;display:inline-block;"></span>AS8500</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:8px;height:8px;border-radius:2px;background:#199ac2;display:inline-block;"></span>A2715</span>
+  </div>
+  <div class="chart-wrap"><canvas id="shipChart"></canvas></div>
+</div>
+
+<div class="team-sec">
+  <div class="eye" id="tm-eye">2026 우리 팀</div>
+  <div class="stitle" id="tm-title">지금 이 순간, 함께하는 사람들</div>
+  <p class="sbody" id="tm-body" style="margin-top:6px;">본인 카드를 클릭해서 사진을 올려주세요.</p>
+  <div class="tgrid" id="teamGrid"></div>
+</div>
+
+<div class="photo-sec">
+  <div class="eye" id="p-eye">우리의 기억들</div>
+  <div class="stitle" id="p-title">20년을 함께한 순간들</div>
+  <p class="sbody" id="p-body" style="margin-top:6px;">어떤 사진이든 좋아요 — 지금의 나, 동료와 함께, 우리가 만든 것, 기억에 남는 순간.</p>
+  <div class="upzone" onclick="openPhModal()">
+    <div style="font-size:22px;opacity:.35;margin-bottom:5px;">📷</div>
+    <div style="font-size:12px;color:#888;"><strong id="ul-lbl">클릭하여 사진 업로드</strong></div>
+  </div>
+  <div class="pgrid" id="photoGrid"></div>
+  <div class="empty" id="p-empty">아직 업로드된 사진이 없어요. 첫 번째 사진을 올려주세요!</div>
+</div>
+
+<div class="msg-sec">
+  <div class="msg-bg">2046</div>
+  <div class="eye" id="m-eye">다음 20년으로</div>
+  <div class="stitle" id="m-title">우리가 함께 쓰는 이야기</div>
+  <p class="sbody" id="m-body">20주년을 맞아, PBK 구성원 모두가 다음 20년에 전하고 싶은 한 마디를 남겨주세요.</p>
+  <button class="badd" onclick="openMsg()"><span id="m-btn">+ 메시지 남기기</span></button>
+  <div class="mwall" id="msgWall"></div>
+  <div class="empty" id="m-empty" style="display:none;color:rgba(19,41,75,.5)">아직 메시지가 없어요.</div>
+</div>
+
+<div class="cg-sec">
+  <div class="eye" id="cg-eye">Congratulations from Promega</div>
+  <div class="stitle" id="cg-title">전 세계 Promega 가족의 축하 메시지</div>
+  <button class="badd" onclick="openCG()"><span id="cg-btn">🎉 축하 메시지 남기기</span></button>
+  <div class="cggrid" id="cgGrid"></div>
+  <div class="empty" id="cg-empty">아직 축하 메시지가 없어요.</div>
+</div>
+
+<div class="footer">
+  <svg class="footer-logo" viewBox="0 0 245.5 80.5" xmlns="http://www.w3.org/2000/svg"><g fill="#ffffff"><path d="m93.2 34.7c-.1-2.3-1.9-6.2-8.3-6.2h-11v.4c.3 5.3.3 16.7 0 22.2v.4s6.1 0 6.1 0v-.4c-.1-2.1-.2-4.7-.2-7.5h3.8c3.6 0 6.1-.9 7.6-2.7 1.8-2.1 1.9-4.3 1.8-6.3zm-10.3 4.7c-.5 0-1.6 0-3 0 0-2.7 0-4.1 0-6.8 1.4 0 2.2-.1 3.3 0 2.7.1 4 1.4 4 3.2s-.4 3.6-4.3 3.8z"/><path d="m108.1 33.9h-.3c-.6-.2-.8-.1-1.3-.1-2.7 0-4.9 1.1-6 2.7v-2-.3h-5.5v.4c.4 6.8.3 11.1.2 15.4v1.2s0 .4 0 .4h5.8v-.4s-.1-2.1-.1-2.1c-.2-3.5-.1-5.9 0-7.2.3-1.9 1.5-3.4 4.1-3.4s1.3 0 1.9.1l.5.2.8-4.7z"/><path d="m108 43c0 4 3.1 8.8 10.7 8.8s10.4-5 10.4-9.2-4-8.9-10.8-8.9-10.3 2.4-10.3 9.3zm5.9-.2c0-3.5 2-5.1 4.7-5.1s4.6.6 4.6 4.6-2.4 5.6-4.7 5.6c-3.3 0-4.6-2.5-4.6-5"/><path d="m160.1 38.8c-.1-3-2.4-5.1-6.3-5.1s-4.7.9-5.9 2.7c-1-1.7-2.8-2.7-5.4-2.7s-4.6 1.2-5.6 2.7v-1.9-.4h-5.5v.4c.2 6.3 0 14.7 0 16.5v.4s5.8 0 5.8 0v-.4c-.1-1.9-.3-7.2 0-9.4.2-1.6.8-3.5 3.2-3.5s2.5.8 2.5 2.6c.1 2.5 0 5 0 7.4v2.9.4s5.8 0 5.8 0v-.6c0-1.8-.2-7.4 0-9.3.2-1.2.7-3.3 3.2-3.3s2.5.8 2.6 2.5c0 1.1 0 7.7-.1 10.2v.6s5.8 0 5.8 0v-.8c-.2-4-.1-7.2 0-9.6 0-1.1 0-1.8 0-2.2"/><path d="m172.4 33.7c-4 0-6.1 1-7.8 2.7-2.2 2.4-2.4 5.6-2.3 6.9 0 1.4.4 3.4 1.8 5.1 1.8 2.2 5 3.3 9.1 3.3s3.9-.3 6-.8h.2s.7-4.1.7-4.1l-.5.2c-1.7.5-4 .9-6 .9-3.2 0-5.4-1-5.6-3.7v-.2s13.2 0 13.2 0 0-1.2 0-2.4c0-4.5-2.9-7.9-9.2-7.9m3.9 7.1h-7.8c0-2.1 1.6-3.6 3.9-3.6s3.9 1.1 3.9 3.6"/><path d="m197.2 49.6s.4 2.5-.9 3.9c-1.1 1.1-3.3 1.2-4.6 1.2s-2.4 0-5.2-.7l-.7-.2-.7 4h.2c1.6.4 4.5.8 7.5.8s6.7-1 8.1-2.5 2-4 1.9-6.2c-.2-5.8-.2-9.6 0-15.1v-.3s-.3 0-.3 0c-2.5-.4-5.1-.8-7.8-.8-4.3 0-7.1.8-9.1 2.9-2.4 2.5-2.4 5.4-2.4 6.7 0 4.9 3.1 8.1 8.1 8.1s5-1 5.9-1.8zm-4.3-2.2c-2.6 0-4.1-1.3-4.2-3.9 0-1 0-2.9 1.3-4.3 1-1.1 2.5-1.7 4.7-1.7s1.6 0 2.5.2v1.2c0 1.5 0 3.3-.2 4.7-.3 1.9-1.4 3.8-4.2 3.8"/><path d="m222.9 51c-.1-3 0-5.8 0-8.3 0-1.7 0-2.3 0-3.3 0-3.3-2.2-5.7-8.2-5.7s-4.5.2-7.4.9h-.2s-.5 4-.5 4l.5-.2c2.5-.9 4.8-1.3 6.9-1.3s3.3.6 3.3 1.6c0 1.7-2.4 1.6-5.4 2.3-3.5.7-7.1 1.8-6.9 6 .2 4.5 4.8 4.9 6.8 4.9s4.7-.7 5.7-2.3v1.5.4s.4 0 .4 0h5.1v-.4zm-5.5-5.5c-.2 2.4-3.3 2.7-4.3 2.7s-2.4-.3-2.6-1.7c-.1-1.3.9-2.3 3.4-2.7 1.1-.2 2.9-.6 3.6-1v2.6z"/><path d="m52.2 27c2.9 2.1 4 6.3 2.5 9.7-1.4-2.7-6.8-5-10.4-5.7 2.7-.9 5.9-2.1 8-4z"/><path d="m29.8 52.4c-2.9-2.1-4-6.3-2.5-9.7 1.4 2.7 6.8 5 10.4 5.7-2.7.9-5.9 2.1-8 4z"/><path d="m28.9 54.2c0-.1 0-.1 0-.2s-.1-.1-.2-.1c-2.4-2.2-4-4.9-3.8-8.1.9-15.8 22.4-14.3 27.2-21.1-3.3-1.9-7-3.1-10.5-4.2-2.5 1.4-5.2 2.2-7.8 3.3-15.7 6.6-20.1 20.2-5.1 30.3h.2z"/><path d="m53.3 25.3s-.1 0-.2-.1v.2s.1.1.2.1c2.3 2.1 4 4.9 3.7 8.1-1.1 15.8-22.4 14.3-27.2 21.1 3.3 1.9 7 3.1 10.5 4.2 2.5-1.4 5.2-2.2 7.8-3.3 15.7-6.6 20.1-20.2 5.2-30.3z"/></g></svg>
+  <div class="footer-txt" id="ft-txt">Promega BioSystems Korea · 20주년 · 2006–2026<br>과학으로 시작된 여정, 사람과 함께 이어갑니다.</div>
+  <div class="footer-yr">2006 — 2026</div>
+</div>
+
+<!-- TEAM PHOTO MODAL -->
+<div class="ov" id="tphOv" onclick="closeOv('tphOv')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="mx" onclick="closeOv('tphOv')">✕</button>
+    <div class="mh" id="tph-h">내 사진 올리기</div>
+    <div class="ms">본인 사진을 올려주세요.</div>
+    <div class="fld">
+      <div class="phzone" id="tphZone"><input type="file" accept="image/*" onchange="previewTeamPh(this)"><div class="phzone-lbl">클릭하여 사진 선택</div></div>
+      <img id="tphPrev" class="ph-prev">
+    </div>
+    <button class="mbtn" onclick="submitTeamPh()">등록하기</button>
+  </div>
+</div>
+
+<!-- PHOTO UPLOAD MODAL -->
+<div class="ov" id="phOv" onclick="closeOv('phOv')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="mx" onclick="closeOv('phOv')">✕</button>
+    <div class="mh">사진 올리기</div>
+    <div class="ms">사진을 선택하고 짧은 캡션을 남겨주세요.</div>
+    <div class="fld">
+      <div class="phzone"><input type="file" accept="image/*" multiple onchange="pickFiles(this)"><div class="phzone-lbl">클릭하여 사진 선택</div></div>
+      <div id="phcnt" class="phcnt"></div>
+    </div>
+    <div class="fld"><label>캡션 (선택)</label><input id="phCap" type="text" placeholder="이 사진에 대한 한 마디..."></div>
+    <button class="mbtn" onclick="submitPh()"><span id="ph-btn">업로드</span></button>
+  </div>
+</div>
+
+<!-- MSG MODAL -->
+<div class="ov" id="msgOv" onclick="closeOv('msgOv')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="mx" onclick="closeOv('msgOv')">✕</button>
+    <div class="mh" id="mo-h">메시지 남기기</div>
+    <div class="ms" id="mo-s">다음 20년을 향한 한 마디를 남겨주세요.</div>
+    <div class="fld"><label>이름</label><input id="inName" type="text" placeholder="홍길동"></div>
+    <div class="fld"><label>메시지</label><textarea id="inMsg" placeholder="자유롭게 써주세요..."></textarea></div>
+    <button class="mbtn" onclick="submitMsg()">남기기</button>
+  </div>
+</div>
+
+<!-- CONGRATS MODAL -->
+<div class="ov" id="cgOv" onclick="closeOv('cgOv')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="mx" onclick="closeOv('cgOv')">✕</button>
+    <div class="mh">🎉 축하 메시지 남기기</div>
+    <div class="ms">Promega 임직원이라면 누구든 PBK 20주년을 축하해주세요!</div>
+    <div class="fld"><label>이름</label><input id="cgName" type="text" placeholder="홍길동 / Gil-dong Hong"></div>
+    <div class="fld"><label>소속 / 지역</label><input id="cgLoc" type="text" placeholder="Madison HQ · R&D"></div>
+    <div class="fld"><label>메시지</label><textarea id="cgMsg" placeholder="PBK 팀에게 전하고 싶은 말을 써주세요..."></textarea></div>
+    <button class="mbtn" onclick="submitCG()">남기기</button>
+  </div>
+</div>
+
+<!-- ADMIN MODAL -->
+<div class="ov" id="adminOv" onclick="closeOv('adminOv')">
+  <div class="modal" onclick="event.stopPropagation()" style="max-width:480px;">
+    <button class="mx" onclick="closeOv('adminOv')">✕</button>
+    <div class="mh">🔐 Admin</div>
+    <div class="ms" id="admin-s">비밀번호를 입력해주세요.</div>
+    <div id="adminLogin">
+      <div class="fld"><label>비밀번호</label><input id="adminPw" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPw()"></div>
+      <button class="mbtn" onclick="checkPw()">확인</button>
+    </div>
+    <div id="adminPanel" style="display:none;">
+      <div style="font-size:11px;color:#888;margin-bottom:10px;">드래그해서 사진 순서를 바꿀 수 있어요.</div>
+      <div id="adminList" style="display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;"></div>
+      <button class="mbtn" style="margin-top:14px;" onclick="saveOrder()">순서 저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRESENT MODE -->
+<div class="pres" id="pres">
+  <div class="pbar" id="pbar"></div>
+  <div id="slideBox"></div>
+  <div class="pctrl">
+    <button class="cbtn" onclick="pPrev()">&#8592;</button>
+    <span class="cinfo" id="pinfo">1 / 1</span>
+    <button class="cbtn" onclick="pNext()">&#8594;</button>
+    <button class="cbtn" id="playBtn" onclick="togglePlay()">&#9646;&#9646;</button>
+    <button class="cexit" onclick="exitPres()">✕ 나가기</button>
+  </div>
+</div>
+
+<div class="tst" id="tst"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// SUPABASE CLIENT
+// ═══════════════════════════════════════════════════════════════
+var SUPABASE_URL = 'https://bcggwrvmbmbfvwhehtfq.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjZ2d3cnZtYm1iZnZ3aGVodGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MzQwMTgsImV4cCI6MjA5MjMxMDAxOH0.P99MxJFtkurG49pEYDAcLpR2zTb4jMUIYENtn5ZY-GU';
+var BUCKET = 'pbk20-photos';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ═══════════════════════════════════════════════════════════════
+// I18N + STATIC DATA
+// ═══════════════════════════════════════════════════════════════
+var lang='ko';
+var TL={
+  ko:[
+    {y:'1998',t:'Bionex Inc. 설립',b:'기업 부설 연구소로 출발. 생명과학 계측기기 분야의 가능성을 열다.',dim:true},
+    {y:'2005',t:'Maxwell 시리즈 첫 출하',b:'Promega와의 MX-16 계약 체결. AS1000 82대 첫 출하.',dim:true},
+    {y:'2006',t:'Promega BioSystems Korea 공식 출범',b:'Promega Corporation과 함께 새 출발. 글로벌 제조 허브로.'},
+    {y:'2010',t:'ISO 13485 인증 취득',b:'의료기기 품질경영시스템 국제 인증.'},
+    {y:'2014',t:'AS4500 & FDA IVD 승인',b:'글로벌 시장 진출 가속화.'},
+    {y:'2020',t:'팬데믹 속 최대 출하 1,183대',b:'역대 최고 기록 달성.'},
+    {y:'2025',t:'Maxwell CSC96 출시',b:'누적 출하 10,000대 돌파.'},
+    {y:'2026',t:'20주년 — 다음 챕터로',b:'20년의 역사 위에, 새로운 이야기를 씁니다.',future:true}
+  ],
+  en:[
+    {y:'1998',t:'Founded as Bionex Inc.',b:'A corporate R&D venture in life science instrumentation — independent, focused, built to grow.',dim:true},
+    {y:'2005',t:'Maxwell Series — First Shipment',b:'MX-16 contract signed. First 82 AS1000 units shipped.',dim:true},
+    {y:'2006',t:'Promega BioSystems Korea Established',b:'Officially launched under Promega Corporation. A new chapter as a global manufacturing hub.'},
+    {y:'2010',t:'ISO 13485 Certification',b:'International certification in medical device quality management.'},
+    {y:'2014',t:'AS4500 & FDA IVD Approval',b:'Accelerating global market expansion.'},
+    {y:'2020',t:'Record Shipment — 1,183 Units',b:'Peak output driven by global pandemic demand.'},
+    {y:'2025',t:'Maxwell CSC96 Launch',b:'Cumulative shipments surpass 10,000 units.'},
+    {y:'2026',t:'20th Anniversary — The Next Chapter',b:'Built on 20 years of history, a new story begins.',future:true}
+  ]
+};
+var TEAM=[
+  {name:'나정아',en:'JeungA Na',koT:'General Manager',enT:'General Manager'},
+  {name:'최인성',en:'Insung Choi',koT:'Since 2004.06',enT:'Since 2004.06'},
+  {name:'김은기',en:'Eungi Kim',koT:'Since 2005.12',enT:'Since 2005.12'},
+  {name:'김성연',en:'Sungyoun Kim',koT:'Since 2007.02',enT:'Since 2007.02'},
+  {name:'허유',en:'Yoo Huh',koT:'Since 2007.03',enT:'Since 2007.03'},
+  {name:'안광섭',en:'Kwangsub Ahn',koT:'Since 2007.08',enT:'Since 2007.08'},
+  {name:'정영율',en:'Youngryul Jung',koT:'Since 2008.06',enT:'Since 2008.06'},
+  {name:'김환수',en:'Hwan-su Kim',koT:'Since 2008.09',enT:'Since 2008.09'},
+  {name:'유창열',en:'Changyeol Yoo',koT:'Since 2010.04',enT:'Since 2010.04'},
+  {name:'김희재',en:'HeeJae Kim',koT:'Since 2011.01',enT:'Since 2011.01'},
+  {name:'윤한아',en:'Hanah Yoon',koT:'Since 2012.06',enT:'Since 2012.06'},
+  {name:'백성현',en:'Sung-Hyun Back',koT:'Since 2014.07',enT:'Since 2014.07'},
+  {name:'김광일',en:'Kwangil Kim',koT:'Since 2014.12',enT:'Since 2014.12'},
+  {name:'변종택',en:'Jong Tack Byeon',koT:'Since 2016.05',enT:'Since 2016.05'},
+  {name:'정지민',en:'Jimin Jung',koT:'Since 2017.08',enT:'Since 2017.08'},
+  {name:'이유라',en:'Youla Lee',koT:'Since 2018.04',enT:'Since 2018.04'},
+  {name:'김동근',en:'Dong Geun Kim',koT:'Since 2019.05',enT:'Since 2019.05'},
+  {name:'홍승무',en:'SungMoo Hong',koT:'Since 2020.06',enT:'Since 2020.06'},
+  {name:'손인호',en:'Inho Son',koT:'Since 2021.10',enT:'Since 2021.10'},
+  {name:'임희선',en:'Heesun Lim',koT:'Since 2021.11',enT:'Since 2021.11'},
+  {name:'황지원',en:'Jiwon Hwang',koT:'Since 2022.07',enT:'Since 2022.07'},
+  {name:'최상원',en:'Sangwon Choi',koT:'Since 2023.04',enT:'Since 2023.04'},
+  {name:'이영준',en:'Young Jun Lee',koT:'Since 2023.06',enT:'Since 2023.06'},
+  {name:'이승진',en:'Seungjin Lee',koT:'Since 2023.07',enT:'Since 2023.07'},
+  {name:'이요한',en:'Yohan Lee',koT:'Since 2024.04',enT:'Since 2024.04'},
+  {name:'황준태',en:'Jun Tae Hwang',koT:'Since 2025.04',enT:'Since 2025.04'},
+  {name:'한재준',en:'Jaejun Han',koT:'Since 2026.05',enT:'Since 2026.05'}
+];
+var avC=['#13294B','#455DA0','#199ac2','#713a61','#0F6E56','#854F0B'];
+function av(n){var h=0;for(var i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))&0xffff;return avC[h%avC.length];}
+function ini(n){return n.split(' ').map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2)||'?';}
+function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
+function toast(m){var el=document.getElementById('tst');el.textContent=m;el.classList.add('on');setTimeout(function(){el.classList.remove('on');},2600);}
+function closeOv(id){document.getElementById(id).classList.remove('on');}
+
+// In-memory cache (also used by present mode)
+var cache = { team:{}, photos:[], msgs:[], cgs:[] };
+
+// ═══════════════════════════════════════════════════════════════
+// TIMELINE + LANGUAGE
+// ═══════════════════════════════════════════════════════════════
+function renderTL(){
+  var data=TL[lang],html='';
+  data.forEach(function(item){
+    var ys=item.future?'opacity:.5':item.dim?'opacity:.5;color:rgba(255,255,255,.4)':'';
+    var ts=item.dim?'color:rgba(255,255,255,.5)':'';
+    var bs=item.dim?'color:rgba(255,255,255,.3)':'';
+    html+='<div class="tli"><div class="tly" style="'+ys+'">'+item.y+'</div><div><div class="tlt" style="'+ts+'">'+esc(item.t)+'</div><div class="tlb" style="'+bs+'">'+esc(item.b)+'</div></div></div>';
+  });
+  var el=document.getElementById('tlMain');if(el)el.innerHTML=html;
+}
+
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lb').forEach(function(b){b.classList.toggle('on',b.textContent.toLowerCase()===l);});
+  var ko=l==='ko';
+  document.getElementById('h1').textContent=ko?'20년의':'20 Years of';
+  document.getElementById('h2').textContent=ko?'과학과 사람.':'Science & People.';
+  document.getElementById('hsub').textContent=ko?'2006년 Promega BioSystems Korea 출범 후 20년. 10,084대의 Maxwell 장비를 세상에 내보내며 함께 성장했습니다.':'Promega BioSystems Korea — 20 years of science, innovation, and people. 10,084 Maxwell instruments shipped worldwide.';
+  document.getElementById('s0').textContent=ko?'함께한 해':'Years Together';
+  document.getElementById('s1').textContent=ko?'현재 팀원':'Team Members';
+  document.getElementById('s2').textContent=ko?'총 출하 대수':'Total Units Shipped';
+  document.getElementById('s3').textContent=ko?'제품 수출국':'Export Countries';
+  document.getElementById('tl-eye').textContent=ko?'우리가 걸어온 길':'Our Journey';
+  document.getElementById('tl-title').textContent=ko?'20년의 발자취':'20 Years in Review';
+  document.getElementById('ch-eye').textContent=ko?'Maxwell 출하 기록':'Maxwell Shipment History';
+  document.getElementById('ch-title').textContent=ko?'연도별 출하 현황':'Annual Shipments';
+  document.getElementById('tm-eye').textContent=ko?'2026 우리 팀':'PBK Team 2026';
+  document.getElementById('tm-title').textContent=ko?'지금 이 순간, 함께하는 사람들':'The people here, right now';
+  document.getElementById('tm-body').textContent=ko?'본인 카드를 클릭해서 사진을 올려주세요.':'Click your card to upload your photo.';
+  document.getElementById('p-eye').textContent=ko?'우리의 기억들':'Our Memories';
+  document.getElementById('p-title').textContent=ko?'20년을 함께한 순간들':"Moments We've Shared";
+  document.getElementById('p-body').textContent=ko?'어떤 사진이든 좋아요 — 지금의 나, 동료와 함께, 우리가 만든 것, 기억에 남는 순간.':'Any photo works — just you, with colleagues, what we made, or memorable moments.';
+  document.getElementById('ul-lbl').textContent=ko?'클릭하여 사진 업로드':'Click to upload photos';
+  document.getElementById('m-eye').textContent=ko?'다음 20년으로':'Toward the Next 20';
+  document.getElementById('m-title').textContent=ko?'우리가 함께 쓰는 이야기':'A Story We Write Together';
+  document.getElementById('m-body').textContent=ko?'20주년을 맞아, PBK 구성원 모두가 다음 20년에 전하고 싶은 한 마디를 남겨주세요.':'As we mark 20 years, leave a message for the next 20.';
+  document.getElementById('m-btn').textContent=ko?'+ 메시지 남기기':'+ Leave a Message';
+  document.getElementById('cg-eye').textContent='Congratulations from Promega';
+  document.getElementById('cg-title').textContent=ko?'전 세계 Promega 가족의 축하 메시지':'Messages from the Promega Family';
+  document.getElementById('cg-btn').textContent=ko?'🎉 축하 메시지 남기기':'🎉 Leave a Congrats Message';
+  document.getElementById('ft-txt').innerHTML=ko?'Promega BioSystems Korea · 20주년 · 2006–2026<br>과학으로 시작된 여정, 사람과 함께 이어갑니다.':'Promega BioSystems Korea · 20th Anniversary · 2006–2026<br>A journey that began with science, continued with people.';
+  document.getElementById('p-empty').textContent=ko?'아직 업로드된 사진이 없어요. 첫 번째 사진을 올려주세요!':'No photos yet. Be the first!';
+  document.getElementById('mo-h').textContent=ko?'메시지 남기기':'Leave a Message';
+  document.getElementById('mo-s').textContent=ko?'다음 20년을 향한 한 마디를 남겨주세요.':'What do you want to say to the next 20 years?';
+  renderTL();renderTeam();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// IMAGE COMPRESSION (returns Blob)
+// ═══════════════════════════════════════════════════════════════
+function compressImg(file,maxPx,q){
+  return new Promise(function(res){
+    var img=new Image(),url=URL.createObjectURL(file);
+    img.onload=function(){
+      var w=img.width,h=img.height;
+      if(w>maxPx){h=Math.round(h*(maxPx/w));w=maxPx;}
+      if(h>maxPx){w=Math.round(w*(maxPx/h));h=maxPx;}
+      var c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);
+      c.toBlob(function(b){res(b);},'image/jpeg',q||0.82);
+    };
+    img.onerror=function(){URL.revokeObjectURL(url);res(null);};
+    img.src=url;
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TEAM PHOTOS (1 per member, keyed by Korean name)
+// ═══════════════════════════════════════════════════════════════
+var curTeamIdx=null,tphBlob=null,tphPreviewUrl=null;
+
+async function loadTeam(){
+  try {
+    var r = await sb.from('pbk20_team_photos').select('member_name, photo_url');
+    if(r.error){ console.error(r.error); }
+    var map = {};
+    (r.data||[]).forEach(function(row){ map[row.member_name] = row.photo_url; });
+    cache.team = map;
+  } catch(e){ console.error(e); }
+  renderTeam();
+}
+function renderTeam(){
+  var g=document.getElementById('teamGrid');if(!g) return;g.innerHTML='';
+  TEAM.forEach(function(m,i){
+    var dn=lang==='en'?m.en:m.name,tenure=lang==='en'?m.enT:m.koT;
+    var card=document.createElement('div');card.className='tc';
+    card.onclick=function(){openTeamPh(i);};
+    if(cache.team[m.name]){
+      card.innerHTML='<img class="tc-photo" src="'+cache.team[m.name]+'" alt="'+esc(dn)+'"><div class="tc-info"><div class="tc-name">'+esc(dn)+'</div><div class="tc-since">'+esc(tenure)+'</div></div>';
+    }else{
+      var bg=av(m.name),in2=ini(m.en||m.name);
+      card.innerHTML='<div class="tc-ph" style="background:'+bg+'"><div class="tc-ini">'+in2+'</div><div class="tc-upl">'+(lang==='en'?'Upload photo':'사진 올리기')+'</div></div><div class="tc-info"><div class="tc-name">'+esc(dn)+'</div><div class="tc-since">'+esc(tenure)+'</div></div>';
+    }
+    g.appendChild(card);
+  });
+}
+function openTeamPh(i){
+  curTeamIdx=i;tphBlob=null;
+  if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
+  document.getElementById('tph-h').textContent=(lang==='en'?'Upload photo — ':'사진 올리기 — ')+(lang==='en'?TEAM[i].en:TEAM[i].name);
+  document.getElementById('tphPrev').style.display='none';
+  document.getElementById('tphZone').style.display='block';
+  document.getElementById('tphOv').classList.add('on');
+}
+function previewTeamPh(input){
+  var f=input.files[0];if(!f)return;
+  compressImg(f,640,0.85).then(function(b){
+    if(!b){toast('이미지 처리 실패');return;}
+    tphBlob=b;
+    if(tphPreviewUrl)URL.revokeObjectURL(tphPreviewUrl);
+    tphPreviewUrl=URL.createObjectURL(b);
+    var p=document.getElementById('tphPrev');p.src=tphPreviewUrl;p.style.display='block';
+    document.getElementById('tphZone').style.display='none';
+  });
+}
+async function submitTeamPh(){
+  if(!tphBlob){toast(lang==='en'?'Please select a photo':'사진을 선택해주세요');return;}
+  var name=TEAM[curTeamIdx].name;
+  var path='team/'+Date.now()+'_'+Math.round(Math.random()*9999)+'.jpg';
+  try {
+    var up = await sb.storage.from(BUCKET).upload(path, tphBlob, { contentType:'image/jpeg', upsert:false });
+    if(up.error){ toast('업로드 실패: '+up.error.message); return; }
+    var url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+    var ins = await sb.from('pbk20_team_photos').upsert({ member_name:name, photo_url:url, ts:new Date().toISOString() });
+    if(ins.error){ toast('저장 실패: '+ins.error.message); return; }
+    if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
+    tphBlob=null;
+    await loadTeam();closeOv('tphOv');toast('등록됐어요 ✨');
+  } catch(e){ console.error(e); toast('오류: '+e.message); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PHOTO GALLERY
+// ═══════════════════════════════════════════════════════════════
+var pendingFiles=[];
+function openPhModal(){
+  pendingFiles=[];
+  document.getElementById('phCap').value='';
+  document.getElementById('phcnt').style.display='none';
+  document.getElementById('phOv').classList.add('on');
+}
+function pickFiles(input){
+  pendingFiles=Array.from(input.files);
+  var cnt=document.getElementById('phcnt');
+  cnt.textContent=pendingFiles.length+(lang==='en'?' file(s) selected':'장 선택됨');
+  cnt.style.display='block';
+}
+async function loadPhotos(){
+  try {
+    var r = await sb.from('pbk20_photos').select('*').order('sort_order',{ascending:true}).order('ts',{ascending:true});
+    if(r.error){ console.error(r.error); cache.photos=[]; }
+    else cache.photos = r.data || [];
+  } catch(e){ console.error(e); cache.photos=[]; }
+  var g=document.getElementById('photoGrid'),e=document.getElementById('p-empty');
+  g.innerHTML='';
+  if(!cache.photos.length){e.style.display='block';return;}
+  e.style.display='none';
+  cache.photos.forEach(function(item){
+    var div=document.createElement('div');div.className='pt';
+    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(item.caption||'')+'" loading="lazy">'+(item.caption?'<div class="pt-cap">'+esc(item.caption)+'</div>':'')+'<button class="pt-del" onclick="delPhoto(\''+item.id+'\')">✕</button>';
+    g.appendChild(div);
+  });
+}
+async function submitPh(){
+  if(!pendingFiles.length){toast(lang==='en'?'Please select a photo':'사진을 선택해주세요');return;}
+  var cap=document.getElementById('phCap').value.trim();
+  var btn=document.getElementById('ph-btn');btn.textContent=lang==='en'?'Uploading...':'업로드 중...';
+  var added=0;
+  for(var i=0;i<pendingFiles.length;i++){
+    try{
+      var blob=await compressImg(pendingFiles[i],1400,0.82);if(!blob)continue;
+      var path='gallery/'+Date.now()+'_'+Math.round(Math.random()*9999)+'.jpg';
+      var up = await sb.storage.from(BUCKET).upload(path, blob, { contentType:'image/jpeg' });
+      if(up.error){ console.error(up.error); continue; }
+      var url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+      var ins = await sb.from('pbk20_photos').insert({ caption:cap, photo_url:url });
+      if(ins.error){ console.error(ins.error); continue; }
+      added++;
+    }catch(e){console.error(e);}
+  }
+  if(added){
+    await loadPhotos();closeOv('phOv');
+    document.getElementById('phCap').value='';pendingFiles=[];
+    toast(added+(lang==='en'?' photo(s) added 📷':'장 추가됐어요 📷'));
+  }else{toast('업로드 실패');}
+  btn.textContent=lang==='en'?'Upload':'업로드';
+}
+async function delPhoto(id){
+  try {
+    var r = await sb.from('pbk20_photos').select('photo_url').eq('id',id).single();
+    if(r.data && r.data.photo_url){
+      var parts = r.data.photo_url.split('/'+BUCKET+'/');
+      if(parts[1]){ await sb.storage.from(BUCKET).remove([parts[1]]); }
+    }
+    await sb.from('pbk20_photos').delete().eq('id',id);
+    await loadPhotos();
+    toast('삭제됐어요');
+  } catch(e){ console.error(e); toast('오류'); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MESSAGES
+// ═══════════════════════════════════════════════════════════════
+async function loadMsgs(){
+  try {
+    var r = await sb.from('pbk20_messages').select('*').order('ts',{ascending:false});
+    if(r.error){ console.error(r.error); cache.msgs=[]; }
+    else cache.msgs = r.data || [];
+  } catch(e){ console.error(e); cache.msgs=[]; }
+  var w=document.getElementById('msgWall'),e=document.getElementById('m-empty');
+  w.innerHTML='';
+  if(!cache.msgs.length){e.style.display='block';return;}
+  e.style.display='none';
+  var angles=[-1.2,0.8,-0.5,1,-0.3,0.6,-0.9,0.4];
+  cache.msgs.forEach(function(m,i){
+    var c=document.createElement('div');c.className='mc';c.style.transform='rotate('+angles[i%angles.length]+'deg)';
+    c.innerHTML='<div class="mc-text">"'+esc(m.text)+'"</div><div class="mc-name">— '+esc(m.name)+'</div><button class="mc-del" onclick="delMsg(\''+m.id+'\')">✕</button>';
+    w.appendChild(c);
+  });
+}
+function openMsg(){document.getElementById('msgOv').classList.add('on');}
+async function submitMsg(){
+  var name=document.getElementById('inName').value.trim()||'익명';
+  var text=document.getElementById('inMsg').value.trim();
+  if(!text){toast('메시지를 입력해주세요');return;}
+  try {
+    var r = await sb.from('pbk20_messages').insert({ name:name, text:text });
+    if(r.error){ toast('저장 실패: '+r.error.message); return; }
+    await loadMsgs();closeOv('msgOv');
+    document.getElementById('inName').value='';document.getElementById('inMsg').value='';
+    toast('등록됐어요 ✨');
+  } catch(e){ console.error(e); toast('오류'); }
+}
+async function delMsg(id){
+  try { await sb.from('pbk20_messages').delete().eq('id',id); await loadMsgs(); toast('삭제됐어요'); }
+  catch(e){ console.error(e); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONGRATS
+// ═══════════════════════════════════════════════════════════════
+async function loadCG(){
+  try {
+    var r = await sb.from('pbk20_congrats').select('*').order('ts',{ascending:false});
+    if(r.error){ console.error(r.error); cache.cgs=[]; }
+    else cache.cgs = r.data || [];
+  } catch(e){ console.error(e); cache.cgs=[]; }
+  var g=document.getElementById('cgGrid'),e=document.getElementById('cg-empty');
+  g.innerHTML='';
+  if(!cache.cgs.length){e.style.display='block';return;}
+  e.style.display='none';
+  cache.cgs.forEach(function(c){
+    var card=document.createElement('div');card.className='cgc';
+    card.innerHTML='<div class="cgc-text">"'+esc(c.text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div><button class="cgc-del" onclick="delCG(\''+c.id+'\')">✕</button>';
+    g.appendChild(card);
+  });
+}
+function openCG(){document.getElementById('cgOv').classList.add('on');}
+async function submitCG(){
+  var name=document.getElementById('cgName').value.trim()||'Anonymous';
+  var loc=document.getElementById('cgLoc').value.trim();
+  var text=document.getElementById('cgMsg').value.trim();
+  if(!text){toast('메시지를 입력해주세요');return;}
+  try {
+    var r = await sb.from('pbk20_congrats').insert({ name:name, loc:loc, text:text });
+    if(r.error){ toast('저장 실패: '+r.error.message); return; }
+    await loadCG();closeOv('cgOv');
+    document.getElementById('cgName').value='';document.getElementById('cgLoc').value='';document.getElementById('cgMsg').value='';
+    toast('등록됐어요 ✨');
+  } catch(e){ console.error(e); toast('오류'); }
+}
+async function delCG(id){
+  try { await sb.from('pbk20_congrats').delete().eq('id',id); await loadCG(); toast('삭제됐어요'); }
+  catch(e){ console.error(e); }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ADMIN
+// ═══════════════════════════════════════════════════════════════
+var adminUnlocked=false,adminDragSrc=null;
+function openAdmin(){
+  document.getElementById('adminPw').value='';
+  document.getElementById('adminLogin').style.display=adminUnlocked?'none':'block';
+  document.getElementById('adminPanel').style.display=adminUnlocked?'block':'none';
+  if(adminUnlocked)showAdminPanel();
+  document.getElementById('adminOv').classList.add('on');
+}
+async function checkPw(){
+  if(document.getElementById('adminPw').value==='pbk2026'){
+    adminUnlocked=true;
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    document.getElementById('admin-s').textContent='Admin 모드 활성화됨';
+    showAdminPanel();
+  }else{document.getElementById('admin-s').textContent='비밀번호가 틀렸어요.';}
+}
+async function showAdminPanel(){
+  var r = await sb.from('pbk20_photos').select('id, caption, photo_url').order('sort_order',{ascending:true}).order('ts',{ascending:true});
+  var rows = r.data || [];
+  var list=document.getElementById('adminList');list.innerHTML='';
+  rows.forEach(function(item){
+    var row=document.createElement('div');row.draggable=true;row.dataset.id=item.id;
+    row.style.cssText='display:flex;align-items:center;gap:8px;padding:7px;background:#F8F6F1;border-radius:7px;cursor:grab;border:1px solid #ddd;margin-bottom:2px;';
+    row.innerHTML='<span style="opacity:.4;font-size:14px;">⠿</span><img src="'+item.photo_url+'" style="width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:#ddd;"><div style="flex:1;font-size:11px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+esc(item.caption||'(캡션 없음)')+'</div><button onclick="adminDelPh(\''+item.id+'\')" style="background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;padding:0 2px;">✕</button>';
+    row.addEventListener('dragstart',function(){adminDragSrc=row;row.style.opacity='.4';});
+    row.addEventListener('dragend',function(){row.style.opacity='1';});
+    row.addEventListener('dragover',function(e){e.preventDefault();});
+    row.addEventListener('drop',function(e){
+      e.preventDefault();if(adminDragSrc===row)return;
+      var items=Array.from(list.children),from=items.indexOf(adminDragSrc),to=items.indexOf(row);
+      if(from<to)list.insertBefore(adminDragSrc,row.nextSibling);else list.insertBefore(adminDragSrc,row);
+    });
+    list.appendChild(row);
+  });
+}
+async function adminDelPh(id){
+  await delPhoto(id);
+  showAdminPanel();
+}
+async function saveOrder(){
+  var rows=Array.from(document.getElementById('adminList').children);
+  for(var i=0;i<rows.length;i++){
+    await sb.from('pbk20_photos').update({ sort_order:i }).eq('id',rows[i].dataset.id);
+  }
+  await loadPhotos();
+  closeOv('adminOv');toast('순서 저장됐어요 ✓');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PRESENT MODE (unchanged from v2 — works on the cached arrays)
+// ═══════════════════════════════════════════════════════════════
+var slides=[],curSlide=0,isPlaying=true,playTimer=null;
+var tsAnim=null,msgAnim=null,cgTimer=null;
+var SLIDE_DUR=10000;
+
+function stopAnims(){
+  if(tsAnim){cancelAnimationFrame(tsAnim);tsAnim=null;}
+  if(msgAnim){cancelAnimationFrame(msgAnim);msgAnim=null;}
+  if(cgTimer){clearTimeout(cgTimer);cgTimer=null;}
+}
+function clearTm(){if(playTimer){clearInterval(playTimer);playTimer=null;}}
+function startTm(dur){clearTm();playTimer=setInterval(pNext,dur||SLIDE_DUR);}
+
+async function startPresent(){
+  // Refresh data first
+  await Promise.all([loadTeam(), loadPhotos(), loadMsgs(), loadCG()]);
+  var teamPh = cache.team;
+  var photos = cache.photos.map(function(p){ return { data:p.photo_url, cap:p.caption||'' }; });
+  var msgs = cache.msgs;
+  var cgs = cache.cgs;
+  slides=[];
+  slides.push({type:'title'});
+  slides.push({type:'timeline'});
+  slides.push({type:'chart'});
+  slides.push({type:'team',members:TEAM.map(function(m){return{name:m.name,en:m.en,enT:m.enT,photo:teamPh[m.name]||null};})});
+  photos.forEach(function(p){slides.push({type:'photo',data:p.data,cap:p.cap});});
+  if(msgs.length)slides.push({type:'msgs',msgs:msgs});
+  if(cgs.length){
+    var grps=[];for(var gi=0;gi<cgs.length;gi+=4)grps.push(cgs.slice(gi,gi+4));
+    slides.push({type:'cgs',groups:grps});
+  }
+  slides.push({type:'closing'});
+  curSlide=0;buildSlides();
+  document.getElementById('pres').classList.add('on');
+  showSlide(0);isPlaying=true;
+  document.getElementById('playBtn').innerHTML='&#9646;&#9646;';
+  startTm();
+}
+
+function buildSlides(){
+  var box=document.getElementById('slideBox');box.innerHTML='';
+  slides.forEach(function(s,i){
+    var div=document.createElement('div');div.className='slide';div.id='sl-'+i;
+    if(s.type==='title'||s.type==='timeline'||s.type==='chart'||s.type==='cgs'||s.type==='closing')div.classList.add('sl-gx');
+    else if(s.type==='msgs')div.classList.add('sl-sol');
+    else if(s.type==='team'||s.type==='photo')div.classList.add('sl-dk');
+
+    if(s.type==='title'){
+      div.innerHTML='<div style="text-align:center;padding:32px;z-index:2;position:relative;"><div class="s-lbl">Promega BioSystems Korea</div><div class="s-main">20 Years of<br><span class="ac">Science & People.</span></div><div class="s-sub">2006 — 2026</div></div>';
+    }else if(s.type==='timeline'){
+      var h='<div style="z-index:2;position:relative;text-align:left;width:100%;max-width:640px;padding:0 36px;"><div class="s-lbl" style="margin-bottom:18px;">Our Journey</div><div class="ptl">';
+      TL['en'].forEach(function(t){
+        var ys=t.future?'opacity:.5':t.dim?'color:rgba(255,193,7,.5)':'';
+        var ts=t.dim?'color:rgba(255,255,255,.45)':'color:#fff';
+        var bs=t.dim?'color:rgba(255,255,255,.3)':'color:rgba(255,255,255,.58)';
+        h+='<div class="ptl-item"><div class="ptl-yr" style="'+ys+'">'+t.y+'</div><div><div class="ptl-t" style="'+ts+'">'+esc(t.t)+'</div><div class="ptl-b" style="'+bs+'">'+esc(t.b)+'</div></div></div>';
+      });
+      h+='</div></div>';div.innerHTML=h;
+    }else if(s.type==='chart'){
+      div.innerHTML='<div style="width:100%;max-width:680px;padding:0 36px;text-align:center;z-index:2;position:relative;"><div class="s-lbl" style="margin-bottom:6px;">Maxwell Shipment History</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:22px;">2005–2025 · Cumulative units shipped</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:5px;height:210px;" id="cBars"></div><div style="font-family:Roboto Condensed,sans-serif;font-size:clamp(32px,5vw,60px);font-weight:700;color:var(--sol);margin-top:18px;" id="cCount">0</div><div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px;">total units shipped</div></div>';
+    }else if(s.type==='team'){
+      var cards=s.members.map(function(m){
+        var bg=av(m.name),in2=ini(m.en||m.name);
+        var phHtml=m.photo?'<img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;" alt="'+esc(m.en)+'">'
+          :'<div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-family:Roboto Condensed,sans-serif;font-size:24px;font-weight:700;color:rgba(255,255,255,.3);">'+in2+'</div>';
+        return '<div style="flex-shrink:0;width:136px;text-align:center;">'
+          +'<div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.15);margin:0 auto 10px;">'+phHtml+'</div>'
+          +'<div style="font-size:12px;font-weight:500;color:#fff;line-height:1.2;">'+esc(m.en)+'</div>'
+          +'<div style="font-size:9px;color:var(--sol);margin-top:3px;">'+esc(m.enT)+'</div>'
+          +'</div>';
+      }).join('');
+      div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden;">'
+        +'<div class="s-lbl" style="text-align:center;margin-bottom:28px;flex-shrink:0;">PBK Team 2026</div>'
+        +'<div id="teamTrack" style="display:flex;gap:28px;padding:0 32px;will-change:transform;">'+cards+cards+'</div>'
+        +'</div>';
+    }else if(s.type==='photo'){
+      div.innerHTML='<img class="full-bg" src="'+s.data+'" alt="'+esc(s.cap)+'"><div class="s-ov"></div><div class="s-bot">'+(s.cap?'<div class="s-cap">'+esc(s.cap)+'</div>':'')+'</div>';
+    }else if(s.type==='msgs'){
+      var mh='';s.msgs.forEach(function(m){
+        mh+='<div style="padding:22px 0;border-bottom:1px solid rgba(19,41,75,.12);">'
+          +'<div style="font-size:clamp(14px,2.2vw,22px);color:#13294B;font-style:italic;line-height:1.45;">"'+esc(m.text)+'"</div>'
+          +'<div style="font-size:11px;color:rgba(19,41,75,.5);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-top:10px;">— '+esc(m.name)+'</div>'
+          +'</div>';
+      });
+      div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:0 10%;">'
+        +'<div class="s-lbl" style="color:#13294B;padding-top:44px;margin-bottom:8px;flex-shrink:0;">Toward the Next 20</div>'
+        +'<div style="flex:1;overflow:hidden;position:relative;">'
+        +'<div id="msgInner" style="will-change:transform;">'+mh+mh+'</div>'
+        +'</div></div>';
+    }else if(s.type==='cgs'){
+      div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;">'
+        +'<div class="s-lbl" style="margin-bottom:28px;">Congratulations from Promega</div>'
+        +'<div id="cgGrid2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:min(640px,88%);"></div>'
+        +'</div>';
+    }else if(s.type==='closing'){
+      div.innerHTML='<div style="text-align:center;padding:32px;z-index:2;position:relative;"><div class="s-lbl">Promega BioSystems Korea</div><div class="s-main">The next 20 years,<br><span class="ac">together.</span></div><div class="s-sub">Thank you · 2026</div></div>';
+    }
+    box.appendChild(div);
+  });
+}
+
+var cumulData=[{y:'2005',t:82},{y:'2006',t:304},{y:'2007',t:834},{y:'2008',t:1135},{y:'2009',t:1569},{y:'2010',t:1863},{y:'2011',t:2223},{y:'2012',t:2556},{y:'2013',t:2947},{y:'2014',t:3344},{y:'2015',t:3802},{y:'2016',t:4219},{y:'2017',t:4649},{y:'2018',t:5150},{y:'2019',t:5612},{y:'2020',t:6795},{y:'2021',t:7648},{y:'2022',t:8367},{y:'2023',t:8964},{y:'2024',t:9512},{y:'2025',t:10084}];
+var cAnim=null;
+function runChart(){
+  var bars=document.getElementById('cBars'),cnt=document.getElementById('cCount');
+  if(!bars||!cnt)return;var H=210;bars.innerHTML='';
+  cumulData.forEach(function(d){
+    var w=document.createElement('div');w.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;';
+    var b=document.createElement('div');b.style.cssText='width:100%;border-radius:3px 3px 0 0;background:var(--sol);height:0;transition:height .9s ease;';
+    b.dataset.h=Math.round((d.t/10084)*H);
+    var l=document.createElement('div');l.style.cssText='font-size:8px;color:rgba(255,255,255,.4);writing-mode:vertical-lr;transform:rotate(180deg);';
+    l.textContent=d.y;w.appendChild(b);w.appendChild(l);bars.appendChild(w);
+  });
+  var i2=0;
+  function step(){
+    if(i2>=cumulData.length)return;
+    var bs=bars.querySelectorAll('div[data-h]');
+    for(var j=0;j<=i2;j++){if(bs[j])bs[j].style.height=bs[j].dataset.h+'px';}
+    animCount(cnt,cumulData[i2].t);i2++;
+    setTimeout(step,i2===1?700:380);
+  }
+  setTimeout(step,400);
+}
+function animCount(el,target){
+  if(cAnim)clearInterval(cAnim);
+  var start=parseInt(el.textContent.replace(/,/g,''))||0,diff=target-start,steps=22,s2=0;
+  cAnim=setInterval(function(){s2++;el.textContent=Math.round(start+diff*(s2/steps)).toLocaleString();if(s2>=steps){clearInterval(cAnim);el.textContent=target.toLocaleString();}},40);
+}
+function runTeamScroll(){
+  var track=document.getElementById('teamTrack');if(!track)return;
+  var half=track.scrollWidth/2,pos=0;
+  if(tsAnim)cancelAnimationFrame(tsAnim);
+  function step(){pos+=0.15;if(pos>=half)pos=0;track.style.transform='translateX(-'+pos+'px)';tsAnim=requestAnimationFrame(step);}
+  step();
+}
+function runMsgScroll(){
+  var inner=document.getElementById('msgInner');if(!inner)return;
+  var half=inner.scrollHeight/2,pos=0;
+  if(msgAnim)cancelAnimationFrame(msgAnim);
+  function step(){pos+=0.4;if(pos>=half)pos=0;inner.style.transform='translateY(-'+pos+'px)';msgAnim=requestAnimationFrame(step);}
+  step();
+}
+function runCascade(groups,gi){
+  if(cgTimer)clearTimeout(cgTimer);
+  var grid=document.getElementById('cgGrid2');if(!grid||gi>=groups.length)return;
+  var grp=groups[gi];grid.innerHTML='';
+  grp.forEach(function(c,i){
+    var card=document.createElement('div');
+    card.style.cssText='background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:11px;padding:16px;opacity:0;transform:translate('+(i%2===0?'-18px':'18px')+','+(i<2?'-18px':'18px')+');transition:opacity .5s ease '+(i*.18)+'s,transform .5s ease '+(i*.18)+'s;';
+    card.innerHTML='<div style="font-size:12px;color:#fff;font-style:italic;line-height:1.6;">"'+esc(c.text)+'"</div>'
+      +'<div style="display:flex;align-items:center;gap:7px;margin-top:12px;"><div style="width:24px;height:24px;border-radius:50%;background:'+av(c.name)+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;">'+ini(c.name)+'</div>'
+      +'<div><div style="font-size:11px;color:#fff;font-weight:500;">'+esc(c.name)+'</div>'+(c.loc?'<div style="font-size:9px;color:rgba(255,255,255,.45);">'+esc(c.loc)+'</div>':'')+'</div></div>';
+    grid.appendChild(card);
+    setTimeout(function(){card.style.opacity='1';card.style.transform='translate(0,0)';},60);
+  });
+  cgTimer=setTimeout(function(){
+    Array.from(grid.children).forEach(function(c){c.style.opacity='0';c.style.transform='scale(.94)';});
+    setTimeout(function(){runCascade(groups,gi+1);},600);
+  },8000);
+}
+
+function showSlide(idx){
+  document.querySelectorAll('.slide').forEach(function(s){s.classList.remove('act');});
+  var sl=document.getElementById('sl-'+idx);if(sl)sl.classList.add('act');
+  document.getElementById('pinfo').textContent=(idx+1)+' / '+slides.length;
+  document.getElementById('pbar').style.width=((idx+1)/slides.length*100)+'%';
+  var s=slides[idx];if(!s)return;
+  if(s.type==='chart'){
+    setTimeout(runChart,200);clearTm();if(isPlaying)startTm(30000);
+  }else if(s.type==='team'){
+    setTimeout(runTeamScroll,100);
+    var cardW=192,speed=0.15,fps=60;
+    var dur=Math.round(s.members.length*(cardW/speed/fps)*1000);
+    clearTm();if(isPlaying)startTm(dur);
+  }else if(s.type==='msgs'){
+    setTimeout(runMsgScroll,100);clearTm();if(isPlaying)startTm(Math.max(40000,s.msgs.length*3000));
+  }else if(s.type==='cgs'){
+    setTimeout(function(){runCascade(s.groups,0);},200);
+    clearTm();if(isPlaying)startTm(Math.ceil(s.groups.length*9000));
+  }else if(s.type==='timeline'){
+    clearTm();if(isPlaying)startTm(30000);
+  }
+}
+
+function pNext(){stopAnims();curSlide=(curSlide+1)%slides.length;showSlide(curSlide);if(isPlaying)startTm();}
+function pPrev(){stopAnims();curSlide=(curSlide-1+slides.length)%slides.length;showSlide(curSlide);if(isPlaying)startTm();}
+function togglePlay(){isPlaying=!isPlaying;document.getElementById('playBtn').innerHTML=isPlaying?'&#9646;&#9646;':'&#9654;';if(isPlaying)startTm();else clearTm();}
+function exitPres(){document.getElementById('pres').classList.remove('on');clearTm();stopAnims();}
+
+document.addEventListener('keydown',function(e){
+  var p=document.getElementById('pres');if(!p.classList.contains('on'))return;
+  if(e.key==='ArrowRight'||e.key===' ')pNext();
+  else if(e.key==='ArrowLeft')pPrev();
+  else if(e.key==='Escape')exitPres();
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SHIPMENT CHART (page chart, separate from present mode)
+// ═══════════════════════════════════════════════════════════════
+new Chart(document.getElementById('shipChart'),{
+  type:'bar',
+  data:{
+    labels:['05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25'],
+    datasets:[
+      {data:[82,222,530,301,434,294,360,333,391,397,458,417,430,501,462,1183,853,719,597,548,572].map(function(v,i){var a=[0,0,0,0,0,0,0,0,0,72,239,337,388,355,297,589,521,394,358,336,350],b=[0,0,0,0,0,0,0,0,0,0,0,0,29,138,153,586,321,308,227,209,199],c2=[0,0,0,0,0,15,29,25,33,19,20,8,4,8,12,8,11,17,12,3,23];return Math.max(0,v-a[i]-b[i]-c2[i]);}),backgroundColor:'#13294B',stack:'s'},
+      {data:[0,0,0,0,0,0,0,0,0,72,239,337,388,355,297,589,521,394,358,336,350],backgroundColor:'#455DA0',stack:'s'},
+      {data:[0,0,0,0,0,0,0,0,0,0,0,0,29,138,153,586,321,308,227,209,199],backgroundColor:'#FDB813',stack:'s'},
+      {data:[0,0,0,0,0,15,29,25,33,19,20,8,4,8,12,8,11,17,12,3,23],backgroundColor:'#199ac2',stack:'s'}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{footer:function(items){return '합계: '+items.reduce(function(s,i){return s+i.parsed.y;},0)+'대';}}}},scales:{x:{stacked:true,ticks:{font:{size:9}},grid:{display:false}},y:{stacked:true,ticks:{font:{size:9},callback:function(v){return v+'대';}},grid:{color:'rgba(0,0,0,.06)'}}}}
+});
+
+// ═══════════════════════════════════════════════════════════════
+// BACKGROUND MUSIC (Web Audio API — same as v2)
+// ═══════════════════════════════════════════════════════════════
+var audioCtx=null,musicNodes=[],isMusicOn=false;
+function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();}
+function playNote(freq,start,dur,vol){
+  var o=audioCtx.createOscillator();
+  var g=audioCtx.createGain();
+  var now=audioCtx.currentTime;
+  o.type='sine';
+  o.frequency.setValueAtTime(freq,now+start);
+  g.gain.setValueAtTime(0,now+start);
+  g.gain.linearRampToValueAtTime(vol||0.08,now+start+0.05);
+  g.gain.exponentialRampToValueAtTime(0.001,now+start+dur);
+  o.connect(g);g.connect(audioCtx.destination);
+  o.start(now+start);o.stop(now+start+dur+0.1);
+  musicNodes.push(o);
+}
+function playWarmMelody(){
+  if(!isMusicOn)return;
+  var notes=[
+    [261.6,0,1.2],[329.6,0.5,0.8],[392,1,1.5],[329.6,1.8,0.8],
+    [261.6,2.5,1.2],[293.7,3,0.8],[349.2,3.5,1.5],[329.6,4.2,1],
+    [261.6,5,1.2],[293.7,5.5,0.8],[329.6,6,1],[392,6.5,1.5],
+    [349.2,7.5,0.8],[329.6,8,0.8],[293.7,8.5,0.8],[261.6,9,2],
+    [196,0,2,0.04],[196,2.5,2,0.04],[196,5,2,0.04],[196,7.5,2,0.04]
+  ];
+  notes.forEach(function(n){playNote(n[0],n[1],n[2],n[3]);});
+  if(isMusicOn)setTimeout(playWarmMelody,9800);
+}
+function toggleMusic(){
+  initAudio();
+  isMusicOn=!isMusicOn;
+  var btn=document.getElementById('musicBtn');
+  if(isMusicOn){
+    btn.style.background='var(--sol)';btn.style.color='var(--gx)';
+    playWarmMelody();
+    toast('♪ 음악 재생 중');
+  }else{
+    btn.style.background='rgba(19,41,75,.1)';btn.style.color='var(--gx)';
+    musicNodes.forEach(function(n){try{n.stop();}catch(e){}});
+    musicNodes=[];
+    toast('음악 일시정지');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+renderTL();
+loadTeam();
+loadPhotos();
+loadMsgs();
+loadCG();
+</script>
+</body>
+</html>
