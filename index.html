@@ -65,8 +65,6 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .tc-info{padding:8px;}
 .tc-name{font-size:11px;font-weight:500;color:#fff;line-height:1.2;}
 .tc-since{font-size:9px;color:var(--sol);margin-top:2px;}
-.tc-del{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:18px;height:18px;cursor:pointer;font-size:9px;display:none;align-items:center;justify-content:center;}
-.tc:hover .tc-del{display:flex;}
 .photo-sec{padding:32px 24px;background:#F0EDE6;}
 .photo-sec .eye{color:var(--wa);}
 .upzone{margin-top:14px;border:1.5px dashed #ccc;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s;}
@@ -75,8 +73,6 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .pt{aspect-ratio:1;overflow:hidden;position:relative;border-radius:6px;background:#ddd;}
 .pt img{width:100%;height:100%;object-fit:cover;display:block;}
 .pt-cap{position:absolute;bottom:0;left:0;right:0;background:rgba(19,41,75,.8);color:#fff;font-size:9px;padding:3px 6px;line-height:1.3;}
-.pt-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:16px;height:16px;cursor:pointer;font-size:9px;display:none;align-items:center;justify-content:center;}
-.pt:hover .pt-del{display:flex;}
 .msg-sec{padding:32px 24px;background:var(--sol);position:relative;overflow:hidden;}
 .msg-sec .eye{color:var(--gx);}
 .msg-sec .eye::before{background:var(--gx);}
@@ -88,8 +84,6 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .mc:hover{transform:translateY(-2px) rotate(.3deg);}
 .mc-text{font-size:11px;color:var(--gx);line-height:1.6;font-style:italic;}
 .mc-name{font-size:9px;font-weight:700;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-top:8px;}
-.mc-del{position:absolute;top:4px;right:6px;background:none;border:none;color:#ccc;cursor:pointer;font-size:11px;display:none;}
-.mc:hover .mc-del{display:block;}
 .cg-sec{padding:32px 24px;background:#fff;}
 .cggrid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;}
 .cgc{background:#F8F6F1;border:1px solid #E8E4DC;border-radius:10px;padding:14px;position:relative;}
@@ -98,8 +92,6 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .cgc-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;}
 .cgc-name{font-size:10px;font-weight:500;color:#1A1A1A;}
 .cgc-loc{font-size:9px;color:#999;}
-.cgc-del{position:absolute;top:6px;right:8px;background:none;border:none;color:#bbb;cursor:pointer;font-size:11px;display:none;}
-.cgc:hover .cgc-del{display:block;}
 .badd{display:inline-flex;align-items:center;gap:5px;background:var(--gx);color:#fff;border:none;padding:8px 18px;border-radius:999px;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;margin-top:14px;position:relative;z-index:1;transition:background .2s;}
 .badd:hover{background:var(--wa);}
 .footer{background:var(--gx);padding:28px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
@@ -151,13 +143,6 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .s-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.08) 65%);}
 .s-bot{position:absolute;bottom:56px;left:0;right:0;z-index:2;text-align:center;padding:0 40px;}
 .s-cap{font-size:clamp(13px,2vw,20px);color:#fff;line-height:1.5;font-style:italic;margin-bottom:6px;}
-.s-cap-meta{font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.04em;}
-.s-badge{display:inline-block;background:var(--sol);color:var(--gx);font-size:10px;font-weight:700;padding:4px 13px;border-radius:999px;margin-top:12px;letter-spacing:.04em;}
-.ptl{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:640px;width:100%;padding:0 36px;}
-.ptl-item{display:grid;grid-template-columns:56px 1fr;gap:12px;align-items:start;}
-.ptl-yr{font-family:'Roboto Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--sol);}
-.ptl-t{font-size:12px;font-weight:500;color:#fff;margin-bottom:2px;}
-.ptl-b{font-size:10px;color:rgba(255,255,255,.5);}
 .pctrl{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:950;background:rgba(0,0,0,.55);padding:7px 14px;border-radius:999px;backdrop-filter:blur(6px);}
 .cbtn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
 .cbtn:hover{background:rgba(255,255,255,.15);}
@@ -193,7 +178,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 <div class="stats">
   <div class="stat"><div class="stat-n">20</div><div class="stat-l" id="s0">함께한 해</div></div>
   <div class="stat"><div class="stat-n">27</div><div class="stat-l" id="s1">현재 팀원</div></div>
-  <div class="stat"><div class="stat-n">10,084</div><div class="stat-l" id="s2">총 출하 대수</div></div>
+  <div class="stat"><div class="stat-n" style="display:flex;align-items:baseline;gap:4px;">10,084<span style="font-size:clamp(12px,1.8vw,18px);color:rgba(19,41,75,.55);font-weight:500;">+</span></div><div class="stat-l" id="s2">총 출하 대수</div><div style="font-size:10px;color:rgba(19,41,75,.5);margin-top:2px;font-weight:500;">10,000+ milestone</div></div>
   <div class="stat"><div class="stat-n">100+</div><div class="stat-l" id="s3">제품 수출국</div></div>
 </div>
 
@@ -218,7 +203,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 <div class="team-sec">
   <div class="eye" id="tm-eye">2026 우리 팀</div>
   <div class="stitle" id="tm-title">지금 이 순간, 함께하는 사람들</div>
-  <p class="sbody" id="tm-body" style="margin-top:6px;">본인 카드를 클릭해서 사진을 올려주세요.</p>
+  <p class="sbody" id="tm-body" style="margin-top:6px;">본인 카드를 클릭해서 사진과 메시지를 올려주세요.</p>
   <div class="tgrid" id="teamGrid"></div>
 </div>
 
@@ -235,11 +220,10 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 </div>
 
 <div class="msg-sec">
-  <div class="msg-bg">2046</div>
-  <div class="eye" id="m-eye">다음 20년으로</div>
+  <div class="msg-bg">2036</div>
+  <div class="eye" id="m-eye">2036년을 바라보며</div>
   <div class="stitle" id="m-title">우리가 함께 쓰는 이야기</div>
-  <p class="sbody" id="m-body">20주년을 맞아, PBK 구성원 모두가 다음 20년에 전하고 싶은 한 마디를 남겨주세요.</p>
-  <button class="badd" onclick="openMsg()"><span id="m-btn">+ 메시지 남기기</span></button>
+  <p class="sbody" id="m-body">20주년을 맞아, PBK 구성원 모두가 다음 10년에 전하고 싶은 한 마디. 본인 팀 카드를 클릭해서 사진과 함께 등록합니다.</p>
   <div class="mwall" id="msgWall"></div>
   <div class="empty" id="m-empty" style="display:none;color:rgba(19,41,75,.5)">아직 메시지가 없어요.</div>
 </div>
@@ -258,15 +242,20 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
   <div class="footer-yr">2006 — 2026</div>
 </div>
 
-<!-- TEAM PHOTO MODAL -->
+<!-- TEAM PHOTO + MESSAGE MODAL -->
 <div class="ov" id="tphOv" onclick="closeOv('tphOv')">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="mx" onclick="closeOv('tphOv')">✕</button>
-    <div class="mh" id="tph-h">내 사진 올리기</div>
-    <div class="ms">본인 사진을 올려주세요.</div>
+    <div class="mh" id="tph-h">내 사진 & 메시지</div>
+    <div class="ms" id="tph-s">사진(선택)과 다음 10년을 향한 한 마디를 남겨주세요.</div>
     <div class="fld">
+      <label>사진 (선택)</label>
       <div class="phzone" id="tphZone"><input type="file" accept="image/*" onchange="previewTeamPh(this)"><div class="phzone-lbl">클릭하여 사진 선택</div></div>
       <img id="tphPrev" class="ph-prev">
+    </div>
+    <div class="fld">
+      <label>다음 10년 메시지 <span style="font-weight:400;color:var(--sol);">*필수</span></label>
+      <textarea id="tphMsg" placeholder="다음 10년에 전하고 싶은 한 마디를 자유롭게 써주세요..." style="min-height:72px;"></textarea>
     </div>
     <button class="mbtn" onclick="submitTeamPh()">등록하기</button>
   </div>
@@ -284,18 +273,6 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
     </div>
     <div class="fld"><label>캡션 (선택)</label><input id="phCap" type="text" placeholder="이 사진에 대한 한 마디..."></div>
     <button class="mbtn" onclick="submitPh()"><span id="ph-btn">업로드</span></button>
-  </div>
-</div>
-
-<!-- MSG MODAL -->
-<div class="ov" id="msgOv" onclick="closeOv('msgOv')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="mx" onclick="closeOv('msgOv')">✕</button>
-    <div class="mh" id="mo-h">메시지 남기기</div>
-    <div class="ms" id="mo-s">다음 20년을 향한 한 마디를 남겨주세요.</div>
-    <div class="fld"><label>이름</label><input id="inName" type="text" placeholder="홍길동"></div>
-    <div class="fld"><label>메시지</label><textarea id="inMsg" placeholder="자유롭게 써주세요..."></textarea></div>
-    <button class="mbtn" onclick="submitMsg()">남기기</button>
   </div>
 </div>
 
@@ -329,7 +306,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
         <button class="adm-tab" id="atab-congrats" onclick="switchAdmTab('congrats')">🎉 축하</button>
         <button class="adm-tab" id="atab-team" onclick="switchAdmTab('team')">👤 팀</button>
       </div>
-      <div id="admHint" style="font-size:11px;color:#888;margin-bottom:10px;">드래그해서 사진 순서를 바꿀 수 있어요.</div>
+      <div id="admHint" style="font-size:11px;color:#888;margin-bottom:10px;">드래그해서 사진 순서를 바꿀 수 있어요. ✕로 삭제.</div>
       <div id="adminList" style="display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;"></div>
       <button class="mbtn" id="saveOrderBtn" style="margin-top:14px;" onclick="saveOrder()">순서 저장</button>
     </div>
@@ -355,41 +332,41 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
-// SUPABASE CLIENT
+// SUPABASE
 // ═══════════════════════════════════════════════════════════════
-var SUPABASE_URL = 'https://bcggwrvmbmbfvwhehtfq.supabase.co';
-var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjZ2d3cnZtYm1iZnZ3aGVodGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MzQwMTgsImV4cCI6MjA5MjMxMDAxOH0.P99MxJFtkurG49pEYDAcLpR2zTb4jMUIYENtn5ZY-GU';
-var BUCKET = 'pbk20-photos';
-var sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+var SUPABASE_URL='https://bcggwrvmbmbfvwhehtfq.supabase.co';
+var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjZ2d3cnZtYm1iZnZ3aGVodGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MzQwMTgsImV4cCI6MjA5MjMxMDAxOH0.P99MxJFtkurG49pEYDAcLpR2zTb4jMUIYENtn5ZY-GU';
+var BUCKET='pbk20-photos';
+var sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
 // ═══════════════════════════════════════════════════════════════
-// I18N + STATIC DATA
+// DATA
 // ═══════════════════════════════════════════════════════════════
 var lang='ko';
 var TL={
   ko:[
-    {y:'1998',t:'Bionex Inc. 설립',b:'기업 부설 연구소로 출발. 생명과학 계측기기 분야의 가능성을 열다.',dim:true},
     {y:'2005',t:'Maxwell 시리즈 첫 출하',b:'Promega와의 MX-16 계약 체결. AS1000 82대 첫 출하.',dim:true},
     {y:'2006',t:'Promega BioSystems Korea 공식 출범',b:'Promega Corporation과 함께 새 출발. 글로벌 제조 허브로.'},
-    {y:'2010',t:'ISO 13485 인증 취득',b:'의료기기 품질경영시스템 국제 인증.'},
-    {y:'2014',t:'AS4500 & FDA IVD 승인',b:'글로벌 시장 진출 가속화.'},
-    {y:'2020',t:'팬데믹 속 최대 출하 1,183대',b:'역대 최고 기록 달성.'},
-    {y:'2025',t:'Maxwell CSC96 출시',b:'누적 출하 10,000대 돌파.'},
+    {y:'2010',t:'ISO 13485 인증 취득',b:'AS2000·AS3000 라인업 확장. 의료기기 품질경영시스템 국제 인증.'},
+    {y:'2014',t:'AS4500 & FDA IVD 승인',b:'글로벌 시장 진출 가속화. AS4500 시리즈가 누계 출하 1위 모델로.'},
+    {y:'2015',t:'AS6000 & FDA IVD 승인',b:'제품 라인업 확장 및 미국 시장 규제 승인.'},
+    {y:'2017',t:'AS8500 출시',b:'고성능 자동화 정제 장비 AS8500 시리즈 론칭.'},
+    {y:'2020',t:'AS8000 & FDA VID 승인 · 최대 출하 1,183대',b:'코로나19 수요로 역대 최고 기록 달성. AS8000 미국 규제 승인.'},
     {y:'2026',t:'20주년 — 다음 챕터로',b:'20년의 역사 위에, 새로운 이야기를 씁니다.',future:true}
   ],
   en:[
-    {y:'1998',t:'Founded as Bionex Inc.',b:'A corporate R&D venture in life science instrumentation — independent, focused, built to grow.',dim:true},
     {y:'2005',t:'Maxwell Series — First Shipment',b:'MX-16 contract signed. First 82 AS1000 units shipped.',dim:true},
     {y:'2006',t:'Promega BioSystems Korea Established',b:'Officially launched under Promega Corporation. A new chapter as a global manufacturing hub.'},
-    {y:'2010',t:'ISO 13485 Certification',b:'International certification in medical device quality management.'},
-    {y:'2014',t:'AS4500 & FDA IVD Approval',b:'Accelerating global market expansion.'},
-    {y:'2020',t:'Record Shipment — 1,183 Units',b:'Peak output driven by global pandemic demand.'},
-    {y:'2025',t:'Maxwell CSC96 Launch',b:'Cumulative shipments surpass 10,000 units.'},
+    {y:'2010',t:'ISO 13485 Certification',b:'AS2000 & AS3000 lineup expanded. International certification in medical device quality management.'},
+    {y:'2014',t:'AS4500 & FDA IVD Approval',b:'Accelerating global market expansion. AS4500 becomes the top-shipped model.'},
+    {y:'2015',t:'AS6000 & FDA IVD Approval',b:'Product lineup expansion with US regulatory approval.'},
+    {y:'2017',t:'AS8500 Launch',b:'High-performance automated purification instrument AS8500 series launched.'},
+    {y:'2020',t:'AS8000 & FDA VID Approval · Record 1,183 Units',b:'Peak output driven by global pandemic demand. AS8000 approved by FDA.'},
     {y:'2026',t:'20th Anniversary — The Next Chapter',b:'Built on 20 years of history, a new story begins.',future:true}
   ]
 };
 var TEAM=[
-  {name:'나정아',en:'JeungA Na',koT:'General Manager',enT:'General Manager'},
+  {name:'나정아',en:'JeungA Na',koT:'Since 2009.08',enT:'Since 2009.08'},
   {name:'최인성',en:'Insung Choi',koT:'Since 2004.06',enT:'Since 2004.06'},
   {name:'김은기',en:'Eungi Kim',koT:'Since 2005.12',enT:'Since 2005.12'},
   {name:'김성연',en:'Sungyoun Kim',koT:'Since 2007.02',enT:'Since 2007.02'},
@@ -423,9 +400,9 @@ function ini(n){return n.split(' ').map(function(w){return w[0]||'';}).join('').
 function esc(s){var d=document.createElement('div');d.textContent=s==null?'':String(s);return d.innerHTML;}
 function toast(m){var el=document.getElementById('tst');el.textContent=m;el.classList.add('on');setTimeout(function(){el.classList.remove('on');},2600);}
 function closeOv(id){document.getElementById(id).classList.remove('on');}
+function memberSlug(m){return m.en.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
 
-// In-memory cache (also used by present mode)
-var cache = { team:{}, photos:[], msgs:[], cgs:[] };
+var cache={team:{},photos:[],msgs:[],cgs:[]};
 
 // ═══════════════════════════════════════════════════════════════
 // TIMELINE + LANGUAGE
@@ -458,23 +435,20 @@ function setLang(l){
   document.getElementById('ch-title').textContent=ko?'연도별 출하 현황':'Annual Shipments';
   document.getElementById('tm-eye').textContent=ko?'2026 우리 팀':'PBK Team 2026';
   document.getElementById('tm-title').textContent=ko?'지금 이 순간, 함께하는 사람들':'The people here, right now';
-  document.getElementById('tm-body').textContent=ko?'본인 카드를 클릭해서 사진을 올려주세요.':'Click your card to upload your photo.';
+  document.getElementById('tm-body').textContent=ko?'본인 카드를 클릭해서 사진과 메시지를 올려주세요.':'Click your card to upload your photo and message.';
   document.getElementById('p-eye').textContent=ko?'우리의 기억들':'Our Memories';
   document.getElementById('p-title').textContent=ko?'20년을 함께한 순간들':"Moments We've Shared";
   document.getElementById('p-body').textContent=ko?'어떤 사진이든 좋아요 — 지금의 나, 동료와 함께, 우리가 만든 것, 기억에 남는 순간.':'Any photo works — just you, with colleagues, what we made, or memorable moments.';
   document.getElementById('ul-lbl').textContent=ko?'클릭하여 사진 업로드':'Click to upload photos';
-  document.getElementById('m-eye').textContent=ko?'다음 20년으로':'Toward the Next 20';
+  document.getElementById('m-eye').textContent=ko?'2036년을 바라보며':'Looking Toward 2036';
   document.getElementById('m-title').textContent=ko?'우리가 함께 쓰는 이야기':'A Story We Write Together';
-  document.getElementById('m-body').textContent=ko?'20주년을 맞아, PBK 구성원 모두가 다음 20년에 전하고 싶은 한 마디를 남겨주세요.':'As we mark 20 years, leave a message for the next 20.';
-  document.getElementById('m-btn').textContent=ko?'+ 메시지 남기기':'+ Leave a Message';
+  document.getElementById('m-body').textContent=ko?'20주년을 맞아, PBK 구성원 모두가 다음 10년에 전하고 싶은 한 마디. 본인 팀 카드를 클릭해서 사진과 함께 등록합니다.':'A message for the next 10 years — submit it together with your photo from your team card above.';
   document.getElementById('cg-eye').textContent='Congratulations from Promega';
   document.getElementById('cg-title').textContent=ko?'전 세계 Promega 가족의 축하 메시지':'Messages from the Promega Family';
   document.getElementById('cg-btn').textContent=ko?'🎉 축하 메시지 남기기':'🎉 Leave a Congrats Message';
   document.getElementById('ft-txt').innerHTML=ko?'Promega BioSystems Korea · 20주년 · 2006–2026<br>과학으로 시작된 여정, 사람과 함께 이어갑니다.':'Promega BioSystems Korea · 20th Anniversary · 2006–2026<br>A journey that began with science, continued with people.';
   document.getElementById('p-empty').textContent=ko?'아직 업로드된 사진이 없어요. 첫 번째 사진을 올려주세요!':'No photos yet. Be the first!';
-  document.getElementById('mo-h').textContent=ko?'메시지 남기기':'Leave a Message';
-  document.getElementById('mo-s').textContent=ko?'다음 20년을 향한 한 마디를 남겨주세요.':'What do you want to say to the next 20 years?';
-  renderTL();renderTeam();
+  renderTL();renderTeam();renderMsgs();
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -498,31 +472,32 @@ function compressImg(file,maxPx,q){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// TEAM PHOTOS (1 per member, keyed by Korean name)
+// TEAM (photo + message per member)
 // ═══════════════════════════════════════════════════════════════
 var curTeamIdx=null,tphBlob=null,tphPreviewUrl=null;
 
 async function loadTeam(){
-  try {
-    var r = await sb.from('pbk20_team_photos').select('member_name, photo_url');
-    if(r.error){ console.error(r.error); }
-    var map = {};
-    (r.data||[]).forEach(function(row){ map[row.member_name] = row.photo_url; });
-    cache.team = map;
-  } catch(e){ console.error(e); }
+  try{
+    var r=await sb.from('pbk20_team_photos').select('member_name,photo_url,msg');
+    var map={};(r.data||[]).forEach(function(row){map[row.member_name]={photo:row.photo_url,msg:row.msg};});
+    cache.team=map;
+  }catch(e){console.error(e);}
   renderTeam();
+  renderMsgs();
 }
 function renderTeam(){
-  var g=document.getElementById('teamGrid');if(!g) return;g.innerHTML='';
+  var g=document.getElementById('teamGrid');if(!g)return;g.innerHTML='';
   TEAM.forEach(function(m,i){
     var dn=lang==='en'?m.en:m.name,tenure=lang==='en'?m.enT:m.koT;
+    var td=cache.team[m.name];
+    var ph=td?td.photo:null;
     var card=document.createElement('div');card.className='tc';
     card.onclick=function(){openTeamPh(i);};
-    if(cache.team[m.name]){
-      card.innerHTML='<img class="tc-photo" src="'+cache.team[m.name]+'" alt="'+esc(dn)+'"><div class="tc-info"><div class="tc-name">'+esc(dn)+'</div><div class="tc-since">'+esc(tenure)+'</div></div>';
+    if(ph){
+      card.innerHTML='<img class="tc-photo" src="'+ph+'" alt="'+esc(dn)+'"><div class="tc-info"><div class="tc-name">'+esc(dn)+'</div><div class="tc-since">'+esc(tenure)+'</div></div>';
     }else{
       var bg=av(m.name),in2=ini(m.en||m.name);
-      card.innerHTML='<div class="tc-ph" style="background:'+bg+'"><div class="tc-ini">'+in2+'</div><div class="tc-upl">'+(lang==='en'?'Upload photo':'사진 올리기')+'</div></div><div class="tc-info"><div class="tc-name">'+esc(dn)+'</div><div class="tc-since">'+esc(tenure)+'</div></div>';
+      card.innerHTML='<div class="tc-ph" style="background:'+bg+'"><div class="tc-ini">'+in2+'</div><div class="tc-upl">'+(lang==='en'?'Upload':'사진+메시지')+'</div></div><div class="tc-info"><div class="tc-name">'+esc(dn)+'</div><div class="tc-since">'+esc(tenure)+'</div></div>';
     }
     g.appendChild(card);
   });
@@ -530,9 +505,18 @@ function renderTeam(){
 function openTeamPh(i){
   curTeamIdx=i;tphBlob=null;
   if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
-  document.getElementById('tph-h').textContent=(lang==='en'?'Upload photo — ':'사진 올리기 — ')+(lang==='en'?TEAM[i].en:TEAM[i].name);
-  document.getElementById('tphPrev').style.display='none';
-  document.getElementById('tphZone').style.display='block';
+  var name=lang==='en'?TEAM[i].en:TEAM[i].name;
+  document.getElementById('tph-h').textContent=name+(lang==='en'?"'s photo & message":'님의 사진 & 메시지');
+  var existing=cache.team[TEAM[i].name];
+  document.getElementById('tphMsg').value=existing?(existing.msg||''):'';
+  if(existing&&existing.photo){
+    document.getElementById('tphPrev').src=existing.photo;
+    document.getElementById('tphPrev').style.display='block';
+    document.getElementById('tphZone').style.display='none';
+  }else{
+    document.getElementById('tphPrev').style.display='none';
+    document.getElementById('tphZone').style.display='block';
+  }
   document.getElementById('tphOv').classList.add('on');
 }
 function previewTeamPh(input){
@@ -547,19 +531,28 @@ function previewTeamPh(input){
   });
 }
 async function submitTeamPh(){
-  if(!tphBlob){toast(lang==='en'?'Please select a photo':'사진을 선택해주세요');return;}
-  var name=TEAM[curTeamIdx].name;
-  var path='team/'+Date.now()+'_'+Math.round(Math.random()*9999)+'.jpg';
-  try {
-    var up = await sb.storage.from(BUCKET).upload(path, tphBlob, { contentType:'image/jpeg', upsert:false });
-    if(up.error){ toast('업로드 실패: '+up.error.message); return; }
-    var url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-    var ins = await sb.from('pbk20_team_photos').upsert({ member_name:name, photo_url:url, ts:new Date().toISOString() });
-    if(ins.error){ toast('저장 실패: '+ins.error.message); return; }
+  var msgText=document.getElementById('tphMsg').value.trim();
+  if(!msgText){toast(lang==='en'?'Please enter a message':'다음 10년 메시지를 입력해주세요');return;}
+  var member=TEAM[curTeamIdx];
+  var existing=cache.team[member.name]||{};
+  var photoUrl=existing.photo||null;
+  try{
+    if(tphBlob){
+      var path='team/'+memberSlug(member)+'.jpg';
+      var up=await sb.storage.from(BUCKET).upload(path,tphBlob,{contentType:'image/jpeg',upsert:true});
+      if(up.error){toast('업로드 실패: '+up.error.message);return;}
+      photoUrl=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl+'?t='+Date.now();
+    }
+    var row={member_name:member.name,msg:msgText,ts:new Date().toISOString()};
+    if(photoUrl)row.photo_url=photoUrl;
+    var ins=await sb.from('pbk20_team_photos').upsert(row);
+    if(ins.error){toast('저장 실패: '+ins.error.message);return;}
     if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
     tphBlob=null;
-    await loadTeam();closeOv('tphOv');toast('등록됐어요 ✨');
-  } catch(e){ console.error(e); toast('오류: '+e.message); }
+    await loadTeam();
+    closeOv('tphOv');
+    toast('등록됐어요 ✨');
+  }catch(e){console.error(e);toast('오류: '+e.message);}
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -579,18 +572,17 @@ function pickFiles(input){
   cnt.style.display='block';
 }
 async function loadPhotos(){
-  try {
-    var r = await sb.from('pbk20_photos').select('*').order('sort_order',{ascending:true}).order('ts',{ascending:true});
-    if(r.error){ console.error(r.error); cache.photos=[]; }
-    else cache.photos = r.data || [];
-  } catch(e){ console.error(e); cache.photos=[]; }
+  try{
+    var r=await sb.from('pbk20_photos').select('*').order('sort_order',{ascending:true}).order('ts',{ascending:true});
+    cache.photos=r.data||[];
+  }catch(e){console.error(e);cache.photos=[];}
   var g=document.getElementById('photoGrid'),e=document.getElementById('p-empty');
   g.innerHTML='';
   if(!cache.photos.length){e.style.display='block';return;}
   e.style.display='none';
   cache.photos.forEach(function(item){
     var div=document.createElement('div');div.className='pt';
-    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(item.caption||'')+'" loading="lazy">'+(item.caption?'<div class="pt-cap">'+esc(item.caption)+'</div>':'')+'<button class="pt-del" onclick="delPhoto(\''+item.id+'\')">✕</button>';
+    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(item.caption||'')+'" loading="lazy">'+(item.caption?'<div class="pt-cap">'+esc(item.caption)+'</div>':'');
     g.appendChild(div);
   });
 }
@@ -603,11 +595,11 @@ async function submitPh(){
     try{
       var blob=await compressImg(pendingFiles[i],1400,0.82);if(!blob)continue;
       var path='gallery/'+Date.now()+'_'+Math.round(Math.random()*9999)+'.jpg';
-      var up = await sb.storage.from(BUCKET).upload(path, blob, { contentType:'image/jpeg' });
-      if(up.error){ console.error(up.error); continue; }
-      var url = sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-      var ins = await sb.from('pbk20_photos').insert({ caption:cap, photo_url:url });
-      if(ins.error){ console.error(ins.error); continue; }
+      var up=await sb.storage.from(BUCKET).upload(path,blob,{contentType:'image/jpeg'});
+      if(up.error){console.error(up.error);continue;}
+      var url=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+      var ins=await sb.from('pbk20_photos').insert({caption:cap,photo_url:url});
+      if(ins.error){console.error(ins.error);continue;}
       added++;
     }catch(e){console.error(e);}
   }
@@ -619,72 +611,58 @@ async function submitPh(){
   btn.textContent=lang==='en'?'Upload':'업로드';
 }
 async function delPhoto(id){
-  try {
-    var r = await sb.from('pbk20_photos').select('photo_url').eq('id',id).single();
-    if(r.data && r.data.photo_url){
-      var parts = r.data.photo_url.split('/'+BUCKET+'/');
-      if(parts[1]){ await sb.storage.from(BUCKET).remove([parts[1]]); }
+  try{
+    var r=await sb.from('pbk20_photos').select('photo_url').eq('id',id).single();
+    if(r.data&&r.data.photo_url){
+      var parts=r.data.photo_url.split('/'+BUCKET+'/');
+      if(parts[1])await sb.storage.from(BUCKET).remove([parts[1]]);
     }
     await sb.from('pbk20_photos').delete().eq('id',id);
     await loadPhotos();
     toast('삭제됐어요');
-  } catch(e){ console.error(e); toast('오류'); }
+  }catch(e){console.error(e);toast('오류');}
 }
 
 // ═══════════════════════════════════════════════════════════════
-// MESSAGES
+// MESSAGES (sourced from team_photos.msg)
 // ═══════════════════════════════════════════════════════════════
-async function loadMsgs(){
-  try {
-    var r = await sb.from('pbk20_messages').select('*').order('ts',{ascending:false});
-    if(r.error){ console.error(r.error); cache.msgs=[]; }
-    else cache.msgs = r.data || [];
-  } catch(e){ console.error(e); cache.msgs=[]; }
+function renderMsgs(){
   var w=document.getElementById('msgWall'),e=document.getElementById('m-empty');
   w.innerHTML='';
-  if(!cache.msgs.length){e.style.display='block';return;}
+  var msgs=[];
+  TEAM.forEach(function(m){
+    var td=cache.team[m.name];
+    if(td&&td.msg){
+      msgs.push({name:lang==='en'?m.en:m.name,text:td.msg});
+    }
+  });
+  cache.msgs=msgs;
+  if(!msgs.length){e.style.display='block';return;}
   e.style.display='none';
   var angles=[-1.2,0.8,-0.5,1,-0.3,0.6,-0.9,0.4];
-  cache.msgs.forEach(function(m,i){
+  msgs.forEach(function(m,i){
     var c=document.createElement('div');c.className='mc';c.style.transform='rotate('+angles[i%angles.length]+'deg)';
-    c.innerHTML='<div class="mc-text">"'+esc(m.text)+'"</div><div class="mc-name">— '+esc(m.name)+'</div><button class="mc-del" onclick="delMsg(\''+m.id+'\')">✕</button>';
+    c.innerHTML='<div class="mc-text">"'+esc(m.text)+'"</div><div class="mc-name">— '+esc(m.name)+'</div>';
     w.appendChild(c);
   });
 }
-function openMsg(){document.getElementById('msgOv').classList.add('on');}
-async function submitMsg(){
-  var name=document.getElementById('inName').value.trim()||'익명';
-  var text=document.getElementById('inMsg').value.trim();
-  if(!text){toast('메시지를 입력해주세요');return;}
-  try {
-    var r = await sb.from('pbk20_messages').insert({ name:name, text:text });
-    if(r.error){ toast('저장 실패: '+r.error.message); return; }
-    await loadMsgs();closeOv('msgOv');
-    document.getElementById('inName').value='';document.getElementById('inMsg').value='';
-    toast('등록됐어요 ✨');
-  } catch(e){ console.error(e); toast('오류'); }
-}
-async function delMsg(id){
-  try { await sb.from('pbk20_messages').delete().eq('id',id); await loadMsgs(); toast('삭제됐어요'); }
-  catch(e){ console.error(e); }
-}
+async function loadMsgs(){await loadTeam();}
 
 // ═══════════════════════════════════════════════════════════════
 // CONGRATS
 // ═══════════════════════════════════════════════════════════════
 async function loadCG(){
-  try {
-    var r = await sb.from('pbk20_congrats').select('*').order('ts',{ascending:false});
-    if(r.error){ console.error(r.error); cache.cgs=[]; }
-    else cache.cgs = r.data || [];
-  } catch(e){ console.error(e); cache.cgs=[]; }
+  try{
+    var r=await sb.from('pbk20_congrats').select('*').order('ts',{ascending:false});
+    cache.cgs=r.data||[];
+  }catch(e){console.error(e);cache.cgs=[];}
   var g=document.getElementById('cgGrid'),e=document.getElementById('cg-empty');
   g.innerHTML='';
   if(!cache.cgs.length){e.style.display='block';return;}
   e.style.display='none';
   cache.cgs.forEach(function(c){
     var card=document.createElement('div');card.className='cgc';
-    card.innerHTML='<div class="cgc-text">"'+esc(c.text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div><button class="cgc-del" onclick="delCG(\''+c.id+'\')">✕</button>';
+    card.innerHTML='<div class="cgc-text">"'+esc(c.text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div>';
     g.appendChild(card);
   });
 }
@@ -694,21 +672,17 @@ async function submitCG(){
   var loc=document.getElementById('cgLoc').value.trim();
   var text=document.getElementById('cgMsg').value.trim();
   if(!text){toast('메시지를 입력해주세요');return;}
-  try {
-    var r = await sb.from('pbk20_congrats').insert({ name:name, loc:loc, text:text });
-    if(r.error){ toast('저장 실패: '+r.error.message); return; }
+  try{
+    var r=await sb.from('pbk20_congrats').insert({name:name,loc:loc,text:text});
+    if(r.error){toast('저장 실패: '+r.error.message);return;}
     await loadCG();closeOv('cgOv');
     document.getElementById('cgName').value='';document.getElementById('cgLoc').value='';document.getElementById('cgMsg').value='';
     toast('등록됐어요 ✨');
-  } catch(e){ console.error(e); toast('오류'); }
-}
-async function delCG(id){
-  try { await sb.from('pbk20_congrats').delete().eq('id',id); await loadCG(); toast('삭제됐어요'); }
-  catch(e){ console.error(e); }
+  }catch(e){console.error(e);toast('오류');}
 }
 
 // ═══════════════════════════════════════════════════════════════
-// ADMIN
+// ADMIN (4-tab panel)
 // ═══════════════════════════════════════════════════════════════
 var adminUnlocked=false,adminDragSrc=null,curAdmTab='photos';
 
@@ -736,9 +710,9 @@ function switchAdmTab(tab){
   document.getElementById('saveOrderBtn').style.display=tab==='photos'?'inline-flex':'none';
   var hint=document.getElementById('admHint');
   if(tab==='photos')hint.textContent='드래그해서 사진 순서를 바꿀 수 있어요. ✕로 삭제.';
-  else if(tab==='messages')hint.textContent='부적절한 메시지를 ✕로 삭제하세요.';
+  else if(tab==='messages')hint.textContent='부적절한 메시지를 ✕로 삭제하세요. (팀원 사진은 유지됩니다)';
   else if(tab==='congrats')hint.textContent='부적절한 축하 메시지를 ✕로 삭제하세요.';
-  else if(tab==='team')hint.textContent='잘못 올린 팀 사진을 ✕로 삭제하세요.';
+  else if(tab==='team')hint.textContent='잘못 올린 팀 사진을 ✕로 삭제하세요. (사진 + 메시지 모두 삭제)';
   showAdminPanel();
 }
 
@@ -764,12 +738,14 @@ async function showAdminPanel(){
     });
   }
   else if(curAdmTab==='messages'){
-    var r=await sb.from('pbk20_messages').select('*').order('ts',{ascending:false});
-    var rows=r.data||[];list.innerHTML='';
+    var r=await sb.from('pbk20_team_photos').select('member_name,msg').not('msg','is',null).order('ts',{ascending:false});
+    var rows=(r.data||[]).filter(function(x){return x.msg&&x.msg.trim();});list.innerHTML='';
     if(!rows.length){list.innerHTML='<div class="adm-empty">아직 메시지가 없어요.</div>';return;}
     rows.forEach(function(m){
+      var member=TEAM.find(function(t){return t.name===m.member_name;});
+      var displayName=member?(member.name+' / '+member.en):m.member_name;
       var row=document.createElement('div');row.className='adm-row';
-      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:3px;color:var(--gx);">'+esc(m.name)+'</div><div style="color:#666;line-height:1.45;">"'+esc(m.text)+'"</div></div><button class="adm-del" onclick="admDel(\'messages\',\''+m.id+'\')">✕</button>';
+      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:3px;color:var(--gx);">'+esc(displayName)+'</div><div style="color:#666;line-height:1.45;">"'+esc(m.msg)+'"</div></div><button class="adm-del" onclick="admDel(\'messages\',\''+m.member_name.replace(/'/g,"\\'")+'\')">✕</button>';
       list.appendChild(row);
     });
   }
@@ -784,14 +760,14 @@ async function showAdminPanel(){
     });
   }
   else if(curAdmTab==='team'){
-    var r=await sb.from('pbk20_team_photos').select('*');
-    var rows=r.data||[];list.innerHTML='';
+    var r=await sb.from('pbk20_team_photos').select('*').not('photo_url','is',null);
+    var rows=(r.data||[]).filter(function(x){return x.photo_url;});list.innerHTML='';
     if(!rows.length){list.innerHTML='<div class="adm-empty">아직 팀 사진이 없어요.</div>';return;}
     rows.forEach(function(item){
       var member=TEAM.find(function(m){return m.name===item.member_name;});
       var dispName=member?(member.name+' / '+member.en):item.member_name;
       var row=document.createElement('div');row.className='adm-row';row.style.alignItems='center';
-      row.innerHTML='<img src="'+item.photo_url+'" style="width:42px;height:42px;object-fit:cover;border-radius:50%;flex-shrink:0;background:#ddd;"><div style="flex:1;font-size:11px;color:#333;"><div style="font-weight:700;color:var(--gx);">'+esc(dispName)+'</div></div><button class="adm-del" onclick="admDel(\'team\',\''+item.member_name.replace(/'/g,"\\'")+'\')">✕</button>';
+      row.innerHTML='<img src="'+item.photo_url+'" style="width:42px;height:42px;object-fit:cover;border-radius:50%;flex-shrink:0;background:#ddd;"><div style="flex:1;font-size:11px;color:#333;"><div style="font-weight:700;color:var(--gx);">'+esc(dispName)+'</div>'+(item.msg?'<div style="color:#999;line-height:1.4;margin-top:2px;font-style:italic;">"'+esc(item.msg.slice(0,60))+(item.msg.length>60?'…':'')+'"</div>':'')+'</div><button class="adm-del" onclick="admDel(\'team\',\''+item.member_name.replace(/'/g,"\\'")+'\')">✕</button>';
       list.appendChild(row);
     });
   }
@@ -803,16 +779,21 @@ async function admDel(tab,id){
     if(tab==='photos'){
       await delPhoto(id);
     }else if(tab==='messages'){
-      await sb.from('pbk20_messages').delete().eq('id',id);
-      await loadMsgs();
+      // 메시지만 비우고 사진은 유지
+      await sb.from('pbk20_team_photos').update({msg:null}).eq('member_name',id);
+      await loadTeam();
     }else if(tab==='congrats'){
       await sb.from('pbk20_congrats').delete().eq('id',id);
       await loadCG();
     }else if(tab==='team'){
+      // 사진 + 메시지 모두 삭제 (행 삭제 + storage 파일 삭제)
       var r=await sb.from('pbk20_team_photos').select('photo_url').eq('member_name',id).single();
       if(r.data&&r.data.photo_url){
         var parts=r.data.photo_url.split('/'+BUCKET+'/');
-        if(parts[1])await sb.storage.from(BUCKET).remove([parts[1]]);
+        if(parts[1]){
+          var clean=parts[1].split('?')[0];
+          await sb.storage.from(BUCKET).remove([clean]);
+        }
       }
       await sb.from('pbk20_team_photos').delete().eq('member_name',id);
       await loadTeam();
@@ -832,34 +813,33 @@ async function saveOrder(){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// PRESENT MODE (unchanged from v2 — works on the cached arrays)
+// PRESENT MODE
 // ═══════════════════════════════════════════════════════════════
 var slides=[],curSlide=0,isPlaying=true,playTimer=null;
 var tsAnim=null,msgAnim=null,cgTimer=null;
-var SLIDE_DUR=10000;
+var SLIDE_DUR=5000;
 
 function stopAnims(){
-  if(tsAnim){cancelAnimationFrame(tsAnim);tsAnim=null;}
-  if(msgAnim){cancelAnimationFrame(msgAnim);msgAnim=null;}
+  if(tsAnim){clearTimeout(tsAnim);cancelAnimationFrame(tsAnim);tsAnim=null;}
+  if(msgAnim){clearTimeout(msgAnim);cancelAnimationFrame(msgAnim);msgAnim=null;}
   if(cgTimer){clearTimeout(cgTimer);cgTimer=null;}
 }
 function clearTm(){if(playTimer){clearInterval(playTimer);playTimer=null;}}
 function startTm(dur){clearTm();playTimer=setInterval(pNext,dur||SLIDE_DUR);}
 
 async function startPresent(){
-  // Refresh data first
-  await Promise.all([loadTeam(), loadPhotos(), loadMsgs(), loadCG()]);
-  var teamPh = cache.team;
-  var photos = cache.photos.map(function(p){ return { data:p.photo_url, cap:p.caption||'' }; });
-  var msgs = cache.msgs;
-  var cgs = cache.cgs;
+  await Promise.all([loadTeam(),loadPhotos(),loadCG()]);
+  var photos=cache.photos.map(function(p){return{data:p.photo_url,cap:p.caption||''};});
+  var cgs=cache.cgs;
   slides=[];
   slides.push({type:'title'});
   slides.push({type:'timeline'});
   slides.push({type:'chart'});
-  slides.push({type:'team',members:TEAM.map(function(m){return{name:m.name,en:m.en,enT:m.enT,photo:teamPh[m.name]||null};})});
+  slides.push({type:'team',members:TEAM.map(function(m){
+    var td=cache.team[m.name];
+    return{name:m.name,en:m.en,enT:m.enT,photo:td?td.photo:null,msg:td?td.msg:null};
+  })});
   photos.forEach(function(p){slides.push({type:'photo',data:p.data,cap:p.cap});});
-  if(msgs.length)slides.push({type:'msgs',msgs:msgs});
   if(cgs.length){
     var grps=[];for(var gi=0;gi<cgs.length;gi+=4)grps.push(cgs.slice(gi,gi+4));
     slides.push({type:'cgs',groups:grps});
@@ -870,6 +850,7 @@ async function startPresent(){
   showSlide(0);isPlaying=true;
   document.getElementById('playBtn').innerHTML='&#9646;&#9646;';
   startTm();
+  startMusicForPresent();
 }
 
 function buildSlides(){
@@ -877,51 +858,48 @@ function buildSlides(){
   slides.forEach(function(s,i){
     var div=document.createElement('div');div.className='slide';div.id='sl-'+i;
     if(s.type==='title'||s.type==='timeline'||s.type==='chart'||s.type==='cgs'||s.type==='closing')div.classList.add('sl-gx');
-    else if(s.type==='msgs')div.classList.add('sl-sol');
     else if(s.type==='team'||s.type==='photo')div.classList.add('sl-dk');
 
     if(s.type==='title'){
       div.innerHTML='<div style="text-align:center;padding:32px;z-index:2;position:relative;"><div class="s-lbl">Promega BioSystems Korea</div><div class="s-main">20 Years of<br><span class="ac">Science & People.</span></div><div class="s-sub">2006 — 2026</div></div>';
     }else if(s.type==='timeline'){
-      var h='<div style="z-index:2;position:relative;text-align:left;width:100%;max-width:640px;padding:0 36px;"><div class="s-lbl" style="margin-bottom:18px;">Our Journey</div><div class="ptl">';
-      TL['en'].forEach(function(t){
-        var ys=t.future?'opacity:.5':t.dim?'color:rgba(255,193,7,.5)':'';
-        var ts=t.dim?'color:rgba(255,255,255,.45)':'color:#fff';
-        var bs=t.dim?'color:rgba(255,255,255,.3)':'color:rgba(255,255,255,.58)';
-        h+='<div class="ptl-item"><div class="ptl-yr" style="'+ys+'">'+t.y+'</div><div><div class="ptl-t" style="'+ts+'">'+esc(t.t)+'</div><div class="ptl-b" style="'+bs+'">'+esc(t.b)+'</div></div></div>';
+      var h='<div style="z-index:2;position:relative;text-align:left;width:100%;max-width:640px;padding:0 36px;overflow:hidden;">'
+        +'<div class="s-lbl" style="margin-bottom:20px;">Our Journey</div>'
+        +'<div id="tlItems" style="display:flex;flex-direction:column;gap:10px;">';
+      TL['en'].forEach(function(t,i){
+        var ys=t.future?'opacity:.4':t.dim?'color:rgba(255,193,7,.5)':'';
+        var ts=t.dim?'color:rgba(255,255,255,.4)':t.future?'color:rgba(255,255,255,.6);font-weight:400':'color:#fff';
+        var bs=t.dim?'color:rgba(255,255,255,.25)':'color:rgba(255,255,255,.55)';
+        h+='<div class="tl-anim-item" data-idx="'+i+'" style="display:grid;grid-template-columns:56px 1fr;gap:12px;opacity:0;transform:translateX(-24px);transition:opacity .55s ease,transform .55s ease;">'
+          +'<div style="font-size:15px;font-weight:700;color:var(--sol);'+ys+'">'+t.y+'</div>'
+          +'<div><div style="font-size:13px;font-weight:500;margin-bottom:2px;transition:font-size .3s;'+ts+'">'+esc(t.t)+'</div>'
+          +'<div style="font-size:10px;'+bs+'">'+esc(t.b)+'</div></div>'
+          +'</div>';
       });
-      h+='</div></div>';div.innerHTML=h;
+      h+='</div></div>';
+      div.innerHTML=h;
     }else if(s.type==='chart'){
       div.innerHTML='<div style="width:100%;max-width:680px;padding:0 36px;text-align:center;z-index:2;position:relative;"><div class="s-lbl" style="margin-bottom:6px;">Maxwell Shipment History</div><div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:22px;">2005–2025 · Cumulative units shipped</div><div style="display:flex;align-items:flex-end;justify-content:center;gap:5px;height:210px;" id="cBars"></div><div style="font-family:Roboto Condensed,sans-serif;font-size:clamp(32px,5vw,60px);font-weight:700;color:var(--sol);margin-top:18px;" id="cCount">0</div><div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:4px;">total units shipped</div></div>';
     }else if(s.type==='team'){
-      var cards=s.members.map(function(m){
+      var thumbs=s.members.map(function(m,i){
         var bg=av(m.name),in2=ini(m.en||m.name);
-        var phHtml=m.photo?'<img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;" alt="'+esc(m.en)+'">'
-          :'<div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-family:Roboto Condensed,sans-serif;font-size:24px;font-weight:700;color:rgba(255,255,255,.3);">'+in2+'</div>';
-        return '<div style="flex-shrink:0;width:136px;text-align:center;">'
-          +'<div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.15);margin:0 auto 10px;">'+phHtml+'</div>'
-          +'<div style="font-size:12px;font-weight:500;color:#fff;line-height:1.2;">'+esc(m.en)+'</div>'
-          +'<div style="font-size:9px;color:var(--sol);margin-top:3px;">'+esc(m.enT)+'</div>'
-          +'</div>';
+        var phHtml=m.photo
+          ?'<img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;" alt="'+esc(m.en)+'">'
+          :'<div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:rgba(255,255,255,.5);">'+in2+'</div>';
+        return '<div class="team-dot" data-idx="'+i+'" style="flex-shrink:0;width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.2);transition:all .5s ease;opacity:.5;">'+phHtml+'</div>';
       }).join('');
-      div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;overflow:hidden;">'
-        +'<div class="s-lbl" style="text-align:center;margin-bottom:28px;flex-shrink:0;">PBK Team 2026</div>'
-        +'<div id="teamTrack" style="display:flex;gap:28px;padding:0 32px;will-change:transform;">'+cards+cards+'</div>'
+      div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">'
+        +'<div class="s-lbl" style="margin-bottom:20px;flex-shrink:0;">PBK Team 2026</div>'
+        +'<div id="teamFocusWrap" style="width:180px;height:180px;border-radius:50%;overflow:hidden;border:3px solid var(--sol);margin-bottom:20px;flex-shrink:0;position:relative;">'
+        +'<div id="teamFocusPhoto" style="width:100%;height:100%;"></div>'
+        +'</div>'
+        +'<div id="teamFocusName" style="font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;"></div>'
+        +'<div id="teamFocusSince" style="font-size:11px;color:var(--sol);margin-bottom:14px;"></div>'
+        +'<div id="teamFocusMsg" style="font-size:clamp(13px,1.8vw,18px);color:rgba(255,255,255,.75);font-style:italic;max-width:560px;text-align:center;line-height:1.5;min-height:28px;margin-bottom:20px;padding:0 20px;opacity:0;transition:opacity .4s ease;"></div>'
+        +'<div id="teamDots" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:600px;padding:0 32px;">'+thumbs+'</div>'
         +'</div>';
     }else if(s.type==='photo'){
       div.innerHTML='<img class="full-bg" src="'+s.data+'" alt="'+esc(s.cap)+'"><div class="s-ov"></div><div class="s-bot">'+(s.cap?'<div class="s-cap">'+esc(s.cap)+'</div>':'')+'</div>';
-    }else if(s.type==='msgs'){
-      var mh='';s.msgs.forEach(function(m){
-        mh+='<div style="padding:22px 0;border-bottom:1px solid rgba(19,41,75,.12);">'
-          +'<div style="font-size:clamp(14px,2.2vw,22px);color:#13294B;font-style:italic;line-height:1.45;">"'+esc(m.text)+'"</div>'
-          +'<div style="font-size:11px;color:rgba(19,41,75,.5);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-top:10px;">— '+esc(m.name)+'</div>'
-          +'</div>';
-      });
-      div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;padding:0 10%;">'
-        +'<div class="s-lbl" style="color:#13294B;padding-top:44px;margin-bottom:8px;flex-shrink:0;">Toward the Next 20</div>'
-        +'<div style="flex:1;overflow:hidden;position:relative;">'
-        +'<div id="msgInner" style="will-change:transform;">'+mh+mh+'</div>'
-        +'</div></div>';
     }else if(s.type==='cgs'){
       div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;">'
         +'<div class="s-lbl" style="margin-bottom:28px;">Congratulations from Promega</div>'
@@ -938,7 +916,8 @@ var cumulData=[{y:'2005',t:82},{y:'2006',t:304},{y:'2007',t:834},{y:'2008',t:113
 var cAnim=null;
 function runChart(){
   var bars=document.getElementById('cBars'),cnt=document.getElementById('cCount');
-  if(!bars||!cnt)return;var H=210;bars.innerHTML='';
+  if(!bars||!cnt){setTimeout(runChart,200);return;}
+  var H=210;bars.innerHTML='';
   cumulData.forEach(function(d){
     var w=document.createElement('div');w.style.cssText='display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;';
     var b=document.createElement('div');b.style.cssText='width:100%;border-radius:3px 3px 0 0;background:var(--sol);height:0;transition:height .9s ease;';
@@ -961,20 +940,41 @@ function animCount(el,target){
   var start=parseInt(el.textContent.replace(/,/g,''))||0,diff=target-start,steps=22,s2=0;
   cAnim=setInterval(function(){s2++;el.textContent=Math.round(start+diff*(s2/steps)).toLocaleString();if(s2>=steps){clearInterval(cAnim);el.textContent=target.toLocaleString();}},40);
 }
+
 function runTeamScroll(){
-  var track=document.getElementById('teamTrack');if(!track)return;
-  var half=track.scrollWidth/2,pos=0;
-  if(tsAnim)cancelAnimationFrame(tsAnim);
-  function step(){pos+=0.15;if(pos>=half)pos=0;track.style.transform='translateX(-'+pos+'px)';tsAnim=requestAnimationFrame(step);}
-  step();
+  var members=slides[curSlide]&&slides[curSlide].members;
+  if(!members)return;
+  var idx=0;
+  function showMember(){
+    if(!document.getElementById('teamFocusPhoto'))return;
+    var m=members[idx];
+    var bg=av(m.name),in2=ini(m.en||m.name);
+    var focusEl=document.getElementById('teamFocusPhoto');
+    if(m.photo){
+      focusEl.innerHTML='<img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;">';
+    }else{
+      focusEl.innerHTML='<div style="width:100%;height:100%;background:'+bg+';display:flex;align-items:center;justify-content:center;font-family:Roboto Condensed,sans-serif;font-size:52px;font-weight:700;color:rgba(255,255,255,.35);">'+in2+'</div>';
+    }
+    document.getElementById('teamFocusName').textContent=m.en;
+    document.getElementById('teamFocusSince').textContent=m.enT;
+    var msgEl=document.getElementById('teamFocusMsg');
+    if(msgEl){
+      if(m.msg){msgEl.textContent='"'+m.msg+'"';msgEl.style.opacity='1';}
+      else{msgEl.textContent='';msgEl.style.opacity='0';}
+    }
+    var dots=document.querySelectorAll('.team-dot');
+    dots.forEach(function(d,i){
+      if(i===idx){d.style.opacity='1';d.style.transform='scale(1.3)';d.style.border='2px solid var(--sol)';}
+      else{d.style.opacity='.4';d.style.transform='scale(1)';d.style.border='2px solid rgba(255,255,255,.2)';}
+    });
+    idx++;
+    if(idx<members.length&&tsAnim!==null){
+      tsAnim=setTimeout(showMember,4000);
+    }
+  }
+  tsAnim=setTimeout(showMember,300);
 }
-function runMsgScroll(){
-  var inner=document.getElementById('msgInner');if(!inner)return;
-  var half=inner.scrollHeight/2,pos=0;
-  if(msgAnim)cancelAnimationFrame(msgAnim);
-  function step(){pos+=0.4;if(pos>=half)pos=0;inner.style.transform='translateY(-'+pos+'px)';msgAnim=requestAnimationFrame(step);}
-  step();
-}
+
 function runCascade(groups,gi){
   if(cgTimer)clearTimeout(cgTimer);
   var grid=document.getElementById('cgGrid2');if(!grid||gi>=groups.length)return;
@@ -994,6 +994,28 @@ function runCascade(groups,gi){
   },8000);
 }
 
+function runTimelineAnim(){
+  var items=document.querySelectorAll('.tl-anim-item');
+  if(!items.length)return;
+  items.forEach(function(el,i){
+    setTimeout(function(){
+      el.style.opacity='1';
+      el.style.transform='translateX(0)';
+      items.forEach(function(other,j){
+        var titleEl=other.querySelector('div > div:first-child');
+        var bodyEl=other.querySelector('div > div:last-child');
+        if(j===i){
+          if(titleEl){titleEl.style.fontSize='15px';titleEl.style.color='#fff';}
+          if(bodyEl)bodyEl.style.opacity='1';
+        } else if(j<i){
+          if(titleEl){titleEl.style.fontSize='12px';titleEl.style.color='rgba(255,255,255,.4)';}
+          if(bodyEl)bodyEl.style.opacity='0.4';
+        }
+      });
+    }, i*1800);
+  });
+}
+
 function showSlide(idx){
   document.querySelectorAll('.slide').forEach(function(s){s.classList.remove('act');});
   var sl=document.getElementById('sl-'+idx);if(sl)sl.classList.add('act');
@@ -1001,26 +1023,28 @@ function showSlide(idx){
   document.getElementById('pbar').style.width=((idx+1)/slides.length*100)+'%';
   var s=slides[idx];if(!s)return;
   if(s.type==='chart'){
-    setTimeout(runChart,200);clearTm();if(isPlaying)startTm(30000);
+    setTimeout(runChart,400);clearTm();if(isPlaying)startTm(14000);
   }else if(s.type==='team'){
+    tsAnim=null;
     setTimeout(runTeamScroll,100);
-    var cardW=192,speed=0.15,fps=60;
-    var dur=Math.round(s.members.length*(cardW/speed/fps)*1000);
+    var dur=s.members.length*4000;
     clearTm();if(isPlaying)startTm(dur);
-  }else if(s.type==='msgs'){
-    setTimeout(runMsgScroll,100);clearTm();if(isPlaying)startTm(Math.max(40000,s.msgs.length*3000));
   }else if(s.type==='cgs'){
     setTimeout(function(){runCascade(s.groups,0);},200);
     clearTm();if(isPlaying)startTm(Math.ceil(s.groups.length*9000));
   }else if(s.type==='timeline'){
-    clearTm();if(isPlaying)startTm(30000);
+    setTimeout(runTimelineAnim,300);
+    var tlDur=(TL['en'].length*1800)+5000;
+    clearTm();if(isPlaying)startTm(tlDur);
+  }else{
+    clearTm();if(isPlaying)startTm(SLIDE_DUR);
   }
 }
 
-function pNext(){stopAnims();curSlide=(curSlide+1)%slides.length;showSlide(curSlide);if(isPlaying)startTm();}
-function pPrev(){stopAnims();curSlide=(curSlide-1+slides.length)%slides.length;showSlide(curSlide);if(isPlaying)startTm();}
-function togglePlay(){isPlaying=!isPlaying;document.getElementById('playBtn').innerHTML=isPlaying?'&#9646;&#9646;':'&#9654;';if(isPlaying)startTm();else clearTm();}
-function exitPres(){document.getElementById('pres').classList.remove('on');clearTm();stopAnims();}
+function pNext(){stopAnims();curSlide=(curSlide+1)%slides.length;showSlide(curSlide);}
+function pPrev(){stopAnims();curSlide=(curSlide-1+slides.length)%slides.length;showSlide(curSlide);}
+function togglePlay(){isPlaying=!isPlaying;document.getElementById('playBtn').innerHTML=isPlaying?'&#9646;&#9646;':'&#9654;';if(isPlaying)showSlide(curSlide);else clearTm();}
+function exitPres(){document.getElementById('pres').classList.remove('on');clearTm();stopAnims();stopMusicForPresent();}
 
 document.addEventListener('keydown',function(e){
   var p=document.getElementById('pres');if(!p.classList.contains('on'))return;
@@ -1029,9 +1053,6 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='Escape')exitPres();
 });
 
-// ═══════════════════════════════════════════════════════════════
-// SHIPMENT CHART (page chart, separate from present mode)
-// ═══════════════════════════════════════════════════════════════
 new Chart(document.getElementById('shipChart'),{
   type:'bar',
   data:{
@@ -1047,49 +1068,56 @@ new Chart(document.getElementById('shipChart'),{
 });
 
 // ═══════════════════════════════════════════════════════════════
-// BACKGROUND MUSIC (Web Audio API — same as v2)
+// BGM (MP3 file with fade in/out)
 // ═══════════════════════════════════════════════════════════════
-var audioCtx=null,musicNodes=[],isMusicOn=false;
-function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();}
-function playNote(freq,start,dur,vol){
-  var o=audioCtx.createOscillator();
-  var g=audioCtx.createGain();
-  var now=audioCtx.currentTime;
-  o.type='sine';
-  o.frequency.setValueAtTime(freq,now+start);
-  g.gain.setValueAtTime(0,now+start);
-  g.gain.linearRampToValueAtTime(vol||0.08,now+start+0.05);
-  g.gain.exponentialRampToValueAtTime(0.001,now+start+dur);
-  o.connect(g);g.connect(audioCtx.destination);
-  o.start(now+start);o.stop(now+start+dur+0.1);
-  musicNodes.push(o);
-}
-function playWarmMelody(){
-  if(!isMusicOn)return;
-  var notes=[
-    [261.6,0,1.2],[329.6,0.5,0.8],[392,1,1.5],[329.6,1.8,0.8],
-    [261.6,2.5,1.2],[293.7,3,0.8],[349.2,3.5,1.5],[329.6,4.2,1],
-    [261.6,5,1.2],[293.7,5.5,0.8],[329.6,6,1],[392,6.5,1.5],
-    [349.2,7.5,0.8],[329.6,8,0.8],[293.7,8.5,0.8],[261.6,9,2],
-    [196,0,2,0.04],[196,2.5,2,0.04],[196,5,2,0.04],[196,7.5,2,0.04]
-  ];
-  notes.forEach(function(n){playNote(n[0],n[1],n[2],n[3]);});
-  if(isMusicOn)setTimeout(playWarmMelody,9800);
+var bgMusic=null,isMusicOn=false;
+function initMusic(){
+  if(!bgMusic){
+    bgMusic=new Audio('pbk-music.mp3');
+    bgMusic.loop=true;
+    bgMusic.volume=0.35;
+  }
 }
 function toggleMusic(){
-  initAudio();
+  initMusic();
   isMusicOn=!isMusicOn;
   var btn=document.getElementById('musicBtn');
   if(isMusicOn){
+    bgMusic.play().catch(function(){toast('브라우저 정책으로 자동재생이 차단됐어요. 다시 눌러주세요.');isMusicOn=false;});
     btn.style.background='var(--sol)';btn.style.color='var(--gx)';
-    playWarmMelody();
     toast('♪ 음악 재생 중');
   }else{
+    fadeOutMusic();
     btn.style.background='rgba(19,41,75,.1)';btn.style.color='var(--gx)';
-    musicNodes.forEach(function(n){try{n.stop();}catch(e){}});
-    musicNodes=[];
     toast('음악 일시정지');
   }
+}
+function fadeOutMusic(cb){
+  if(!bgMusic){if(cb)cb();return;}
+  var vol=bgMusic.volume;
+  var step=vol/30;
+  var fade=setInterval(function(){
+    vol=Math.max(0,vol-step);
+    bgMusic.volume=vol;
+    if(vol<=0){
+      clearInterval(fade);
+      bgMusic.pause();
+      bgMusic.volume=0.35;
+      if(cb)cb();
+    }
+  },50);
+}
+function startMusicForPresent(){
+  initMusic();
+  isMusicOn=true;
+  bgMusic.volume=0.35;
+  bgMusic.currentTime=0;
+  bgMusic.play().catch(function(){});
+  document.getElementById('musicBtn').style.background='var(--sol)';
+  document.getElementById('musicBtn').style.color='var(--gx)';
+}
+function stopMusicForPresent(){
+  if(isMusicOn)fadeOutMusic(function(){isMusicOn=false;document.getElementById('musicBtn').style.background='rgba(19,41,75,.1)';document.getElementById('musicBtn').style.color='var(--gx)';});
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1098,7 +1126,6 @@ function toggleMusic(){
 renderTL();
 loadTeam();
 loadPhotos();
-loadMsgs();
 loadCG();
 </script>
 </body>
