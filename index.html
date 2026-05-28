@@ -356,7 +356,11 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#F8F6F1
 var SUPABASE_URL='https://bcggwrvmbmbfvwhehtfq.supabase.co';
 var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjZ2d3cnZtYm1iZnZ3aGVodGZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY3MzQwMTgsImV4cCI6MjA5MjMxMDAxOH0.P99MxJFtkurG49pEYDAcLpR2zTb4jMUIYENtn5ZY-GU';
 var BUCKET='pbk20-photos';
-var sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+// Disable session persistence so the SDK doesn't depend on localStorage —
+// avoids Edge "Tracking Prevention" blocking and the resulting 400 errors.
+var sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
+  auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}
+});
 
 // ═══════════════════════════════════════════════════════════════
 // DATA
@@ -425,9 +429,14 @@ function memberSlug(m){return m.en.toLowerCase().replace(/[^a-z0-9]+/g,'-').repl
 
 var cache={team:{},photos:[],msgs:[],cgs:[]};
 
-// localStorage-based "this is mine" tracking — lets a user edit only their own submissions
+// localStorage-based "this is mine" tracking — survives missing/blocked storage
 function getMyIds(key){try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return [];}}
-function addMyId(key,id){var ids=getMyIds(key);if(ids.indexOf(id)<0){ids.push(id);localStorage.setItem(key,JSON.stringify(ids));}}
+function addMyId(key,id){
+  try{
+    var ids=getMyIds(key);
+    if(ids.indexOf(id)<0){ids.push(id);localStorage.setItem(key,JSON.stringify(ids));}
+  }catch(e){console.warn('localStorage blocked (Edge tracking prevention?). Edit/delete buttons will not appear on this browser:',e.message);}
+}
 function isMine(key,id){return getMyIds(key).indexOf(id)>=0;}
 
 // ═══════════════════════════════════════════════════════════════
