@@ -184,7 +184,7 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#F8F6F1
 <div class="stats">
   <div class="stat"><div class="stat-n">20</div><div class="stat-l" id="s0">함께한 해</div></div>
   <div class="stat"><div class="stat-n">27</div><div class="stat-l" id="s1">현재 팀원</div></div>
-  <div class="stat"><div class="stat-n" style="display:flex;align-items:baseline;gap:4px;">10,084<span style="font-size:clamp(12px,1.8vw,18px);color:rgba(19,41,75,.55);font-weight:500;">+</span></div><div class="stat-l" id="s2">총 출하 대수</div><div style="font-size:10px;color:rgba(19,41,75,.5);margin-top:2px;font-weight:500;">10,000+ milestone (2025년 12월 말 기준)</div></div>
+  <div class="stat"><div class="stat-n" style="display:flex;align-items:baseline;gap:4px;">10,084<span style="font-size:clamp(12px,1.8vw,18px);color:rgba(19,41,75,.55);font-weight:500;">+</span></div><div class="stat-l" id="s2">총 출하 대수</div><div id="s2-sub" style="font-size:10px;color:rgba(19,41,75,.5);margin-top:2px;font-weight:500;">10,000+ milestone (2025년 12월 말 기준)</div></div>
   <div class="stat"><div class="stat-n">100+</div><div class="stat-l" id="s3">제품 수출국</div></div>
 </div>
 
@@ -231,7 +231,7 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#F8F6F1
   <div class="stitle" id="m-title">우리가 함께 쓰는 이야기</div>
   <p class="sbody" id="m-body">20주년을 맞아, PBK 구성원 모두가 다음 10년에 전하고 싶은 한 마디. 본인 팀 카드를 클릭해서 사진과 함께 등록합니다.</p>
   <div class="mwall" id="msgWall"></div>
-  <div class="empty" id="m-empty" style="display:none;color:rgba(19,41,75,.5)">아직 메시지가 없어요.</div>
+  <div class="empty" id="m-empty" style="display:none;color:rgba(19,41,75,.5)">No messages yet.</div>
 </div>
 
 <div class="cg-sec">
@@ -239,7 +239,7 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#F8F6F1
   <div class="stitle" id="cg-title">전 세계 Promega 가족의 축하 메시지</div>
   <button class="badd" onclick="openCG()"><span id="cg-btn">🎉 축하 메시지 남기기</span></button>
   <div class="cggrid" id="cgGrid"></div>
-  <div class="empty" id="cg-empty">아직 축하 메시지가 없어요.</div>
+  <div class="empty" id="cg-empty">No congrats messages yet.</div>
 </div>
 
 <div class="footer">
@@ -341,7 +341,7 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#F8F6F1
     <span class="cinfo" id="pinfo">1 / 1</span>
     <button class="cbtn" onclick="pNext()">&#8594;</button>
     <button class="cbtn" id="playBtn" onclick="togglePlay()">&#9646;&#9646;</button>
-    <button class="cexit" onclick="exitPres()">✕ 나가기</button>
+    <button class="cexit" id="presExitBtn" onclick="exitPres()">✕ Exit</button>
   </div>
 </div>
 
@@ -496,6 +496,12 @@ function setLang(l){
   var cgM=document.getElementById('cgMsg');if(cgM)cgM.placeholder=ko?'PBK 팀에게 전하고 싶은 말을 써주세요...':'Share your message for the PBK team...';
   // Admin modal
   var apwL=document.getElementById('adminPwLabel');if(apwL)apwL.textContent=ko?'비밀번호':'Password';
+  // Empty states + misc public labels
+  var s2s=document.getElementById('s2-sub');if(s2s)s2s.textContent=ko?'10,000+ milestone (2025년 12월 말 기준)':'10,000+ milestone (as of Dec 2025)';
+  var mEmpty=document.getElementById('m-empty');if(mEmpty)mEmpty.textContent=ko?'아직 메시지가 없어요.':'No messages yet.';
+  var cgEmpty=document.getElementById('cg-empty');if(cgEmpty)cgEmpty.textContent=ko?'아직 축하 메시지가 없어요.':'No congrats messages yet.';
+  var pExit=document.getElementById('presExitBtn');if(pExit)pExit.textContent=ko?'✕ 나가기':'✕ Exit';
+  var musicBtn=document.getElementById('musicBtn');if(musicBtn)musicBtn.title=ko?'배경음악':'Background music';
   renderTL();renderTeam();renderMsgs();renderPhotos();renderCG();
 }
 
