@@ -73,6 +73,10 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .pt{aspect-ratio:1;overflow:hidden;position:relative;border-radius:6px;background:#ddd;}
 .pt img{width:100%;height:100%;object-fit:cover;display:block;}
 .pt-cap{position:absolute;bottom:0;left:0;right:0;background:rgba(19,41,75,.8);color:#fff;font-size:9px;padding:3px 6px;line-height:1.3;}
+.pt-edit{position:absolute;top:3px;right:3px;background:rgba(253,184,19,.92);color:#13294B;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;display:none;align-items:center;justify-content:center;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.3);}
+.pt:hover .pt-edit{display:flex;}
+.cgc-edit{position:absolute;top:6px;right:8px;background:rgba(253,184,19,.92);color:#13294B;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;font-weight:700;display:none;align-items:center;justify-content:center;}
+.cgc:hover .cgc-edit{display:flex;}
 .msg-sec{padding:32px 24px;background:var(--sol);position:relative;overflow:hidden;}
 .msg-sec .eye{color:var(--gx);}
 .msg-sec .eye::before{background:var(--gx);}
@@ -267,10 +271,11 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 <div class="ov" id="phOv" onclick="closeOv('phOv')">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="mx" onclick="closeOv('phOv')">✕</button>
-    <div class="mh">사진 올리기</div>
-    <div class="ms">사진을 선택하고 짧은 캡션을 남겨주세요.</div>
+    <div class="mh" id="ph-h">사진 올리기</div>
+    <div class="ms" id="ph-s">사진을 선택하고 짧은 캡션을 남겨주세요.</div>
+    <img id="phEditPrev" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:7px;margin-bottom:8px;display:none;">
     <div class="fld">
-      <div class="phzone"><input type="file" accept="image/*" multiple onchange="pickFiles(this)"><div class="phzone-lbl">클릭하여 사진 선택</div></div>
+      <div class="phzone"><input type="file" accept="image/*" multiple onchange="pickFiles(this)"><div class="phzone-lbl" id="ph-zone-lbl">클릭하여 사진 선택</div></div>
       <div id="phcnt" class="phcnt"></div>
     </div>
     <div class="fld"><label>캡션 (선택)</label><input id="phCap" type="text" placeholder="이 사진에 대한 한 마디..."></div>
@@ -282,12 +287,12 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 <div class="ov" id="cgOv" onclick="closeOv('cgOv')">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="mx" onclick="closeOv('cgOv')">✕</button>
-    <div class="mh">🎉 축하 메시지 남기기</div>
-    <div class="ms">Promega 임직원이라면 누구든 PBK 20주년을 축하해주세요!</div>
+    <div class="mh" id="cg-h">🎉 축하 메시지 남기기</div>
+    <div class="ms" id="cg-s">Promega 임직원이라면 누구든 PBK 20주년을 축하해주세요!</div>
     <div class="fld"><label>이름</label><input id="cgName" type="text" placeholder="홍길동 / Gil-dong Hong"></div>
     <div class="fld"><label>소속 / 지역</label><input id="cgLoc" type="text" placeholder="Madison HQ · R&D"></div>
     <div class="fld"><label>메시지</label><textarea id="cgMsg" placeholder="PBK 팀에게 전하고 싶은 말을 써주세요..."></textarea></div>
-    <button class="mbtn" onclick="submitCG()">남기기</button>
+    <button class="mbtn" id="cg-btn-save" onclick="submitCG()">남기기</button>
   </div>
 </div>
 
@@ -407,6 +412,11 @@ function closeOv(id){document.getElementById(id).classList.remove('on');}
 function memberSlug(m){return m.en.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
 
 var cache={team:{},photos:[],msgs:[],cgs:[]};
+
+// localStorage-based "this is mine" tracking — lets a user edit only their own submissions
+function getMyIds(key){try{return JSON.parse(localStorage.getItem(key)||'[]');}catch(e){return [];}}
+function addMyId(key,id){var ids=getMyIds(key);if(ids.indexOf(id)<0){ids.push(id);localStorage.setItem(key,JSON.stringify(ids));}}
+function isMine(key,id){return getMyIds(key).indexOf(id)>=0;}
 
 // ═══════════════════════════════════════════════════════════════
 // TIMELINE + LANGUAGE
@@ -594,10 +604,32 @@ async function submitTeamPh(){
 // PHOTO GALLERY
 // ═══════════════════════════════════════════════════════════════
 var pendingFiles=[];
+var editingPhotoId=null;
 function openPhModal(){
+  editingPhotoId=null;
   pendingFiles=[];
   document.getElementById('phCap').value='';
   document.getElementById('phcnt').style.display='none';
+  document.getElementById('phEditPrev').style.display='none';
+  document.getElementById('ph-h').textContent=lang==='en'?'Upload Photo':'사진 올리기';
+  document.getElementById('ph-s').textContent=lang==='en'?'Select photos and add a short caption.':'사진을 선택하고 짧은 캡션을 남겨주세요.';
+  document.getElementById('ph-zone-lbl').textContent=lang==='en'?'Click to select photo(s)':'클릭하여 사진 선택';
+  document.getElementById('ph-btn').textContent=lang==='en'?'Upload':'업로드';
+  document.getElementById('phOv').classList.add('on');
+}
+function editPhoto(id){
+  var photo=cache.photos.find(function(p){return p.id===id;});
+  if(!photo){toast('찾을 수 없음');return;}
+  editingPhotoId=id;
+  pendingFiles=[];
+  document.getElementById('phCap').value=pickLang(photo.caption_ko,photo.caption_en,photo.caption)||'';
+  document.getElementById('phcnt').style.display='none';
+  var prev=document.getElementById('phEditPrev');
+  prev.src=photo.photo_url;prev.style.display='block';
+  document.getElementById('ph-h').textContent=lang==='en'?'✎ Edit Photo':'✎ 사진 수정';
+  document.getElementById('ph-s').textContent=lang==='en'?'Update caption, or pick a new file to replace the photo.':'캡션을 수정하거나 새 파일로 사진을 교체할 수 있어요.';
+  document.getElementById('ph-zone-lbl').textContent=lang==='en'?'(Optional) replace photo':'(선택) 사진 교체';
+  document.getElementById('ph-btn').textContent=lang==='en'?'Save':'저장';
   document.getElementById('phOv').classList.add('on');
 }
 function pickFiles(input){
@@ -621,15 +653,46 @@ function renderPhotos(){
   cache.photos.forEach(function(item){
     var div=document.createElement('div');div.className='pt';
     var cap=pickLang(item.caption_ko,item.caption_en,item.caption);
-    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<div class="pt-cap">'+esc(cap)+'</div>':'');
+    var mine=isMine('pbk20_my_photos',item.id);
+    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<div class="pt-cap">'+esc(cap)+'</div>':'')+(mine?'<button class="pt-edit" onclick="editPhoto(\''+item.id+'\')" title="수정">✎</button>':'');
     g.appendChild(div);
   });
 }
 async function submitPh(){
-  if(!pendingFiles.length){toast(lang==='en'?'Please select a photo':'사진을 선택해주세요');return;}
+  var btn=document.getElementById('ph-btn');
   var cap=document.getElementById('phCap').value.trim();
-  var btn=document.getElementById('ph-btn');btn.textContent=lang==='en'?'Uploading...':'업로드 중...';
-  // Translate caption once (shared across all photos in this batch)
+  // ── EDIT MODE
+  if(editingPhotoId){
+    btn.textContent=lang==='en'?'Saving...':'저장 중...';
+    var update={};
+    try{
+      if(cap){
+        var tr=await translateText(cap);
+        update.caption=cap;update.caption_ko=tr.ko;update.caption_en=tr.en;
+      }else{
+        update.caption='';update.caption_ko=null;update.caption_en=null;
+      }
+      if(pendingFiles.length){
+        var blob=await compressImg(pendingFiles[0],1400,0.82);
+        if(blob){
+          var path='gallery/'+Date.now()+'_'+Math.round(Math.random()*9999)+'.jpg';
+          var up=await sb.storage.from(BUCKET).upload(path,blob,{contentType:'image/jpeg'});
+          if(up.error){toast('업로드 실패: '+up.error.message);btn.textContent=lang==='en'?'Save':'저장';return;}
+          update.photo_url=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+        }
+      }
+      var u=await sb.from('pbk20_photos').update(update).eq('id',editingPhotoId);
+      if(u.error){toast('저장 실패: '+u.error.message);btn.textContent=lang==='en'?'Save':'저장';return;}
+      editingPhotoId=null;pendingFiles=[];
+      await loadPhotos();closeOv('phOv');
+      toast('수정됐어요 ✨');
+    }catch(e){console.error(e);toast('오류: '+e.message);}
+    btn.textContent=lang==='en'?'Save':'저장';
+    return;
+  }
+  // ── INSERT MODE
+  if(!pendingFiles.length){toast(lang==='en'?'Please select a photo':'사진을 선택해주세요');return;}
+  btn.textContent=lang==='en'?'Uploading...':'업로드 중...';
   var tr=cap?await translateText(cap):{ko:'',en:''};
   var added=0;
   for(var i=0;i<pendingFiles.length;i++){
@@ -639,8 +702,9 @@ async function submitPh(){
       var up=await sb.storage.from(BUCKET).upload(path,blob,{contentType:'image/jpeg'});
       if(up.error){console.error(up.error);continue;}
       var url=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-      var ins=await sb.from('pbk20_photos').insert({caption:cap,caption_ko:tr.ko||null,caption_en:tr.en||null,photo_url:url});
+      var ins=await sb.from('pbk20_photos').insert({caption:cap,caption_ko:tr.ko||null,caption_en:tr.en||null,photo_url:url}).select();
       if(ins.error){console.error(ins.error);continue;}
+      if(ins.data&&ins.data[0])addMyId('pbk20_my_photos',ins.data[0].id);
       added++;
     }catch(e){console.error(e);}
   }
@@ -708,26 +772,57 @@ function renderCG(){
   cache.cgs.forEach(function(c){
     var card=document.createElement('div');card.className='cgc';
     var text=pickLang(c.text_ko,c.text_en,c.text);
-    card.innerHTML='<div class="cgc-text">"'+esc(text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div>';
+    var mine=isMine('pbk20_my_congrats',c.id);
+    card.innerHTML='<div class="cgc-text">"'+esc(text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div>'+(mine?'<button class="cgc-edit" onclick="editCG(\''+c.id+'\')" title="수정">✎</button>':'');
     g.appendChild(card);
   });
 }
-function openCG(){document.getElementById('cgOv').classList.add('on');}
+var editingCGId=null;
+function openCG(){
+  editingCGId=null;
+  document.getElementById('cgName').value='';
+  document.getElementById('cgLoc').value='';
+  document.getElementById('cgMsg').value='';
+  document.getElementById('cg-h').textContent=lang==='en'?'🎉 Leave a Congrats Message':'🎉 축하 메시지 남기기';
+  document.getElementById('cg-s').textContent=lang==='en'?'Anyone at Promega — share your congratulations for PBK 20!':'Promega 임직원이라면 누구든 PBK 20주년을 축하해주세요!';
+  document.getElementById('cg-btn-save').textContent=lang==='en'?'Submit':'남기기';
+  document.getElementById('cgOv').classList.add('on');
+}
+function editCG(id){
+  var c=cache.cgs.find(function(x){return x.id===id;});
+  if(!c){toast('찾을 수 없음');return;}
+  editingCGId=id;
+  document.getElementById('cgName').value=c.name||'';
+  document.getElementById('cgLoc').value=c.loc||'';
+  document.getElementById('cgMsg').value=pickLang(c.text_ko,c.text_en,c.text)||'';
+  document.getElementById('cg-h').textContent=lang==='en'?'✎ Edit Congrats Message':'✎ 축하 메시지 수정';
+  document.getElementById('cg-s').textContent=lang==='en'?'Update your message.':'본인 축하 메시지를 수정합니다.';
+  document.getElementById('cg-btn-save').textContent=lang==='en'?'Save':'저장';
+  document.getElementById('cgOv').classList.add('on');
+}
 async function submitCG(){
   var name=document.getElementById('cgName').value.trim()||'Anonymous';
   var loc=document.getElementById('cgLoc').value.trim();
   var text=document.getElementById('cgMsg').value.trim();
   if(!text){toast('메시지를 입력해주세요');return;}
-  var btn=document.querySelector('#cgOv .mbtn');
+  var btn=document.getElementById('cg-btn-save');
   var origBtnText=btn.textContent;
   btn.textContent=lang==='en'?'Translating...':'번역·저장 중...';btn.disabled=true;
   try{
     var tr=await translateText(text);
-    var r=await sb.from('pbk20_congrats').insert({name:name,loc:loc,text:text,text_ko:tr.ko,text_en:tr.en});
-    if(r.error){toast('저장 실패: '+r.error.message);return;}
+    if(editingCGId){
+      var u=await sb.from('pbk20_congrats').update({name:name,loc:loc,text:text,text_ko:tr.ko,text_en:tr.en}).eq('id',editingCGId);
+      if(u.error){toast('저장 실패: '+u.error.message);return;}
+      editingCGId=null;
+      toast(lang==='en'?'Updated ✨':'수정됐어요 ✨');
+    }else{
+      var r=await sb.from('pbk20_congrats').insert({name:name,loc:loc,text:text,text_ko:tr.ko,text_en:tr.en}).select();
+      if(r.error){toast('저장 실패: '+r.error.message);return;}
+      if(r.data&&r.data[0])addMyId('pbk20_my_congrats',r.data[0].id);
+      toast(lang==='en'?'Submitted ✨':'등록됐어요 ✨');
+    }
     await loadCG();closeOv('cgOv');
     document.getElementById('cgName').value='';document.getElementById('cgLoc').value='';document.getElementById('cgMsg').value='';
-    toast('등록됐어요 ✨');
   }catch(e){console.error(e);toast('오류');}
   finally{btn.textContent=origBtnText;btn.disabled=false;}
 }
