@@ -255,15 +255,15 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
     <div class="mh" id="tph-h">내 사진 & 메시지</div>
     <div class="ms" id="tph-s">사진(선택)과 다음 10년을 향한 한 마디를 남겨주세요.</div>
     <div class="fld">
-      <label>사진 (선택)</label>
-      <div class="phzone" id="tphZone"><input type="file" accept="image/*" onchange="previewTeamPh(this)"><div class="phzone-lbl">클릭하여 사진 선택</div></div>
+      <label id="tphPhotoLabel">사진 (선택)</label>
+      <div class="phzone" id="tphZone"><input type="file" accept="image/*" onchange="previewTeamPh(this)"><div class="phzone-lbl" id="tphZoneLbl">클릭하여 사진 선택</div></div>
       <img id="tphPrev" class="ph-prev">
     </div>
     <div class="fld">
-      <label>다음 10년 메시지 <span style="font-weight:400;color:var(--sol);">*필수</span></label>
+      <label id="tphMsgLabel">다음 10년 메시지 <span style="font-weight:400;color:var(--sol);">*필수</span></label>
       <textarea id="tphMsg" placeholder="다음 10년에 전하고 싶은 한 마디를 자유롭게 써주세요..." style="min-height:72px;"></textarea>
     </div>
-    <button class="mbtn" onclick="submitTeamPh()">등록하기</button>
+    <button class="mbtn" id="tphBtn" onclick="submitTeamPh()">등록하기</button>
   </div>
 </div>
 
@@ -278,7 +278,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
       <div class="phzone"><input type="file" accept="image/*" multiple onchange="pickFiles(this)"><div class="phzone-lbl" id="ph-zone-lbl">클릭하여 사진 선택</div></div>
       <div id="phcnt" class="phcnt"></div>
     </div>
-    <div class="fld"><label>캡션 (선택)</label><input id="phCap" type="text" placeholder="이 사진에 대한 한 마디..."></div>
+    <div class="fld"><label id="phCapLabel">캡션 (선택)</label><input id="phCap" type="text" placeholder="이 사진에 대한 한 마디..."></div>
     <button class="mbtn" onclick="submitPh()"><span id="ph-btn">업로드</span></button>
   </div>
 </div>
@@ -289,9 +289,9 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
     <button class="mx" onclick="closeOv('cgOv')">✕</button>
     <div class="mh" id="cg-h">🎉 축하 메시지 남기기</div>
     <div class="ms" id="cg-s">Promega 임직원이라면 누구든 PBK 20주년을 축하해주세요!</div>
-    <div class="fld"><label>이름</label><input id="cgName" type="text" placeholder="홍길동 / Gil-dong Hong"></div>
-    <div class="fld"><label>소속 / 지역</label><input id="cgLoc" type="text" placeholder="Madison HQ · R&D"></div>
-    <div class="fld"><label>메시지</label><textarea id="cgMsg" placeholder="PBK 팀에게 전하고 싶은 말을 써주세요..."></textarea></div>
+    <div class="fld"><label id="cgNameLabel">이름</label><input id="cgName" type="text" placeholder="홍길동 / Gil-dong Hong"></div>
+    <div class="fld"><label id="cgLocLabel">소속 / 지역</label><input id="cgLoc" type="text" placeholder="Madison HQ · R&D"></div>
+    <div class="fld"><label id="cgMsgLabel">메시지</label><textarea id="cgMsg" placeholder="PBK 팀에게 전하고 싶은 말을 써주세요..."></textarea></div>
     <button class="mbtn" id="cg-btn-save" onclick="submitCG()">남기기</button>
   </div>
 </div>
@@ -303,7 +303,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
     <div class="mh">🔐 Admin</div>
     <div class="ms" id="admin-s">비밀번호를 입력해주세요.</div>
     <div id="adminLogin">
-      <div class="fld"><label>비밀번호</label><input id="adminPw" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPw()"></div>
+      <div class="fld"><label id="adminPwLabel">비밀번호</label><input id="adminPw" type="password" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPw()"></div>
       <button class="mbtn" onclick="checkPw()">확인</button>
     </div>
     <div id="adminPanel" style="display:none;">
@@ -471,6 +471,25 @@ function setLang(l){
   document.getElementById('cg-btn').textContent=ko?'🎉 축하 메시지 남기기':'🎉 Leave a Congrats Message';
   document.getElementById('ft-txt').innerHTML=ko?'Promega BioSystems Korea · 20주년 · 2006–2026<br>과학으로 시작된 여정, 사람과 함께 이어갑니다.':'Promega BioSystems Korea · 20th Anniversary · 2006–2026<br>A journey that began with science, continued with people.';
   document.getElementById('p-empty').textContent=ko?'아직 업로드된 사진이 없어요. 첫 번째 사진을 올려주세요!':'No photos yet. Be the first!';
+  // ── Modal labels / placeholders (per-language)
+  // Team photo modal
+  var phLbl=document.getElementById('tphPhotoLabel');if(phLbl)phLbl.textContent=ko?'사진 (선택)':'Photo (optional)';
+  var zoneLbl=document.getElementById('tphZoneLbl');if(zoneLbl)zoneLbl.textContent=ko?'클릭하여 사진 선택':'Click to select a photo';
+  var msgLbl=document.getElementById('tphMsgLabel');if(msgLbl)msgLbl.innerHTML=(ko?'다음 10년 메시지 ':'Message for the next 10 years ')+'<span style="font-weight:400;color:var(--sol);">'+(ko?'*필수':'*required')+'</span>';
+  var tphMsgEl=document.getElementById('tphMsg');if(tphMsgEl)tphMsgEl.placeholder=ko?'다음 10년에 전하고 싶은 한 마디를 자유롭게 써주세요...':'Share what you want to say to the next 10 years...';
+  var tphBtnEl=document.getElementById('tphBtn');if(tphBtnEl)tphBtnEl.textContent=ko?'등록하기':'Submit';
+  // Photo gallery modal
+  var phCapLbl=document.getElementById('phCapLabel');if(phCapLbl)phCapLbl.textContent=ko?'캡션 (선택)':'Caption (optional)';
+  var phCapEl=document.getElementById('phCap');if(phCapEl)phCapEl.placeholder=ko?'이 사진에 대한 한 마디...':'A short caption for this photo...';
+  // Congrats modal
+  var cgNL=document.getElementById('cgNameLabel');if(cgNL)cgNL.textContent=ko?'이름':'Name';
+  var cgLL=document.getElementById('cgLocLabel');if(cgLL)cgLL.textContent=ko?'소속 / 지역':'Affiliation / Location';
+  var cgML=document.getElementById('cgMsgLabel');if(cgML)cgML.textContent=ko?'메시지':'Message';
+  var cgN=document.getElementById('cgName');if(cgN)cgN.placeholder=ko?'홍길동 / Gil-dong Hong':'Gil-dong Hong';
+  var cgL=document.getElementById('cgLoc');if(cgL)cgL.placeholder=ko?'본사 R&D · 일본 지사 등':'Madison HQ · R&D · Tokyo office...';
+  var cgM=document.getElementById('cgMsg');if(cgM)cgM.placeholder=ko?'PBK 팀에게 전하고 싶은 말을 써주세요...':'Share your message for the PBK team...';
+  // Admin modal
+  var apwL=document.getElementById('adminPwLabel');if(apwL)apwL.textContent=ko?'비밀번호':'Password';
   renderTL();renderTeam();renderMsgs();renderPhotos();renderCG();
 }
 
