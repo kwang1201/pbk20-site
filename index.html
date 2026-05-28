@@ -1229,6 +1229,16 @@ function animCount(el,target){
   cAnim=setInterval(function(){s2++;el.textContent=Math.round(start+diff*(s2/steps)).toLocaleString();if(s2>=steps){clearInterval(cAnim);el.textContent=target.toLocaleString();}},40);
 }
 
+// Per-member display time based on message length (KO + EN combined)
+function memberDuration(m){
+  var len=((m.msg_ko||'').length)+((m.msg_en||'').length);
+  if(len===0)return 2800;        // No message: brief flash, just to show all members
+  if(len<60)return 5500;          // Very short
+  if(len<140)return 7500;         // Medium
+  if(len<240)return 9500;         // Long
+  return 12000;                   // Very long — generous reading time
+}
+
 function runTeamScroll(){
   var members=slides[curSlide]&&slides[curSlide].members;
   if(!members)return;
@@ -1277,7 +1287,7 @@ function runTeamScroll(){
       requestAnimationFrame(function(){requestAnimationFrame(function(){fadeTo(1);});});
       idx++;
       if(idx<members.length&&tsAnim!==null){
-        tsAnim=setTimeout(showMember,4000);
+        tsAnim=setTimeout(showMember,memberDuration(members[idx-1]));
       }
     };
     if(isFirst){
@@ -1342,7 +1352,8 @@ function showSlide(idx){
   }else if(s.type==='team'){
     tsAnim=null;
     setTimeout(runTeamScroll,100);
-    var dur=s.members.length*4000;
+    // Total team-slide duration = sum of each member's reading time
+    var dur=s.members.reduce(function(t,m){return t+memberDuration(m);},0);
     clearTm();if(isPlaying)startTm(dur);
   }else if(s.type==='cgs'){
     setTimeout(function(){runCascade(s.groups,0);},200);
