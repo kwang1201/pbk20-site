@@ -884,7 +884,7 @@ function startTm(dur){clearTm();playTimer=setInterval(pNext,dur||SLIDE_DUR);}
 
 async function startPresent(){
   await Promise.all([loadTeam(),loadPhotos(),loadCG()]);
-  var photos=cache.photos.map(function(p){return{data:p.photo_url,cap:p.caption||''};});
+  var photos=cache.photos.map(function(p){return{data:p.photo_url,cap:pickLang(p.caption_ko,p.caption_en,p.caption)};});
   var cgs=cache.cgs;
   slides=[];
   slides.push({type:'title'});
@@ -950,12 +950,12 @@ function buildSlides(){
       }).join('');
       div.innerHTML='<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">'
         +'<div class="s-lbl" style="margin-bottom:20px;flex-shrink:0;">PBK Team 2026</div>'
-        +'<div id="teamFocusWrap" style="width:180px;height:180px;border-radius:50%;overflow:hidden;border:3px solid var(--sol);margin-bottom:20px;flex-shrink:0;position:relative;">'
+        +'<div id="teamFocusWrap" style="width:180px;height:180px;border-radius:50%;overflow:hidden;border:3px solid var(--sol);margin-bottom:20px;flex-shrink:0;position:relative;opacity:0;transition:opacity .4s ease;">'
         +'<div id="teamFocusPhoto" style="width:100%;height:100%;"></div>'
         +'</div>'
-        +'<div id="teamFocusName" style="font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;"></div>'
-        +'<div id="teamFocusSince" style="font-size:11px;color:var(--sol);margin-bottom:14px;"></div>'
-        +'<div id="teamFocusMsg" style="font-size:clamp(13px,1.8vw,18px);color:rgba(255,255,255,.75);font-style:italic;max-width:560px;text-align:center;line-height:1.5;min-height:28px;margin-bottom:20px;padding:0 20px;opacity:0;transition:opacity .4s ease;"></div>'
+        +'<div id="teamFocusName" style="font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;opacity:0;transition:opacity .4s ease;"></div>'
+        +'<div id="teamFocusSince" style="font-size:11px;color:var(--sol);margin-bottom:14px;opacity:0;transition:opacity .4s ease;"></div>'
+        +'<div id="teamFocusMsg" style="max-width:640px;text-align:center;min-height:140px;margin-bottom:20px;padding:0 20px;opacity:0;transition:opacity .4s ease;"></div>'
         +'<div id="teamDots" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:600px;padding:0 32px;">'+thumbs+'</div>'
         +'</div>';
     }else if(s.type==='photo'){
@@ -1005,11 +1005,11 @@ function runTeamScroll(){
   var members=slides[curSlide]&&slides[curSlide].members;
   if(!members)return;
   var idx=0;
-  function showMember(){
-    if(!document.getElementById('teamFocusPhoto'))return;
+  function applyMember(){
     var m=members[idx];
     var bg=av(m.name),in2=ini(m.en||m.name);
     var focusEl=document.getElementById('teamFocusPhoto');
+    if(!focusEl)return;
     if(m.photo){
       focusEl.innerHTML='<img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;">';
     }else{
@@ -1028,20 +1028,38 @@ function runTeamScroll(){
         var isKo=/[ㄱ-힝]/.test(single);
         html='<div class="'+(isKo?'s-msg-ko':'s-msg-en')+'">"'+esc(single)+'"</div>';
       }
-      if(html){msgEl.innerHTML=html;msgEl.style.opacity='1';}
-      else{msgEl.innerHTML='';msgEl.style.opacity='0';}
+      msgEl.innerHTML=html;
     }
     var dots=document.querySelectorAll('.team-dot');
     dots.forEach(function(d,i){
       if(i===idx){d.style.opacity='1';d.style.transform='scale(1.3)';d.style.border='2px solid var(--sol)';}
       else{d.style.opacity='.4';d.style.transform='scale(1)';d.style.border='2px solid rgba(255,255,255,.2)';}
     });
-    idx++;
-    if(idx<members.length&&tsAnim!==null){
-      tsAnim=setTimeout(showMember,4000);
+  }
+  function fadeTo(v){
+    ['teamFocusWrap','teamFocusName','teamFocusSince','teamFocusMsg'].forEach(function(id){
+      var el=document.getElementById(id);if(el)el.style.opacity=String(v);
+    });
+  }
+  function showMember(isFirst){
+    if(!document.getElementById('teamFocusPhoto'))return;
+    var doSwap=function(){
+      applyMember();
+      // double rAF to ensure layout settles before fading in
+      requestAnimationFrame(function(){requestAnimationFrame(function(){fadeTo(1);});});
+      idx++;
+      if(idx<members.length&&tsAnim!==null){
+        tsAnim=setTimeout(showMember,4000);
+      }
+    };
+    if(isFirst){
+      doSwap();
+    }else{
+      fadeTo(0);
+      setTimeout(doSwap,420);
     }
   }
-  tsAnim=setTimeout(showMember,300);
+  tsAnim=setTimeout(function(){showMember(true);},200);
 }
 
 function runCascade(groups,gi){
