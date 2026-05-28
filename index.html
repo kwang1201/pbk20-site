@@ -320,6 +320,15 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
   </div>
 </div>
 
+<!-- LIGHTBOX (click photo to enlarge) -->
+<div class="ov" id="lbOv" onclick="closeOv('lbOv')">
+  <div style="position:relative;max-width:90vw;max-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;" onclick="event.stopPropagation()">
+    <button onclick="closeOv('lbOv')" style="position:absolute;top:-44px;right:0;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:16px;cursor:pointer;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;">✕</button>
+    <img id="lbImg" style="max-width:90vw;max-height:78vh;object-fit:contain;border-radius:8px;background:#000;display:block;">
+    <div id="lbCap" style="margin-top:18px;color:#fff;font-size:14px;line-height:1.55;text-align:center;max-width:680px;font-style:italic;padding:0 20px;"></div>
+  </div>
+</div>
+
 <!-- PRESENT MODE -->
 <div class="pres" id="pres">
   <div class="pbar" id="pbar"></div>
@@ -654,9 +663,22 @@ function renderPhotos(){
     var div=document.createElement('div');div.className='pt';
     var cap=pickLang(item.caption_ko,item.caption_en,item.caption);
     var mine=isMine('pbk20_my_photos',item.id);
-    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<div class="pt-cap">'+esc(cap)+'</div>':'')+(mine?'<button class="pt-edit" onclick="editPhoto(\''+item.id+'\')" title="수정">✎</button>':'');
+    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<div class="pt-cap">'+esc(cap)+'</div>':'')+(mine?'<button class="pt-edit" title="수정">✎</button>':'');
+    div.style.cursor='pointer';
+    div.onclick=function(e){
+      // Edit button click should not open lightbox
+      if(e.target.closest('.pt-edit')){editPhoto(item.id);return;}
+      openLightbox(item.photo_url,cap);
+    };
     g.appendChild(div);
   });
+}
+function openLightbox(url,caption){
+  document.getElementById('lbImg').src=url;
+  var capEl=document.getElementById('lbCap');
+  if(caption){capEl.textContent='"'+caption+'"';capEl.style.display='block';}
+  else{capEl.textContent='';capEl.style.display='none';}
+  document.getElementById('lbOv').classList.add('on');
 }
 async function submitPh(){
   var btn=document.getElementById('ph-btn');
@@ -1229,6 +1251,12 @@ function togglePlay(){isPlaying=!isPlaying;document.getElementById('playBtn').in
 function exitPres(){document.getElementById('pres').classList.remove('on');clearTm();stopAnims();stopMusicForPresent();}
 
 document.addEventListener('keydown',function(e){
+  // Lightbox ESC takes priority
+  var lb=document.getElementById('lbOv');
+  if(lb&&lb.classList.contains('on')){
+    if(e.key==='Escape')closeOv('lbOv');
+    return;
+  }
   var p=document.getElementById('pres');if(!p.classList.contains('on'))return;
   if(e.key==='ArrowRight'||e.key===' ')pNext();
   else if(e.key==='ArrowLeft')pPrev();
