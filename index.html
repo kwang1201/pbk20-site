@@ -258,6 +258,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
       <label id="tphPhotoLabel">사진 (선택)</label>
       <div class="phzone" id="tphZone"><input type="file" accept="image/*" onchange="previewTeamPh(this)"><div class="phzone-lbl" id="tphZoneLbl">클릭하여 사진 선택</div></div>
       <img id="tphPrev" class="ph-prev">
+      <button id="tphRemoveBtn" onclick="removeTphPhoto()" style="display:none;font-size:11px;background:none;border:1px solid #ddd;color:#999;padding:5px 14px;border-radius:999px;margin-top:8px;cursor:pointer;transition:all .15s;" onmouseover="this.style.borderColor='#c33';this.style.color='#c33';" onmouseout="this.style.borderColor='#ddd';this.style.color='#999';">🗑 사진 삭제</button>
     </div>
     <div class="fld">
       <label id="tphMsgLabel">다음 10년 메시지 <span style="font-weight:400;color:var(--sol);">*필수</span></label>
@@ -478,6 +479,7 @@ function setLang(l){
   var msgLbl=document.getElementById('tphMsgLabel');if(msgLbl)msgLbl.innerHTML=(ko?'다음 10년 메시지 ':'Message for the next 10 years ')+'<span style="font-weight:400;color:var(--sol);">'+(ko?'*필수':'*required')+'</span>';
   var tphMsgEl=document.getElementById('tphMsg');if(tphMsgEl)tphMsgEl.placeholder=ko?'다음 10년에 전하고 싶은 한 마디를 자유롭게 써주세요...':'Share what you want to say to the next 10 years...';
   var tphBtnEl=document.getElementById('tphBtn');if(tphBtnEl)tphBtnEl.textContent=ko?'등록하기':'Submit';
+  var tphRm=document.getElementById('tphRemoveBtn');if(tphRm)tphRm.textContent=ko?'🗑 사진 삭제':'🗑 Remove photo';
   // Photo gallery modal
   var phCapLbl=document.getElementById('phCapLabel');if(phCapLbl)phCapLbl.textContent=ko?'캡션 (선택)':'Caption (optional)';
   var phCapEl=document.getElementById('phCap');if(phCapEl)phCapEl.placeholder=ko?'이 사진에 대한 한 마디...':'A short caption for this photo...';
@@ -542,7 +544,7 @@ function pickLang(ko,en,orig){
 // ═══════════════════════════════════════════════════════════════
 // TEAM (photo + message per member)
 // ═══════════════════════════════════════════════════════════════
-var curTeamIdx=null,tphBlob=null,tphPreviewUrl=null;
+var curTeamIdx=null,tphBlob=null,tphPreviewUrl=null,tphRemovePhoto=false;
 
 async function loadTeam(){
   try{
@@ -571,21 +573,35 @@ function renderTeam(){
   });
 }
 function openTeamPh(i){
-  curTeamIdx=i;tphBlob=null;
+  curTeamIdx=i;tphBlob=null;tphRemovePhoto=false;
   if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
   var name=lang==='en'?TEAM[i].en:TEAM[i].name;
   document.getElementById('tph-h').textContent=name+(lang==='en'?"'s photo & message":'님의 사진 & 메시지');
   var existing=cache.team[TEAM[i].name];
   document.getElementById('tphMsg').value=existing?(existing.msg||''):'';
-  if(existing&&existing.photo){
-    document.getElementById('tphPrev').src=existing.photo;
-    document.getElementById('tphPrev').style.display='block';
-    document.getElementById('tphZone').style.display='none';
-  }else{
-    document.getElementById('tphPrev').style.display='none';
-    document.getElementById('tphZone').style.display='block';
-  }
+  setTphPhotoUI(existing&&existing.photo?existing.photo:null);
   document.getElementById('tphOv').classList.add('on');
+}
+function setTphPhotoUI(photoUrl){
+  var prev=document.getElementById('tphPrev');
+  var zone=document.getElementById('tphZone');
+  var rm=document.getElementById('tphRemoveBtn');
+  if(photoUrl){
+    prev.src=photoUrl;prev.style.display='block';
+    zone.style.display='none';
+    if(rm)rm.style.display='inline-block';
+  }else{
+    prev.style.display='none';
+    zone.style.display='block';
+    if(rm)rm.style.display='none';
+  }
+}
+function removeTphPhoto(){
+  if(!confirm(lang==='en'?'Remove this photo? (Message will be kept.)':'사진을 삭제할까요? (메시지는 유지됩니다)'))return;
+  tphBlob=null;tphRemovePhoto=true;
+  if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
+  setTphPhotoUI(null);
+  toast(lang==='en'?'Photo will be removed on Submit':'저장하면 사진이 삭제됩니다');
 }
 function previewTeamPh(input){
   var f=input.files[0];if(!f)return;
@@ -608,22 +624,31 @@ async function submitTeamPh(){
   var origBtnText=btn.textContent;
   btn.textContent=lang==='en'?'Saving...':'번역·저장 중...';btn.disabled=true;
   try{
-    if(tphBlob){
+    // Handle photo state: remove > replace > keep
+    if(tphRemovePhoto){
+      if(existing.photo){
+        var parts=existing.photo.split('/'+BUCKET+'/');
+        if(parts[1]){
+          var clean=parts[1].split('?')[0];
+          try{await sb.storage.from(BUCKET).remove([clean]);}catch(e){console.warn('storage remove:',e);}
+        }
+      }
+      photoUrl=null;
+    }else if(tphBlob){
       var path='team/'+memberSlug(member)+'.jpg';
       var up=await sb.storage.from(BUCKET).upload(path,tphBlob,{contentType:'image/jpeg',upsert:true});
       if(up.error){toast('업로드 실패: '+up.error.message);return;}
       photoUrl=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl+'?t='+Date.now();
     }
     var tr=await translateText(msgText);
-    var row={member_name:member.name,msg:msgText,msg_ko:tr.ko,msg_en:tr.en,ts:new Date().toISOString()};
-    if(photoUrl)row.photo_url=photoUrl;
+    var row={member_name:member.name,msg:msgText,msg_ko:tr.ko,msg_en:tr.en,ts:new Date().toISOString(),photo_url:photoUrl};
     var ins=await sb.from('pbk20_team_photos').upsert(row);
     if(ins.error){toast('저장 실패: '+ins.error.message);return;}
     if(tphPreviewUrl){URL.revokeObjectURL(tphPreviewUrl);tphPreviewUrl=null;}
-    tphBlob=null;
+    tphBlob=null;tphRemovePhoto=false;
     await loadTeam();
     closeOv('tphOv');
-    toast('등록됐어요 ✨');
+    toast(lang==='en'?'Saved ✨':'등록됐어요 ✨');
   }catch(e){console.error(e);toast('오류: '+e.message);}
   finally{btn.textContent=origBtnText;btn.disabled=false;}
 }
