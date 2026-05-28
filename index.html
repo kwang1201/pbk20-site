@@ -124,6 +124,13 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .ph-prev{width:100%;aspect-ratio:1;border-radius:7px;object-fit:cover;margin-top:6px;display:none;}
 .mbtn{background:var(--gx);color:#fff;border:none;padding:8px 20px;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;border-radius:999px;margin-top:4px;transition:background .2s;}
 .mbtn:hover{background:var(--wa);}
+.adm-tab{flex:1;padding:8px 4px;border:none;background:transparent;font-family:'Roboto',sans-serif;font-size:11px;font-weight:700;color:#999;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
+.adm-tab.on{color:var(--gx);border-bottom-color:var(--sol);}
+.adm-tab:hover{color:var(--gx);}
+.adm-row{padding:8px;background:#F8F6F1;border-radius:7px;border:1px solid #ddd;display:flex;gap:8px;align-items:flex-start;}
+.adm-row .adm-del{background:none;border:none;color:#c33;cursor:pointer;font-size:14px;flex-shrink:0;padding:2px 6px;}
+.adm-row .adm-del:hover{color:#900;}
+.adm-empty{padding:24px;text-align:center;color:#aaa;font-size:12px;}
 .mx{position:absolute;top:11px;right:13px;background:none;border:none;font-size:17px;cursor:pointer;color:#aaa;}
 .phcnt{font-size:11px;color:#888;margin-top:4px;display:none;}
 .tst{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--gx);color:#fff;padding:8px 16px;border-radius:999px;font-size:12px;font-weight:500;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;}
@@ -316,9 +323,15 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
       <button class="mbtn" onclick="checkPw()">확인</button>
     </div>
     <div id="adminPanel" style="display:none;">
-      <div style="font-size:11px;color:#888;margin-bottom:10px;">드래그해서 사진 순서를 바꿀 수 있어요.</div>
+      <div style="display:flex;gap:0;margin-bottom:10px;border-bottom:1px solid #ddd;">
+        <button class="adm-tab on" id="atab-photos" onclick="switchAdmTab('photos')">📷 사진</button>
+        <button class="adm-tab" id="atab-messages" onclick="switchAdmTab('messages')">💬 메시지</button>
+        <button class="adm-tab" id="atab-congrats" onclick="switchAdmTab('congrats')">🎉 축하</button>
+        <button class="adm-tab" id="atab-team" onclick="switchAdmTab('team')">👤 팀</button>
+      </div>
+      <div id="admHint" style="font-size:11px;color:#888;margin-bottom:10px;">드래그해서 사진 순서를 바꿀 수 있어요.</div>
       <div id="adminList" style="display:flex;flex-direction:column;gap:6px;max-height:340px;overflow-y:auto;"></div>
-      <button class="mbtn" style="margin-top:14px;" onclick="saveOrder()">순서 저장</button>
+      <button class="mbtn" id="saveOrderBtn" style="margin-top:14px;" onclick="saveOrder()">순서 저장</button>
     </div>
   </div>
 </div>
@@ -697,12 +710,13 @@ async function delCG(id){
 // ═══════════════════════════════════════════════════════════════
 // ADMIN
 // ═══════════════════════════════════════════════════════════════
-var adminUnlocked=false,adminDragSrc=null;
+var adminUnlocked=false,adminDragSrc=null,curAdmTab='photos';
+
 function openAdmin(){
   document.getElementById('adminPw').value='';
   document.getElementById('adminLogin').style.display=adminUnlocked?'none':'block';
   document.getElementById('adminPanel').style.display=adminUnlocked?'block':'none';
-  if(adminUnlocked)showAdminPanel();
+  if(adminUnlocked){curAdmTab='photos';switchAdmTab('photos');}
   document.getElementById('adminOv').classList.add('on');
 }
 async function checkPw(){
@@ -711,36 +725,107 @@ async function checkPw(){
     document.getElementById('adminLogin').style.display='none';
     document.getElementById('adminPanel').style.display='block';
     document.getElementById('admin-s').textContent='Admin 모드 활성화됨';
-    showAdminPanel();
+    curAdmTab='photos';switchAdmTab('photos');
   }else{document.getElementById('admin-s').textContent='비밀번호가 틀렸어요.';}
 }
-async function showAdminPanel(){
-  var r = await sb.from('pbk20_photos').select('id, caption, photo_url').order('sort_order',{ascending:true}).order('ts',{ascending:true});
-  var rows = r.data || [];
-  var list=document.getElementById('adminList');list.innerHTML='';
-  rows.forEach(function(item){
-    var row=document.createElement('div');row.draggable=true;row.dataset.id=item.id;
-    row.style.cssText='display:flex;align-items:center;gap:8px;padding:7px;background:#F8F6F1;border-radius:7px;cursor:grab;border:1px solid #ddd;margin-bottom:2px;';
-    row.innerHTML='<span style="opacity:.4;font-size:14px;">⠿</span><img src="'+item.photo_url+'" style="width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:#ddd;"><div style="flex:1;font-size:11px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+esc(item.caption||'(캡션 없음)')+'</div><button onclick="adminDelPh(\''+item.id+'\')" style="background:none;border:none;color:#ccc;cursor:pointer;font-size:14px;padding:0 2px;">✕</button>';
-    row.addEventListener('dragstart',function(){adminDragSrc=row;row.style.opacity='.4';});
-    row.addEventListener('dragend',function(){row.style.opacity='1';});
-    row.addEventListener('dragover',function(e){e.preventDefault();});
-    row.addEventListener('drop',function(e){
-      e.preventDefault();if(adminDragSrc===row)return;
-      var items=Array.from(list.children),from=items.indexOf(adminDragSrc),to=items.indexOf(row);
-      if(from<to)list.insertBefore(adminDragSrc,row.nextSibling);else list.insertBefore(adminDragSrc,row);
-    });
-    list.appendChild(row);
-  });
-}
-async function adminDelPh(id){
-  await delPhoto(id);
+
+function switchAdmTab(tab){
+  curAdmTab=tab;
+  document.querySelectorAll('.adm-tab').forEach(function(b){b.classList.remove('on');});
+  var btn=document.getElementById('atab-'+tab);if(btn)btn.classList.add('on');
+  document.getElementById('saveOrderBtn').style.display=tab==='photos'?'inline-flex':'none';
+  var hint=document.getElementById('admHint');
+  if(tab==='photos')hint.textContent='드래그해서 사진 순서를 바꿀 수 있어요. ✕로 삭제.';
+  else if(tab==='messages')hint.textContent='부적절한 메시지를 ✕로 삭제하세요.';
+  else if(tab==='congrats')hint.textContent='부적절한 축하 메시지를 ✕로 삭제하세요.';
+  else if(tab==='team')hint.textContent='잘못 올린 팀 사진을 ✕로 삭제하세요.';
   showAdminPanel();
 }
+
+async function showAdminPanel(){
+  var list=document.getElementById('adminList');list.innerHTML='<div class="adm-empty">불러오는 중…</div>';
+  if(curAdmTab==='photos'){
+    var r=await sb.from('pbk20_photos').select('id,caption,photo_url').order('sort_order',{ascending:true}).order('ts',{ascending:true});
+    var rows=r.data||[];list.innerHTML='';
+    if(!rows.length){list.innerHTML='<div class="adm-empty">아직 업로드된 사진이 없어요.</div>';return;}
+    rows.forEach(function(item){
+      var row=document.createElement('div');row.draggable=true;row.dataset.id=item.id;
+      row.style.cssText='display:flex;align-items:center;gap:8px;padding:7px;background:#F8F6F1;border-radius:7px;cursor:grab;border:1px solid #ddd;';
+      row.innerHTML='<span style="opacity:.4;font-size:14px;">⠿</span><img src="'+item.photo_url+'" style="width:42px;height:42px;object-fit:cover;border-radius:5px;flex-shrink:0;background:#ddd;"><div style="flex:1;font-size:11px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+esc(item.caption||'(캡션 없음)')+'</div><button class="adm-del" onclick="admDel(\'photos\',\''+item.id+'\')">✕</button>';
+      row.addEventListener('dragstart',function(){adminDragSrc=row;row.style.opacity='.4';});
+      row.addEventListener('dragend',function(){row.style.opacity='1';});
+      row.addEventListener('dragover',function(e){e.preventDefault();});
+      row.addEventListener('drop',function(e){
+        e.preventDefault();if(adminDragSrc===row)return;
+        var items=Array.from(list.children),from=items.indexOf(adminDragSrc),to=items.indexOf(row);
+        if(from<to)list.insertBefore(adminDragSrc,row.nextSibling);else list.insertBefore(adminDragSrc,row);
+      });
+      list.appendChild(row);
+    });
+  }
+  else if(curAdmTab==='messages'){
+    var r=await sb.from('pbk20_messages').select('*').order('ts',{ascending:false});
+    var rows=r.data||[];list.innerHTML='';
+    if(!rows.length){list.innerHTML='<div class="adm-empty">아직 메시지가 없어요.</div>';return;}
+    rows.forEach(function(m){
+      var row=document.createElement('div');row.className='adm-row';
+      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:3px;color:var(--gx);">'+esc(m.name)+'</div><div style="color:#666;line-height:1.45;">"'+esc(m.text)+'"</div></div><button class="adm-del" onclick="admDel(\'messages\',\''+m.id+'\')">✕</button>';
+      list.appendChild(row);
+    });
+  }
+  else if(curAdmTab==='congrats'){
+    var r=await sb.from('pbk20_congrats').select('*').order('ts',{ascending:false});
+    var rows=r.data||[];list.innerHTML='';
+    if(!rows.length){list.innerHTML='<div class="adm-empty">아직 축하 메시지가 없어요.</div>';return;}
+    rows.forEach(function(c){
+      var row=document.createElement('div');row.className='adm-row';
+      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:2px;color:var(--gx);">'+esc(c.name)+(c.loc?' <span style="color:#999;font-weight:400;">· '+esc(c.loc)+'</span>':'')+'</div><div style="color:#666;line-height:1.45;">"'+esc(c.text)+'"</div></div><button class="adm-del" onclick="admDel(\'congrats\',\''+c.id+'\')">✕</button>';
+      list.appendChild(row);
+    });
+  }
+  else if(curAdmTab==='team'){
+    var r=await sb.from('pbk20_team_photos').select('*');
+    var rows=r.data||[];list.innerHTML='';
+    if(!rows.length){list.innerHTML='<div class="adm-empty">아직 팀 사진이 없어요.</div>';return;}
+    rows.forEach(function(item){
+      var member=TEAM.find(function(m){return m.name===item.member_name;});
+      var dispName=member?(member.name+' / '+member.en):item.member_name;
+      var row=document.createElement('div');row.className='adm-row';row.style.alignItems='center';
+      row.innerHTML='<img src="'+item.photo_url+'" style="width:42px;height:42px;object-fit:cover;border-radius:50%;flex-shrink:0;background:#ddd;"><div style="flex:1;font-size:11px;color:#333;"><div style="font-weight:700;color:var(--gx);">'+esc(dispName)+'</div></div><button class="adm-del" onclick="admDel(\'team\',\''+item.member_name.replace(/'/g,"\\'")+'\')">✕</button>';
+      list.appendChild(row);
+    });
+  }
+}
+
+async function admDel(tab,id){
+  if(!confirm('정말 삭제할까요?'))return;
+  try{
+    if(tab==='photos'){
+      await delPhoto(id);
+    }else if(tab==='messages'){
+      await sb.from('pbk20_messages').delete().eq('id',id);
+      await loadMsgs();
+    }else if(tab==='congrats'){
+      await sb.from('pbk20_congrats').delete().eq('id',id);
+      await loadCG();
+    }else if(tab==='team'){
+      var r=await sb.from('pbk20_team_photos').select('photo_url').eq('member_name',id).single();
+      if(r.data&&r.data.photo_url){
+        var parts=r.data.photo_url.split('/'+BUCKET+'/');
+        if(parts[1])await sb.storage.from(BUCKET).remove([parts[1]]);
+      }
+      await sb.from('pbk20_team_photos').delete().eq('member_name',id);
+      await loadTeam();
+    }
+    showAdminPanel();
+    toast('삭제됐어요');
+  }catch(e){console.error(e);toast('오류: '+e.message);}
+}
+
 async function saveOrder(){
-  var rows=Array.from(document.getElementById('adminList').children);
+  var rows=Array.from(document.getElementById('adminList').children).filter(function(r){return r.dataset&&r.dataset.id;});
   for(var i=0;i<rows.length;i++){
-    await sb.from('pbk20_photos').update({ sort_order:i }).eq('id',rows[i].dataset.id);
+    await sb.from('pbk20_photos').update({sort_order:i}).eq('id',rows[i].dataset.id);
   }
   await loadPhotos();
   closeOv('adminOv');toast('순서 저장됐어요 ✓');
