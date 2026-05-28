@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PBK 20th Anniversary</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&family=Nanum+Pen+Script&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--sol:#FDB813;--gx:#13294B;--wa:#455DA0;--sk:#199ac2;}
@@ -143,6 +143,8 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 .s-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.08) 65%);}
 .s-bot{position:absolute;bottom:56px;left:0;right:0;z-index:2;text-align:center;padding:0 40px;}
 .s-cap{font-size:clamp(13px,2vw,20px);color:#fff;line-height:1.5;font-style:italic;margin-bottom:6px;}
+.s-msg-ko{font-family:'Nanum Pen Script',cursive;font-size:clamp(18px,2.6vw,30px);color:rgba(255,255,255,.95);line-height:1.4;margin-bottom:8px;}
+.s-msg-en{font-family:'Caveat',cursive;font-size:clamp(16px,2.2vw,26px);color:rgba(255,255,255,.7);line-height:1.4;}
 .pctrl{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;z-index:950;background:rgba(0,0,0,.55);padding:7px 14px;border-radius:999px;backdrop-filter:blur(6px);}
 .cbtn{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
 .cbtn:hover{background:rgba(255,255,255,.15);}
@@ -178,7 +180,7 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 <div class="stats">
   <div class="stat"><div class="stat-n">20</div><div class="stat-l" id="s0">함께한 해</div></div>
   <div class="stat"><div class="stat-n">27</div><div class="stat-l" id="s1">현재 팀원</div></div>
-  <div class="stat"><div class="stat-n" style="display:flex;align-items:baseline;gap:4px;">10,084<span style="font-size:clamp(12px,1.8vw,18px);color:rgba(19,41,75,.55);font-weight:500;">+</span></div><div class="stat-l" id="s2">총 출하 대수</div><div style="font-size:10px;color:rgba(19,41,75,.5);margin-top:2px;font-weight:500;">10,000+ milestone</div></div>
+  <div class="stat"><div class="stat-n" style="display:flex;align-items:baseline;gap:4px;">10,084<span style="font-size:clamp(12px,1.8vw,18px);color:rgba(19,41,75,.55);font-weight:500;">+</span></div><div class="stat-l" id="s2">총 출하 대수</div><div style="font-size:10px;color:rgba(19,41,75,.5);margin-top:2px;font-weight:500;">10,000+ milestone (2025년 12월 말 기준)</div></div>
   <div class="stat"><div class="stat-n">100+</div><div class="stat-l" id="s3">제품 수출국</div></div>
 </div>
 
@@ -345,24 +347,26 @@ var sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 var lang='ko';
 var TL={
   ko:[
-    {y:'2005',t:'Maxwell 시리즈 첫 출하',b:'Promega와의 MX-16 계약 체결. AS1000 82대 첫 출하.',dim:true},
-    {y:'2006',t:'Promega BioSystems Korea 공식 출범',b:'Promega Corporation과 함께 새 출발. 글로벌 제조 허브로.'},
-    {y:'2010',t:'ISO 13485 인증 취득',b:'AS2000·AS3000 라인업 확장. 의료기기 품질경영시스템 국제 인증.'},
-    {y:'2014',t:'AS4500 & FDA IVD 승인',b:'글로벌 시장 진출 가속화. AS4500 시리즈가 누계 출하 1위 모델로.'},
-    {y:'2015',t:'AS6000 & FDA IVD 승인',b:'제품 라인업 확장 및 미국 시장 규제 승인.'},
-    {y:'2017',t:'AS8500 출시',b:'고성능 자동화 정제 장비 AS8500 시리즈 론칭.'},
-    {y:'2020',t:'AS8000 & FDA VID 승인 · 최대 출하 1,183대',b:'코로나19 수요로 역대 최고 기록 달성. AS8000 미국 규제 승인.'},
-    {y:'2026',t:'20주년 — 다음 챕터로',b:'20년의 역사 위에, 새로운 이야기를 씁니다.',future:true}
+    {y:'2005',t:'MX-16 계약 체결 · AS1000 첫 출하',b:'82대의 작은 시작. 그 한 대 한 대가 전 세계 연구자들의 손에 닿아 생명과학 연구를 가능하게 했습니다.',dim:true},
+    {y:'2006',t:'Promega BioSystems Korea 공식 출범',b:'Promega의 글로벌 제조 파트너로, 한국에서 만든 장비가 세계로 나가는 여정이 시작됐습니다.'},
+    {y:'2010',t:'AS2000·AS3000 출시 & ISO 13485 인증',b:'더 많은 샘플, 더 빠른 처리. 국제 의료기기 품질 인증으로 우리가 만드는 것에 대한 신뢰를 공식화했습니다.'},
+    {y:'2013',t:'HSM 2.0 런칭',b:'대용량 혈액 시료에서 DNA를 자동 추출하는 기술. 포렌식·임상·연구 현장의 속도를 바꾼 장비였습니다.'},
+    {y:'2014',t:'AS4500 (Maxwell RSC) 출시',b:'우리가 출하한 장비 중 가장 많이 팔린 모델. 전 세계 연구소에서 가장 친숙한 Maxwell의 얼굴이 됐습니다.'},
+    {y:'2015',t:'AS6000 & FDA IVD 승인',b:'미국 FDA IVD 승인 — 우리가 만든 장비가 실제 환자 진단에 공식적으로 쓰일 수 있다는 인정이었습니다.'},
+    {y:'2017',t:'AS8500 (Maxwell RSC 48) 출시',b:'한 번에 48개 샘플 처리. 대형 병원과 연구소의 워크플로를 바꿀 수 있는 스케일의 장비를 우리 손으로 만들었습니다.'},
+    {y:'2020',t:'AS8000 & FDA IVD 승인 · 최대 출하 1,183대',b:'팬데믹의 한가운데, 세계가 진단 역량을 필요로 했을 때 — 우리는 역대 최다 장비를 출하했습니다. 위기 속에서 가장 빛난 한 해였습니다.'},
+    {y:'2026',t:'20주년 — 다음 챕터로',b:'20년간 10,084대. 숫자 너머에, 우리가 함께 만들어온 이야기가 있습니다.',future:true}
   ],
   en:[
-    {y:'2005',t:'Maxwell Series — First Shipment',b:'MX-16 contract signed. First 82 AS1000 units shipped.',dim:true},
-    {y:'2006',t:'Promega BioSystems Korea Established',b:'Officially launched under Promega Corporation. A new chapter as a global manufacturing hub.'},
-    {y:'2010',t:'ISO 13485 Certification',b:'AS2000 & AS3000 lineup expanded. International certification in medical device quality management.'},
-    {y:'2014',t:'AS4500 & FDA IVD Approval',b:'Accelerating global market expansion. AS4500 becomes the top-shipped model.'},
-    {y:'2015',t:'AS6000 & FDA IVD Approval',b:'Product lineup expansion with US regulatory approval.'},
-    {y:'2017',t:'AS8500 Launch',b:'High-performance automated purification instrument AS8500 series launched.'},
-    {y:'2020',t:'AS8000 & FDA VID Approval · Record 1,183 Units',b:'Peak output driven by global pandemic demand. AS8000 approved by FDA.'},
-    {y:'2026',t:'20th Anniversary — The Next Chapter',b:'Built on 20 years of history, a new story begins.',future:true}
+    {y:'2005',t:'MX-16 Contract · First AS1000 Shipment',b:'82 units. A small beginning — but every single one reached a researcher somewhere in the world, making science possible.',dim:true},
+    {y:'2006',t:'Promega BioSystems Korea Established',b:'A global manufacturing partner for Promega. The journey of Korea-made instruments reaching the world had begun.'},
+    {y:'2010',t:'AS2000 & AS3000 Launch · ISO 13485 Certified',b:'More samples, faster processing — and an international quality certification that made our commitment to standards official.'},
+    {y:'2013',t:'HSM 2.0 Launch',b:'Automated large-volume DNA extraction from blood samples. A game-changer for forensic labs, clinical settings, and research workflows worldwide.'},
+    {y:'2014',t:'AS4500 (Maxwell RSC) Launch',b:'Our best-selling model of all time. The face of Maxwell that became most familiar to labs around the world — built right here.'},
+    {y:'2015',t:'AS6000 & FDA IVD Approval',b:'FDA IVD clearance means more than a certificate. It means instruments we built are trusted for real patient diagnostics.'},
+    {y:'2017',t:'AS8500 (Maxwell RSC 48) Launch',b:'48 samples in a single run. The scale that large hospitals and research centers needed — and we delivered it.'},
+    {y:'2020',t:'AS8000 & FDA IVD Approval · Record 1,183 Units',b:'At the height of a global pandemic, the world needed diagnostic capacity. We shipped more instruments than ever before. Our most defining year.'},
+    {y:'2026',t:'20th Anniversary — The Next Chapter',b:'10,084 instruments over 20 years. Beyond the numbers, there is a story we built together.',future:true}
   ]
 };
 var TEAM=[
@@ -448,7 +452,7 @@ function setLang(l){
   document.getElementById('cg-btn').textContent=ko?'🎉 축하 메시지 남기기':'🎉 Leave a Congrats Message';
   document.getElementById('ft-txt').innerHTML=ko?'Promega BioSystems Korea · 20주년 · 2006–2026<br>과학으로 시작된 여정, 사람과 함께 이어갑니다.':'Promega BioSystems Korea · 20th Anniversary · 2006–2026<br>A journey that began with science, continued with people.';
   document.getElementById('p-empty').textContent=ko?'아직 업로드된 사진이 없어요. 첫 번째 사진을 올려주세요!':'No photos yet. Be the first!';
-  renderTL();renderTeam();renderMsgs();
+  renderTL();renderTeam();renderMsgs();renderPhotos();renderCG();
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -471,6 +475,32 @@ function compressImg(file,maxPx,q){
   });
 }
 
+// Bilingual translation via /api/translate (Vercel function → Claude Haiku)
+// Returns { ko, en, detected }. On failure, falls back to the original on both sides.
+async function translateText(text){
+  if(!text||!text.trim())return{ko:'',en:'',detected:'en'};
+  try{
+    var r=await fetch('/api/translate',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({text:text})
+    });
+    if(!r.ok)throw new Error('translate '+r.status);
+    var j=await r.json();
+    if(!j.ko||!j.en)throw new Error('empty translation');
+    return j;
+  }catch(e){
+    console.warn('Translation failed, falling back to original:',e.message);
+    var hasKo=/[ㄱ-힝]/.test(text);
+    return{ko:text,en:text,detected:hasKo?'ko':'en'};
+  }
+}
+// Pick the right text for the current language with sensible fallback
+function pickLang(ko,en,orig){
+  if(lang==='en')return en||orig||ko||'';
+  return ko||orig||en||'';
+}
+
 // ═══════════════════════════════════════════════════════════════
 // TEAM (photo + message per member)
 // ═══════════════════════════════════════════════════════════════
@@ -478,8 +508,8 @@ var curTeamIdx=null,tphBlob=null,tphPreviewUrl=null;
 
 async function loadTeam(){
   try{
-    var r=await sb.from('pbk20_team_photos').select('member_name,photo_url,msg');
-    var map={};(r.data||[]).forEach(function(row){map[row.member_name]={photo:row.photo_url,msg:row.msg};});
+    var r=await sb.from('pbk20_team_photos').select('member_name,photo_url,msg,msg_ko,msg_en');
+    var map={};(r.data||[]).forEach(function(row){map[row.member_name]={photo:row.photo_url,msg:row.msg,msg_ko:row.msg_ko,msg_en:row.msg_en};});
     cache.team=map;
   }catch(e){console.error(e);}
   renderTeam();
@@ -536,6 +566,9 @@ async function submitTeamPh(){
   var member=TEAM[curTeamIdx];
   var existing=cache.team[member.name]||{};
   var photoUrl=existing.photo||null;
+  var btn=document.querySelector('#tphOv .mbtn');
+  var origBtnText=btn.textContent;
+  btn.textContent=lang==='en'?'Saving...':'번역·저장 중...';btn.disabled=true;
   try{
     if(tphBlob){
       var path='team/'+memberSlug(member)+'.jpg';
@@ -543,7 +576,8 @@ async function submitTeamPh(){
       if(up.error){toast('업로드 실패: '+up.error.message);return;}
       photoUrl=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl+'?t='+Date.now();
     }
-    var row={member_name:member.name,msg:msgText,ts:new Date().toISOString()};
+    var tr=await translateText(msgText);
+    var row={member_name:member.name,msg:msgText,msg_ko:tr.ko,msg_en:tr.en,ts:new Date().toISOString()};
     if(photoUrl)row.photo_url=photoUrl;
     var ins=await sb.from('pbk20_team_photos').upsert(row);
     if(ins.error){toast('저장 실패: '+ins.error.message);return;}
@@ -553,6 +587,7 @@ async function submitTeamPh(){
     closeOv('tphOv');
     toast('등록됐어요 ✨');
   }catch(e){console.error(e);toast('오류: '+e.message);}
+  finally{btn.textContent=origBtnText;btn.disabled=false;}
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -576,13 +611,17 @@ async function loadPhotos(){
     var r=await sb.from('pbk20_photos').select('*').order('sort_order',{ascending:true}).order('ts',{ascending:true});
     cache.photos=r.data||[];
   }catch(e){console.error(e);cache.photos=[];}
+  renderPhotos();
+}
+function renderPhotos(){
   var g=document.getElementById('photoGrid'),e=document.getElementById('p-empty');
-  g.innerHTML='';
-  if(!cache.photos.length){e.style.display='block';return;}
-  e.style.display='none';
+  if(!g)return;g.innerHTML='';
+  if(!cache.photos.length){if(e)e.style.display='block';return;}
+  if(e)e.style.display='none';
   cache.photos.forEach(function(item){
     var div=document.createElement('div');div.className='pt';
-    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(item.caption||'')+'" loading="lazy">'+(item.caption?'<div class="pt-cap">'+esc(item.caption)+'</div>':'');
+    var cap=pickLang(item.caption_ko,item.caption_en,item.caption);
+    div.innerHTML='<img src="'+item.photo_url+'" alt="'+esc(cap||'')+'" loading="lazy">'+(cap?'<div class="pt-cap">'+esc(cap)+'</div>':'');
     g.appendChild(div);
   });
 }
@@ -590,6 +629,8 @@ async function submitPh(){
   if(!pendingFiles.length){toast(lang==='en'?'Please select a photo':'사진을 선택해주세요');return;}
   var cap=document.getElementById('phCap').value.trim();
   var btn=document.getElementById('ph-btn');btn.textContent=lang==='en'?'Uploading...':'업로드 중...';
+  // Translate caption once (shared across all photos in this batch)
+  var tr=cap?await translateText(cap):{ko:'',en:''};
   var added=0;
   for(var i=0;i<pendingFiles.length;i++){
     try{
@@ -598,7 +639,7 @@ async function submitPh(){
       var up=await sb.storage.from(BUCKET).upload(path,blob,{contentType:'image/jpeg'});
       if(up.error){console.error(up.error);continue;}
       var url=sb.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-      var ins=await sb.from('pbk20_photos').insert({caption:cap,photo_url:url});
+      var ins=await sb.from('pbk20_photos').insert({caption:cap,caption_ko:tr.ko||null,caption_en:tr.en||null,photo_url:url});
       if(ins.error){console.error(ins.error);continue;}
       added++;
     }catch(e){console.error(e);}
@@ -632,8 +673,9 @@ function renderMsgs(){
   var msgs=[];
   TEAM.forEach(function(m){
     var td=cache.team[m.name];
-    if(td&&td.msg){
-      msgs.push({name:lang==='en'?m.en:m.name,text:td.msg});
+    var text=td?pickLang(td.msg_ko,td.msg_en,td.msg):'';
+    if(text){
+      msgs.push({name:lang==='en'?m.en:m.name,text:text});
     }
   });
   cache.msgs=msgs;
@@ -656,13 +698,17 @@ async function loadCG(){
     var r=await sb.from('pbk20_congrats').select('*').order('ts',{ascending:false});
     cache.cgs=r.data||[];
   }catch(e){console.error(e);cache.cgs=[];}
+  renderCG();
+}
+function renderCG(){
   var g=document.getElementById('cgGrid'),e=document.getElementById('cg-empty');
-  g.innerHTML='';
-  if(!cache.cgs.length){e.style.display='block';return;}
-  e.style.display='none';
+  if(!g)return;g.innerHTML='';
+  if(!cache.cgs.length){if(e)e.style.display='block';return;}
+  if(e)e.style.display='none';
   cache.cgs.forEach(function(c){
     var card=document.createElement('div');card.className='cgc';
-    card.innerHTML='<div class="cgc-text">"'+esc(c.text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div>';
+    var text=pickLang(c.text_ko,c.text_en,c.text);
+    card.innerHTML='<div class="cgc-text">"'+esc(text)+'"</div><div class="cgc-foot"><div class="cgc-av" style="background:'+av(c.name)+'">'+ini(c.name)+'</div><div><div class="cgc-name">'+esc(c.name)+'</div>'+(c.loc?'<div class="cgc-loc">'+esc(c.loc)+'</div>':'')+'</div></div>';
     g.appendChild(card);
   });
 }
@@ -672,13 +718,18 @@ async function submitCG(){
   var loc=document.getElementById('cgLoc').value.trim();
   var text=document.getElementById('cgMsg').value.trim();
   if(!text){toast('메시지를 입력해주세요');return;}
+  var btn=document.querySelector('#cgOv .mbtn');
+  var origBtnText=btn.textContent;
+  btn.textContent=lang==='en'?'Translating...':'번역·저장 중...';btn.disabled=true;
   try{
-    var r=await sb.from('pbk20_congrats').insert({name:name,loc:loc,text:text});
+    var tr=await translateText(text);
+    var r=await sb.from('pbk20_congrats').insert({name:name,loc:loc,text:text,text_ko:tr.ko,text_en:tr.en});
     if(r.error){toast('저장 실패: '+r.error.message);return;}
     await loadCG();closeOv('cgOv');
     document.getElementById('cgName').value='';document.getElementById('cgLoc').value='';document.getElementById('cgMsg').value='';
     toast('등록됐어요 ✨');
   }catch(e){console.error(e);toast('오류');}
+  finally{btn.textContent=origBtnText;btn.disabled=false;}
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -738,14 +789,16 @@ async function showAdminPanel(){
     });
   }
   else if(curAdmTab==='messages'){
-    var r=await sb.from('pbk20_team_photos').select('member_name,msg').not('msg','is',null).order('ts',{ascending:false});
-    var rows=(r.data||[]).filter(function(x){return x.msg&&x.msg.trim();});list.innerHTML='';
+    var r=await sb.from('pbk20_team_photos').select('member_name,msg,msg_ko,msg_en').order('ts',{ascending:false});
+    var rows=(r.data||[]).filter(function(x){return (x.msg||x.msg_ko||x.msg_en)&&((x.msg||'').trim()||(x.msg_ko||'').trim()||(x.msg_en||'').trim());});list.innerHTML='';
     if(!rows.length){list.innerHTML='<div class="adm-empty">아직 메시지가 없어요.</div>';return;}
     rows.forEach(function(m){
       var member=TEAM.find(function(t){return t.name===m.member_name;});
       var displayName=member?(member.name+' / '+member.en):m.member_name;
+      var ko=m.msg_ko||m.msg||'',en=m.msg_en||'';
+      var both=(ko&&en&&ko!==en)?('<div style="color:#666;line-height:1.45;">"'+esc(ko)+'"</div><div style="color:#888;line-height:1.4;font-style:italic;margin-top:3px;">"'+esc(en)+'"</div>'):('<div style="color:#666;line-height:1.45;">"'+esc(ko||en)+'"</div>');
       var row=document.createElement('div');row.className='adm-row';
-      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:3px;color:var(--gx);">'+esc(displayName)+'</div><div style="color:#666;line-height:1.45;">"'+esc(m.msg)+'"</div></div><button class="adm-del" onclick="admDel(\'messages\',\''+m.member_name.replace(/'/g,"\\'")+'\')">✕</button>';
+      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:3px;color:var(--gx);">'+esc(displayName)+'</div>'+both+'</div><button class="adm-del" onclick="admDel(\'messages\',\''+m.member_name.replace(/'/g,"\\'")+'\')">✕</button>';
       list.appendChild(row);
     });
   }
@@ -754,8 +807,10 @@ async function showAdminPanel(){
     var rows=r.data||[];list.innerHTML='';
     if(!rows.length){list.innerHTML='<div class="adm-empty">아직 축하 메시지가 없어요.</div>';return;}
     rows.forEach(function(c){
+      var ko=c.text_ko||c.text||'',en=c.text_en||'';
+      var both=(ko&&en&&ko!==en)?('<div style="color:#666;line-height:1.45;">"'+esc(ko)+'"</div><div style="color:#888;line-height:1.4;font-style:italic;margin-top:3px;">"'+esc(en)+'"</div>'):('<div style="color:#666;line-height:1.45;">"'+esc(ko||en||c.text)+'"</div>');
       var row=document.createElement('div');row.className='adm-row';
-      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:2px;color:var(--gx);">'+esc(c.name)+(c.loc?' <span style="color:#999;font-weight:400;">· '+esc(c.loc)+'</span>':'')+'</div><div style="color:#666;line-height:1.45;">"'+esc(c.text)+'"</div></div><button class="adm-del" onclick="admDel(\'congrats\',\''+c.id+'\')">✕</button>';
+      row.innerHTML='<div style="flex:1;font-size:11px;color:#333;overflow:hidden;"><div style="font-weight:700;margin-bottom:2px;color:var(--gx);">'+esc(c.name)+(c.loc?' <span style="color:#999;font-weight:400;">· '+esc(c.loc)+'</span>':'')+'</div>'+both+'</div><button class="adm-del" onclick="admDel(\'congrats\',\''+c.id+'\')">✕</button>';
       list.appendChild(row);
     });
   }
@@ -837,7 +892,12 @@ async function startPresent(){
   slides.push({type:'chart'});
   slides.push({type:'team',members:TEAM.map(function(m){
     var td=cache.team[m.name];
-    return{name:m.name,en:m.en,enT:m.enT,photo:td?td.photo:null,msg:td?td.msg:null};
+    return{
+      name:m.name,en:m.en,enT:m.enT,
+      photo:td?td.photo:null,
+      msg_ko:td?(td.msg_ko||td.msg||null):null,
+      msg_en:td?(td.msg_en||td.msg||null):null
+    };
   })});
   photos.forEach(function(p){slides.push({type:'photo',data:p.data,cap:p.cap});});
   if(cgs.length){
@@ -959,8 +1019,17 @@ function runTeamScroll(){
     document.getElementById('teamFocusSince').textContent=m.enT;
     var msgEl=document.getElementById('teamFocusMsg');
     if(msgEl){
-      if(m.msg){msgEl.textContent='"'+m.msg+'"';msgEl.style.opacity='1';}
-      else{msgEl.textContent='';msgEl.style.opacity='0';}
+      var ko=m.msg_ko||'',en=m.msg_en||'';
+      var html='';
+      if(ko&&en&&ko!==en){
+        html='<div class="s-msg-ko">"'+esc(ko)+'"</div><div class="s-msg-en">"'+esc(en)+'"</div>';
+      }else if(ko||en){
+        var single=ko||en;
+        var isKo=/[ㄱ-힝]/.test(single);
+        html='<div class="'+(isKo?'s-msg-ko':'s-msg-en')+'">"'+esc(single)+'"</div>';
+      }
+      if(html){msgEl.innerHTML=html;msgEl.style.opacity='1';}
+      else{msgEl.innerHTML='';msgEl.style.opacity='0';}
     }
     var dots=document.querySelectorAll('.team-dot');
     dots.forEach(function(d,i){
