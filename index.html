@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,8 +159,8 @@ body{font-family:'Roboto',sans-serif;background:#F8F6F1;color:#1A1A1A;overflow-x
 
 <div class="topbar">
   <div class="lbg">
-    <button class="lb on" onclick="setLang('ko')">KO</button>
-    <button class="lb" onclick="setLang('en')">EN</button>
+    <button class="lb" onclick="setLang('ko')">KO</button>
+    <button class="lb on" onclick="setLang('en')">EN</button>
   </div>
   <div class="topbtns">
     <button class="tbtn" id="musicBtn" style="background:rgba(19,41,75,.1);color:var(--gx);" onclick="toggleMusic()" title="배경음악">♪</button>
@@ -344,7 +344,7 @@ var sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 // ═══════════════════════════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════════════════════════
-var lang='ko';
+var lang='en';
 var TL={
   ko:[
     {y:'2005',t:'MX-16 계약 체결 · AS1000 첫 출하',b:'82대의 작은 시작. 그 한 대 한 대가 전 세계 연구자들의 손에 닿아 생명과학 연구를 가능하게 했습니다.',dim:true},
@@ -1190,9 +1190,9 @@ function stopMusicForPresent(){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// INIT
+// INIT (apply English as default for international audience)
 // ═══════════════════════════════════════════════════════════════
-renderTL();
+setLang('en');
 loadTeam();
 loadPhotos();
 loadCG();
