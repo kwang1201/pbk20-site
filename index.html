@@ -67,8 +67,9 @@ body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#F8F6F1
 .tc-since{font-size:9px;color:var(--sol);margin-top:2px;}
 .photo-sec{padding:32px 24px;background:#F0EDE6;}
 .photo-sec .eye{color:var(--wa);}
-.upzone{margin-top:14px;border:1.5px dashed #ccc;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s;}
+.upzone{margin-top:14px;border:1.5px dashed #ccc;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;}
 .upzone:hover{border-color:var(--sol);}
+.upzone.drag-over,.phzone.drag-over{border-color:var(--sol);background:#FFFDF5;}
 .pgrid{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:4px;}
 .pt{aspect-ratio:1;overflow:hidden;position:relative;border-radius:6px;background:#ddd;}
 .pt img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -1441,12 +1442,56 @@ function stopMusicForPresent(){
 }
 
 // ═══════════════════════════════════════════════════════════════
+// FILE DRAG-AND-DROP (gallery + team photo zones)
+// ═══════════════════════════════════════════════════════════════
+function bindDrop(zone,handler){
+  if(!zone)return;
+  zone.addEventListener('dragover',function(e){e.preventDefault();e.stopPropagation();zone.classList.add('drag-over');});
+  zone.addEventListener('dragenter',function(e){e.preventDefault();e.stopPropagation();zone.classList.add('drag-over');});
+  zone.addEventListener('dragleave',function(e){e.preventDefault();e.stopPropagation();zone.classList.remove('drag-over');});
+  zone.addEventListener('drop',function(e){
+    e.preventDefault();e.stopPropagation();
+    zone.classList.remove('drag-over');
+    var files=Array.from(e.dataTransfer.files||[]).filter(function(f){return f.type.indexOf('image/')===0;});
+    if(files.length)handler(files);
+  });
+}
+function setupDragDrop(){
+  // 1. Outer gallery upload zone: dropping here opens modal + populates files
+  bindDrop(document.querySelector('.photo-sec .upzone'),function(files){
+    openPhModal();
+    pendingFiles=files;
+    var cnt=document.getElementById('phcnt');
+    cnt.textContent=files.length+(lang==='en'?' file(s) selected':'장 선택됨');
+    cnt.style.display='block';
+  });
+  // 2. Gallery upload modal phzone (when modal already open)
+  bindDrop(document.querySelector('#phOv .phzone'),function(files){
+    pendingFiles=files;
+    var cnt=document.getElementById('phcnt');
+    cnt.textContent=files.length+(lang==='en'?' file(s) selected':'장 선택됨');
+    cnt.style.display='block';
+  });
+  // 3. Team photo modal: single image
+  bindDrop(document.getElementById('tphZone'),function(files){
+    previewTeamPh({files:[files[0]]});
+  });
+  // Prevent the page from navigating away when files dropped outside zones
+  ['dragover','drop'].forEach(function(ev){
+    window.addEventListener(ev,function(e){
+      if(!e.target.closest('.upzone,.phzone'))e.preventDefault();
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // INIT (apply English as default for international audience)
 // ═══════════════════════════════════════════════════════════════
 setLang('en');
 loadTeam();
 loadPhotos();
 loadCG();
+setupDragDrop();
 </script>
 </body>
 </html>
